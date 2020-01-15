@@ -1,0 +1,3 @@
+profil
+
+{{ Auth::user()->name }}

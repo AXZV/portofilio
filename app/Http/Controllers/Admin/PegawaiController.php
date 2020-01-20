@@ -18,30 +18,35 @@ class PegawaiController extends Controller
 
     public function hapus($id)
     {
-        DB::table('pegawai')->where('id',$id)->delete();
+        $data=Pegawai::find($id);
+        $data->delete();
         return redirect()->back()->with('successdelete', true);
     }
 
 
     public function tambah(Request $request)
     {
-        DB::table('pegawai')->insert([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'email' => $request->email,
-            'nomor_telepon' => $request->telepon
-        ]);
+
+        $data = new Pegawai;
+        $data->nama=$request->get('nama');
+        $data->alamat=$request->get('alamat');
+        $data->email=$request->get('email');
+        $data->nomor_telepon=$request->get('telepon');
+        $data->save();
+
         return redirect()->back()->with('successadd', true);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, $id)
     {
-        DB::table('pegawai')->where('id',$request->id)->update([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'email' => $request->email,
-            'nomor_telepon' => $request->telepon
-        ]);
+
+        $data=Pegawai::find($id);
+        $data->nama=$request->get('nama');
+        $data->alamat=$request->get('alamat');
+        $data->email=$request->get('email');
+        $data->nomor_telepon=$request->get('telepon');
+        $data->save();
+
         return redirect()->back()->with('successedit', true);
     
     }

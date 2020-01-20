@@ -26,7 +26,7 @@ Route::get('/admin_dasboard', 'Admin\AdminController@index')->middleware('verifi
 Route::get('/admin_dasboard/pegawai', 'Admin\PegawaiController@index')->middleware('verified')->middleware('admin');
 Route::POST('/admin_dasboard/proses_hapus_pegawai/{id}', 'Admin\PegawaiController@hapus');
 Route::POST('/admin_dasboard/proses_tambah_pegawai', 'Admin\PegawaiController@tambah');
-Route::POST('/admin_dasboard/proses_edit_pegawai', 'Admin\PegawaiController@edit');
+Route::POST('/admin_dasboard/proses_edit_pegawai/{id}', 'Admin\PegawaiController@edit');
 
 
 Route::get('/admin_dasboard/slider', 'Admin\AdminController@slider')->middleware('verified')->middleware('admin');

@@ -69,158 +69,232 @@ $(function () {
   
     }());
   
-    // Start chart
+  //   // Start chart
   
-    var chart = document.getElementById('myChart');
-    Chart.defaults.global.animation.duration = 2000; // Animation duration
-    Chart.defaults.global.title.display = false; // Remove title
-    Chart.defaults.global.title.text = "Chart"; // Title
-    Chart.defaults.global.title.position = 'bottom'; // Title position
-    Chart.defaults.global.defaultFontColor = '#999'; // Font color
-    Chart.defaults.global.defaultFontSize = 10; // Font size for every label
+  //   var chart = document.getElementById('myChart');
+  //   Chart.defaults.global.animation.duration = 2000; // Animation duration
+  //   Chart.defaults.global.title.display = false; // Remove title
+  //   Chart.defaults.global.title.text = "Chart"; // Title
+  //   Chart.defaults.global.title.position = 'bottom'; // Title position
+  //   Chart.defaults.global.defaultFontColor = '#999'; // Font color
+  //   Chart.defaults.global.defaultFontSize = 10; // Font size for every label
   
-    // Chart.defaults.global.tooltips.backgroundColor = '#FFF'; // Tooltips background color
-    Chart.defaults.global.tooltips.borderColor = 'white'; // Tooltips border color
-    Chart.defaults.global.legend.labels.padding = 0;
-    Chart.defaults.scale.ticks.beginAtZero = true;
-    Chart.defaults.scale.gridLines.zeroLineColor = 'rgba(255, 255, 255, 0.1)';
-    Chart.defaults.scale.gridLines.color = 'rgba(255, 255, 255, 0.02)';
+  //   // Chart.defaults.global.tooltips.backgroundColor = '#FFF'; // Tooltips background color
+  //   Chart.defaults.global.tooltips.borderColor = 'white'; // Tooltips border color
+  //   Chart.defaults.global.legend.labels.padding = 0;
+  //   Chart.defaults.scale.ticks.beginAtZero = true;
+  //   Chart.defaults.scale.gridLines.zeroLineColor = 'rgba(255, 255, 255, 0.1)';
+  //   Chart.defaults.scale.gridLines.color = 'rgba(255, 255, 255, 0.02)';
   
-    Chart.defaults.global.legend.display = false;
+  //   Chart.defaults.global.legend.display = false;
   
-    var myChart = new Chart(chart, {
-      type: 'bar',
-      data: {
-        labels: ["January", "February", "March", "April", "May", 'Jul'],
-        datasets: [{
-          label: "Lost",
-          fill: false,
-          lineTension: 0,
-          data: [45, 25, 40, 20, 45, 20],
-          pointBorderColor: "#4bc0c0",
-          borderColor: '#4bc0c0',
-          borderWidth: 2,
-          showLine: true,
-        }, {
-          label: "Succes",
-          fill: false,
-          lineTension: 0,
-          startAngle: 2,
-          data: [20, 40, 20, 45, 25, 60],
-          // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
-          backgroundColor: "transparent",
-          pointBorderColor: "#ff6384",
-          borderColor: '#ff6384',
-          borderWidth: 2,
-          showLine: true,
-        }]
-      },
+  //   var myChart = new Chart(chart, {
+  //     type: 'bar',
+  //     data: {
+  //       labels: ["January", "February", "March", "April", "May", 'Jul'],
+  //       datasets: [{
+  //         label: "Lost",
+  //         fill: false,
+  //         lineTension: 0,
+  //         data: [45, 25, 40, 20, 45, 20],
+  //         pointBorderColor: "#4bc0c0",
+  //         borderColor: '#4bc0c0',
+  //         borderWidth: 2,
+  //         showLine: true,
+  //       }, {
+  //         label: "Succes",
+  //         fill: false,
+  //         lineTension: 0,
+  //         startAngle: 2,
+  //         data: [20, 40, 20, 45, 25, 60],
+  //         // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
+  //         backgroundColor: "transparent",
+  //         pointBorderColor: "#ff6384",
+  //         borderColor: '#ff6384',
+  //         borderWidth: 2,
+  //         showLine: true,
+  //       }]
+  //     },
+  //   });
+  //   //  Chart ( 2 )
+  
+  
+  //   var Chart2 = document.getElementById('myChart2').getContext('2d');
+  //   var chart = new Chart(Chart2, {
+  //     type: 'line',
+  //     data: {
+  //       labels: ["January", "February", "March", "April", 'test', 'test', 'test', 'test'],
+  //       datasets: [{
+  //         label: "My First dataset",
+  //         backgroundColor: 'rgb(255, 99, 132)',
+  //         borderColor: 'rgb(255, 79, 116)',
+  //         borderWidth: 2,
+  //         pointBorderColor: false,
+  //         data: [5, 10, 5, 8, 20, 30, 20, 10],
+  //         fill: false,
+  //         lineTension: .4,
+  //       }, {
+  //         label: "Month",
+  //         fill: false,
+  //         lineTension: .4,
+  //         startAngle: 2,
+  //         data: [20, 14, 20, 25, 10, 15, 25, 10],
+  //         // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
+  //         backgroundColor: "transparent",
+  //         pointBorderColor: "#4bc0c0",
+  //         borderColor: '#4bc0c0',
+  //         borderWidth: 2,
+  //         showLine: true,
+  //       }, {
+  //         label: "Month",
+  //         fill: false,
+  //         lineTension: .4,
+  //         startAngle: 2,
+  //         data: [40, 20, 5, 10, 30, 15, 15, 10],
+  //         // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
+  //         backgroundColor: "transparent",
+  //         pointBorderColor: "#ffcd56",
+  //         borderColor: '#ffcd56',
+  //         borderWidth: 2,
+  //         showLine: true,
+  //       }]
+  //     },
+  
+  //     // Configuration options
+  //     options: {
+  //       title: {
+  //         display: false
+  //       }
+  //     }
+  //   });
+  
+  
+  //   console.log(Chart.defaults.global);
+  
+  //   var chart = document.getElementById('chart3');
+  //   var myChart = new Chart(chart, {
+  //     type: 'line',
+  //     data: {
+  //       labels: ["One", "Two", "Three", "Four", "Five", 'Six', "Seven", "Eight"],
+  //       datasets: [{
+  //         label: "Lost",
+  //         fill: false,
+  //         lineTension: .5,
+  //         pointBorderColor: "transparent",
+  //         pointColor: "white",
+  //         borderColor: '#d9534f',
+  //         borderWidth: 0,
+  //         showLine: true,
+  //         data: [0, 40, 10, 30, 10, 20, 15, 20],
+  //         pointBackgroundColor: 'transparent',
+  //       },{
+  //         label: "Lost",
+  //         fill: false,
+  //         lineTension: .5,
+  //         pointColor: "white",
+  //         borderColor: '#5cb85c',
+  //         borderWidth: 0,
+  //         showLine: true,
+  //         data: [40, 0, 20, 10, 25, 15, 30, 0],
+  //         pointBackgroundColor: 'transparent',
+  //       },
+  //                  {
+  //                    label: "Lost",
+  //                    fill: false,
+  //                    lineTension: .5,
+  //                    pointColor: "white",
+  //                    borderColor: '#f0ad4e',
+  //                    borderWidth: 0,
+  //                    showLine: true,
+  //                    data: [10, 40, 20, 5, 35, 15, 35, 0],
+  //                    pointBackgroundColor: 'transparent',
+  //                  },
+  //                  {
+  //                    label: "Lost",
+  //                    fill: false,
+  //                    lineTension: .5,
+  //                    pointColor: "white",
+  //                    borderColor: '#337ab7',
+  //                    borderWidth: 0,
+  //                    showLine: true,
+  //                    data: [0, 30, 10, 25, 10, 40, 20, 0],
+  //                    pointBackgroundColor: 'transparent',
+  //                  }]
+  //     },
+  //   });
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [{
+    label: '# of Votes',
+    data: [12, 19, 3, 5, 2, 3],
+    backgroundColor: [
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)'
+    ],
+    borderColor: [
+    'rgba(255,99,132,1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+    yAxes: [{
+    ticks: {
+    beginAtZero: true
+    }
+    }]
+    }
+    }
     });
-    //  Chart ( 2 )
-  
-  
-    var Chart2 = document.getElementById('myChart2').getContext('2d');
-    var chart = new Chart(Chart2, {
-      type: 'line',
-      data: {
-        labels: ["January", "February", "March", "April", 'test', 'test', 'test', 'test'],
-        datasets: [{
-          label: "My First dataset",
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 79, 116)',
-          borderWidth: 2,
-          pointBorderColor: false,
-          data: [5, 10, 5, 8, 20, 30, 20, 10],
-          fill: false,
-          lineTension: .4,
-        }, {
-          label: "Month",
-          fill: false,
-          lineTension: .4,
-          startAngle: 2,
-          data: [20, 14, 20, 25, 10, 15, 25, 10],
-          // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
-          backgroundColor: "transparent",
-          pointBorderColor: "#4bc0c0",
-          borderColor: '#4bc0c0',
-          borderWidth: 2,
-          showLine: true,
-        }, {
-          label: "Month",
-          fill: false,
-          lineTension: .4,
-          startAngle: 2,
-          data: [40, 20, 5, 10, 30, 15, 15, 10],
-          // , '#ff6384', '#4bc0c0', '#ffcd56', '#457ba1'
-          backgroundColor: "transparent",
-          pointBorderColor: "#ffcd56",
-          borderColor: '#ffcd56',
-          borderWidth: 2,
-          showLine: true,
-        }]
-      },
-  
-      // Configuration options
-      options: {
-        title: {
-          display: false
-        }
-      }
+
+
+    //line
+    var ctxL = document.getElementById("lineChart").getContext('2d');
+    var myLineChart = new Chart(ctxL, {
+    type: 'line',
+    data: {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [{
+    label: "My First dataset",
+    data: [65, 59, 80, 81, 56, 55, 40],
+    backgroundColor: [
+    'rgba(105, 0, 132, .2)',
+    ],
+    borderColor: [
+    'rgba(200, 99, 132, .7)',
+    ],
+    borderWidth: 2
+    },
+    {
+    label: "My Second dataset",
+    data: [28, 48, 40, 19, 86, 27, 90],
+    backgroundColor: [
+    'rgba(0, 137, 132, .2)',
+    ],
+    borderColor: [
+    'rgba(0, 10, 130, .7)',
+    ],
+    borderWidth: 2
+    }
+    ]
+    },
+    options: {
+    responsive: true
+    }
     });
-  
-  
-    console.log(Chart.defaults.global);
-  
-    var chart = document.getElementById('chart3');
-    var myChart = new Chart(chart, {
-      type: 'line',
-      data: {
-        labels: ["One", "Two", "Three", "Four", "Five", 'Six', "Seven", "Eight"],
-        datasets: [{
-          label: "Lost",
-          fill: false,
-          lineTension: .5,
-          pointBorderColor: "transparent",
-          pointColor: "white",
-          borderColor: '#d9534f',
-          borderWidth: 0,
-          showLine: true,
-          data: [0, 40, 10, 30, 10, 20, 15, 20],
-          pointBackgroundColor: 'transparent',
-        },{
-          label: "Lost",
-          fill: false,
-          lineTension: .5,
-          pointColor: "white",
-          borderColor: '#5cb85c',
-          borderWidth: 0,
-          showLine: true,
-          data: [40, 0, 20, 10, 25, 15, 30, 0],
-          pointBackgroundColor: 'transparent',
-        },
-                   {
-                     label: "Lost",
-                     fill: false,
-                     lineTension: .5,
-                     pointColor: "white",
-                     borderColor: '#f0ad4e',
-                     borderWidth: 0,
-                     showLine: true,
-                     data: [10, 40, 20, 5, 35, 15, 35, 0],
-                     pointBackgroundColor: 'transparent',
-                   },
-                   {
-                     label: "Lost",
-                     fill: false,
-                     lineTension: .5,
-                     pointColor: "white",
-                     borderColor: '#337ab7',
-                     borderWidth: 0,
-                     showLine: true,
-                     data: [0, 30, 10, 25, 10, 40, 20, 0],
-                     pointBackgroundColor: 'transparent',
-                   }]
-      },
-    });
-  
+    
   });

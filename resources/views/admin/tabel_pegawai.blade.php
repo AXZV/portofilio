@@ -58,7 +58,7 @@
                     toastr.success('Sukses hapus data pegawai');
             </script>"; ?>
     @endif
-
+<!-- ///////////////////////////////////////////////////////////////////////// -->
 
 <div class="rowx">
     <div class="card shadow border-0 mb-4">
@@ -245,7 +245,7 @@
             </button>
         </div>
 
-        <form action="/admin_dasboard/proses_edit_pegawai" id="editForm" method="post">
+        <form action="" id="editForm" method="post">
         {{ csrf_field() }}
         <!--Body-->
             <div class="modal-body">
@@ -280,7 +280,7 @@
             <!--Footer-->
             <div class="modal-footer justify-content-center">
                 <!-- <a type="submit" href="/admin_dasboard/proses_tambah_pegawai" class="btn waves-effect btnx">Simpan</a> -->
-                <button type="submit" class="btn btn-primary btn-sm" >Simpan</button>
+                <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
                 <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
             </div>
             
@@ -292,9 +292,10 @@
     </div>
 
 
-
-
     <script type="text/javascript">
+
+
+
         function editData(id, nama, alamat, email, telepon)
         {
             document.getElementById("form0x").value = id;
@@ -302,6 +303,15 @@
             document.getElementById("form2x").value = alamat;
             document.getElementById("form3x").value = email;
             document.getElementById("form4x").value = telepon;
+
+            var id = id;
+            var url = "/admin_dasboard/proses_edit_pegawai/"+id;
+            $("#editForm").attr('action', url);
+        }
+
+        function formSubmit2()
+        {
+            $("#editForm").submit();
         }
 
     </script>

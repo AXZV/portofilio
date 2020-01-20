@@ -61,16 +61,10 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6">
-              <div class="chart-container">
-                <h3>Chart</h3>
                 <canvas id="myChart"></canvas>
-              </div>
             </div>
             <div class="col-md-6">
-              <div class="chart-container">
-                <h3>Chart2</h3>
-                <canvas id="myChart2"></canvas>
-              </div>
+                <canvas id="lineChart"></canvas>
             </div>
           </div>
         </div>

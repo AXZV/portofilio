@@ -6,11 +6,11 @@
     <title>The Lure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script type="text/javascript" src="{{ URL::asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="<?php echo e(URL::asset('js/jquery-3.2.1.min.js')); ?>"></script>
     
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::asset('css/footermaster.css') }}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::asset('css/slider.css') }}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::asset('css/css.css') }}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(URL::asset('css/footermaster.css')); ?>" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(URL::asset('css/slider.css')); ?>" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(URL::asset('css/css.css')); ?>" />
 
     <?php include($_SERVER['DOCUMENT_ROOT'].'/link/link.php'); ?>
 
@@ -81,15 +81,15 @@
     <!-- Links -->
 
     <ul class="navbar-nav ml-auto">
-        @if (Auth::guest())
+        <?php if(Auth::guest()): ?>
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login
                 </a>
             </li>
-        @else
+        <?php else: ?>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }} <span class="caret"></span>
+                    <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <?php
@@ -103,18 +103,19 @@
                             Profile
                         </a>
                     <?php } ?>
-                    <a class="dropdown-item" href="{{ route('logout') }}"
+                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                        <?php echo e(__('Logout')); ?>
+
                     </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
+                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                        <?php echo csrf_field(); ?>
                     </form>
                 </div>
             </li>       
-        @endif
+        <?php endif; ?>
     </ul>
     </div>
     <!-- Collapsible content -->
@@ -127,7 +128,7 @@
 <!-- ////////////////////////////////////  CONTENT  //////////////////////////////////////////// -->
 
 <div>
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
 </div>
 
 <!-- ////////////////////////////////////  FOOTER  //////////////////////////////////////////// -->
@@ -199,3 +200,4 @@
 </body>
 </html>
 
+<?php /**PATH C:\xampp\htdocs\laravel_04\laravelx2\resources\views/layouts/master.blade.php ENDPATH**/ ?>

@@ -3,3 +3,21 @@
 .lupakatasandi{color:black}
 
 .help-block{color:rgb(224, 5, 5);}
+
+
+/* ----------------------------  HEADER  ---------------------------- */
+
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+            background: #4d4d4d !important;
+    }
+}
+.top-nav-collapse
+{
+    background-color:#4d4d4d;
+}
+@media only screen and (max-width:768px){.navbar{background-color:#4d4d4d;}}
+.navbar{
+    background-color:#4d4d4d6c;
+}
+.top-nav-collapse{background-color:#4d4d4d;}

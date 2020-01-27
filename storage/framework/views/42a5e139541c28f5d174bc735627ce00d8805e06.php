@@ -1,7 +1,7 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('layouts.master')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 <!-- ////////////////////////////////////  SLIDER  //////////////////////////////////////////// -->
 
@@ -14,24 +14,24 @@
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <img class="d-block w-100" src="assets/slider_img/{{$img_slider1->img}}" alt="First slide">
+            <img class="d-block w-100" src="assets/slider_img/<?php echo e($img_slider1->img); ?>" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <!-- <h5>Media heading</h5> -->
-                <p>{{$img_slider1->caption}}</p>
+                <p><?php echo e($img_slider1->caption); ?></p>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="assets/slider_img/{{$img_slider2->img}}" alt="Second slide">
+            <img class="d-block w-100" src="assets/slider_img/<?php echo e($img_slider2->img); ?>" alt="Second slide">
             <div class="carousel-caption d-none d-md-block">
                 <!-- <h5>Media heading</h5> -->
-                <p> {{$img_slider2 -> caption}}</p>
+                <p> <?php echo e($img_slider2 -> caption); ?></p>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="assets/slider_img/{{$img_slider3->img}}" alt="Third slide">
+            <img class="d-block w-100" src="assets/slider_img/<?php echo e($img_slider3->img); ?>" alt="Third slide">
             <div class="carousel-caption d-none d-md-block">
                 <!-- <h5>Media heading</h5> -->
-                <p> {{$img_slider3 -> caption}}</p>
+                <p> <?php echo e($img_slider3 -> caption); ?></p>
             </div>
         </div>
     </div>
@@ -121,4 +121,5 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\laravel_04\laravelx2\resources\views/dasboard.blade.php ENDPATH**/ ?>

@@ -5,9 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Dasboard</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript" src="{{ URL::asset('js/jquery-3.2.1.min.js') }}"></script>
+	<script type="text/javascript" src="<?php echo e(URL::asset('js/jquery-3.2.1.min.js')); ?>"></script>
     
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::asset('css/css.css') }}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(URL::asset('css/css.css')); ?>" />
 
     <?php include($_SERVER['DOCUMENT_ROOT'].'/link/link.php'); ?>
 </head>
@@ -729,4 +729,4 @@
   </footer>
   <!--/.Footer-->
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\laravel_04\laravelx2\resources\views/index.blade.php ENDPATH**/ ?>

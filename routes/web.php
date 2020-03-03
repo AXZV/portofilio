@@ -29,8 +29,8 @@ Route::POST('/admin_dasboard/proses_tambah_pegawai', 'Admin\PegawaiController@ta
 Route::POST('/admin_dasboard/proses_edit_pegawai/{id}', 'Admin\PegawaiController@edit');
 
 
-Route::get('/admin_dasboard/slider', 'Admin\AdminController@slider')->middleware('verified')->middleware('admin');
-Route::POST('/admin_dasboard/proses_edit_captionslider', 'Admin\AdminController@updateslidercaption');
-Route::POST('/admin_dasboard/proses_edit_imgslider', 'Admin\AdminController@updatesliderimage');
+Route::get('/admin_dasboard/slider', 'Admin\ImgsliderController@slider')->middleware('verified')->middleware('admin');
+Route::POST('/admin_dasboard/proses_edit_captionslider', 'Admin\ImgsliderController@updateslidercaption');
+Route::POST('/admin_dasboard/proses_edit_imgslider', 'Admin\ImgsliderController@updatesliderimage');
 
 

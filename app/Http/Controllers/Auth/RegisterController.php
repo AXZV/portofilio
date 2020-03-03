@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Model\User;
+use App\Model\Admin;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -71,15 +72,32 @@ class RegisterController extends Controller
         $rand = substr(md5(microtime()),rand(0,26),5);
         $id_user = $date.$rand.$firstname;
 
-        return User::create([
-            'user_id' => $id_user,
-            'username' => $data['username'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => 'user'
-        ]);
+        // if ($data['jenis_user'] == 'user')
+        // {
+            return User::create([
+                'user_id' => $id_user,
+                'username' => $data['username'],
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'role' => $data['jenis_user']
+            ]);
 
-        $user->sendEmailVerificationNotification();
+            $user->sendEmailVerificationNotification();
+        // }
+        // elseif($data['jenis_user'] == 'admin')
+        // {
+        //     return Admin::create([
+        //         'admin_id' => $id_user,
+        //         'username' => $data['username'],
+        //         'name' => $data['name'],
+        //         'email' => $data['email'],
+        //         'password' => Hash::make($data['password']),
+        //         'role' => 'admin'
+        //     ]);
+
+        //     $user->sendEmailVerificationNotification();
+        // }
+        
     }
 }

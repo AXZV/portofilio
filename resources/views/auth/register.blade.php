@@ -12,6 +12,21 @@
                 <div class="card-body">
                     <form class="needs-validation" novalidate method="POST" action="{{ route('register') }}">
                         @csrf
+                        <div class="form-group">
+                            <label for="jenis_user" class="form-label">{{ __('Jenis User') }}</label>
+                            <div class="">
+                                <select id="jenis_user" name="jenis_user" class="browser-default custom-select">
+                                    <option value="user">User</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                @error('jenis_user')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <label for="name" class="form-label">{{ __('Nama Lengkap') }}</label>

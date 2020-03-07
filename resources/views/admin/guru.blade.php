@@ -81,9 +81,21 @@
         </div>
     @endif
 
-    @if ($errors->has('kode'))
+    @if ($errors->has('no_identitas'))
         <div class="alert alert-danger" id="error" role="alert">
-            Kode Instansi Tidak Boleh Sama
+            Nomor Identitas Sudah Terdaftar
+        </div>
+    @endif
+
+    @if ($errors->has('username'))
+        <div class="alert alert-danger" id="error" role="alert">
+            Username sudah terdaftar atau tidak sesuai aturan
+        </div>
+    @endif
+
+    @if ($errors->has('password'))
+        <div class="alert alert-danger" id="error" role="alert">
+            Password tidak sesuai aturan
         </div>
     @endif
 <!-- ///////////////////////////////////////////////////////////////////////// -->
@@ -113,19 +125,19 @@
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                                 <thead>
                                     <tr style="text-align:center">
-
                                         <th>No</th>
                                         <th>No. Identitas</th>
                                         <th>Nama</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Tempat Lahir</th>
+                                        <th>Jenis Kelamin</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
                                         <th>Domisili</th>
                                         <th>Telepon</th>
                                         <th>Email</th>
-                                        <th>Masuk</th>
-                                        <th>Keluar</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Tanggal Keluar</th>
                                         <th>Status</th>
                                         <th>Instansi</th>
                                         <th>Aksi</th>
@@ -141,17 +153,36 @@
                                         <td> {{$i->tanggal_lahir}}</td>
                                         <td> {{$i->tempat_lahir}}</td>
                                         <td> {{$i->jenis_kelamin}}</td>
+                                        <td> {{$i->agama}}</td>
                                         <td> {{$i->alamat}}</td>
                                         <td> {{$i->alamat_domisili}}</td>
                                         <td> {{$i->no_telp}}</td>
                                         <td> {{$i->email}}</td>
                                         <td> {{$i->tanggal_masuk}}</td>
                                         <td> {{$i->tanggal_keluar}}</td>
-                                        <td> {{$i->status}}</td>
-                                        <td> </td>
+                                        <td> {{$i->status_aktif}}</td>
+                                        <td> {{$i->instansi->nama}}</td>
                                         <td style="text-align:center">  
                                             <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->kode}}', '{{$i->nama}}', '{{$i->alamat}}', '{{$i->no_telp}}', '{{$i->email}}', '{{$i->status_pusat}}')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" 
+                                            onclick="editData( 
+                                                '{{$i->id}}',
+                                                '{{$i->no_identitas}}',
+                                                '{{$i->nama_depan}}', 
+                                                '{{$i->nama_belakang}}',
+                                                '{{$i->tanggal_lahir}}',
+                                                '{{$i->tempat_lahir}}',
+                                                '{{$i->jenis_kelamin}}',
+                                                '{{$i->agama}}',
+                                                '{{$i->alamat}}',
+                                                '{{$i->alamat_domisili}}',
+                                                '{{$i->no_telp}}',
+                                                '{{$i->email}}',
+                                                '{{$i->tanggal_masuk}}',
+                                                '{{$i->tanggal_keluar}}',
+                                                '{{$i->status_aktif}}',
+                                                '{{$i->instansi->nama}}',)"
+                                            data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
                                         </td>
                                     </tr>                                              
                                     </tr>
@@ -164,13 +195,14 @@
                                         <th>Nama</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Tempat Lahir</th>
+                                        <th>Jenis Kelamin</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
                                         <th>Domisili</th>
                                         <th>Telepon</th>
                                         <th>Email</th>
-                                        <th>tanggal_masuk</th>
-                                        <th>tanggal_keluar</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Tanggal Keluar</th>
                                         <th>Status</th>
                                         <th>Instansi</th>
                                         <th>Aksi</th>
@@ -190,7 +222,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Instansi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Guru</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -215,7 +247,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput2">Nama Belakang</label>
-                                    <input required type="text" name="nama_belakang" class="form-control" id="formGroupExampleInput2" placeholder="Nama Belakang">
+                                    <input type="text" name="nama_belakang" class="form-control" id="formGroupExampleInput2" placeholder="Nama Belakang">
                                 </div>
                             </div>
                         </div>
@@ -233,9 +265,6 @@
                                     <input required type="date" name="tanggal_lahir" class="form-control" id="formGroupExampleInput2" placeholder="Tanggal Lahir">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput2">Jenis Kelamin</label>
@@ -253,12 +282,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput2">Alamat (Sesuai KTP)</label>
+                                    <label for="formGroupExampleInput2">Alamat</label>
                                     <input required type="text" name="alamat" class="form-control" id="formGroupExampleInput2" placeholder="Alamat">
+                                    <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
                                 </div>
                             </div>
                             <div class="col">
@@ -294,7 +323,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput2">Tanggal Keluar</label>
-                                    <input required type="date" name="tanggal_keluar" class="form-control" id="formGroupExampleInput2" placeholder="Tanggal Keluar">
+                                    <input type="date" name="tanggal_keluar" class="form-control" id="formGroupExampleInput2" placeholder="Tanggal Keluar">
                                 </div>
                             </div>
                             <div class="col">
@@ -307,6 +336,17 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Instansi</label>
+                                    <select name="kode_instansi" id="status_aktif" class="form-control" required>
+                                        <option value="" disabled selected>Pilih.....</option>                                       
+                                        @foreach($instansi as $ins)
+                                        <option value="{{$ins->kode}}">{{$ins->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row mb-4">
@@ -314,18 +354,18 @@
                                 <div class="form-group">
                                     <label for="formGroupExampleInput2">Nama Pengguna</label>
                                     <input required type="text" name="username" class="form-control" id="formGroupExampleInput2" placeholder="Username">
+                                    <small id="usernameHelp" class="form-text text-muted">Berisi antara 3-12 karakter tanpa spasi</small>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput2">Password</label>
-                                    <input required type="text" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Password">
+                                    <input required type="password" id="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Password">
+                                    <small id="passwordHelp" class="form-text text-muted">Minimal 8 karakter tanpa spasi</small>
+                                    <input type="checkbox" onclick="showpass()">Tampilkan Password
                                 </div>
                             </div>
                         </div>
-
-                        
-
                     </div>
                     <!--Footer-->
                     <div class="modal-footer justify-content-center">
@@ -337,6 +377,17 @@
             </div>
         </div>
         </div>
+
+        <script>
+            function showpass() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
 
 <!-- /////////////////////////////// Modal Hapus Data /////////////////////////////// -->
 
@@ -368,7 +419,7 @@
 
         <!--Footer-->
         <div class="modal-footer justify-content-center">
-        <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Yes, Hapus</button>
+        <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Ya, Hapus</button>
         <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Batal</button>
         </div>
 
@@ -384,7 +435,7 @@
         function deleteData(id)
         {
             var id = id;
-            var url = "/admin/hapus_instansi/"+id;
+            var url = "/admin/hapus_guru/"+id;
             $("#deleteForm").attr('action', url);
         }
 
@@ -411,37 +462,141 @@
         {{ csrf_field() }}
         <!--Body-->
             <div class="modal-body">
-                <input type="hidden" name="id" id="form0x" class="form-control">
+                <input type="hidden" name="id" id="f0" class="form-control">
 
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Kode Instansi</label>
-                    <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                    <label for="formGroupExampleInput">Nomor Identitas</label>
+                    <input required type="text" name="no_identitas" class="form-control" id="f1" placeholder="Nomor Identitas">
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Nama Depan</label>
+                            <input required type="text" name="nama_depan" class="form-control" id="f2" placeholder="Nama Depan">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Nama Belakang</label>
+                            <input type="text" name="nama_belakang" class="form-control" id="f3" placeholder="Nama Belakang">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Nama Instansi</label>
-                    <input required type="text" id="form2x" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Tempat Lahir</label>
+                            <input required type="text" name="tempat_lahir" class="form-control" id="f4" placeholder="Tempat Lahir">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Tanggal Lahir</label>
+                            <input required type="date" name="tanggal_lahir" class="form-control" id="f5" placeholder="Tanggal Lahir">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="f6" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Agama</label>
+                            <input required type="text" name="agama" class="form-control" id="f7" placeholder="Agama">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput3">Alamat</label>
-                    <input required type="text" id="form3x" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput4">Telepon</label>
-                    <input required type="text" id="form4x" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput5">Email</label>
-                    <input required type="email" id="form5x" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label for="inputState">Status Kantor</label>
-                    <select name="status" id="inputState" class="form-control" required>
-                        <option value="Pusat" selected>Kantor Pusat</option>
-                        <option value="Cabang">Kantor Cabang</option>
-                    </select>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Alamat</label>
+                            <input required type="text" name="alamat" class="form-control" id="f8" placeholder="Alamat">
+                            <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Alamat Domisili</label>
+                            <input required type="text" name="alamat_domisili" class="form-control" id="f9" placeholder="Alamat Domisili">
+                        </div>
+                    </div>
                 </div>
 
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Telepon</label>
+                            <input required type="text" name="no_telp" class="form-control" id="f10" placeholder="Telepon">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Email</label>
+                            <input required type="text" name="email" class="form-control" id="f11" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Tanggal Masuk</label>
+                            <input required type="date" name="tanggal_masuk" class="form-control" id="f12" placeholder="Tanggal Masuk">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Tanggal Keluar</label>
+                            <input type="date" name="tanggal_keluar" class="form-control" id="f13" placeholder="Tanggal Keluar">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Status</label>
+                            <select name="status_aktif" id="f14" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>
+                                <option value="Aktif">Aktif</option>
+                                <option value="Tidak Aktif">Tidak Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Instansi</label>
+                            <select name="kode_instansi" id="f15" class="form-control" required>
+                                <option value="" disabled>Pilih.....</option>                                       
+                                @foreach($instansi as $ins)
+                                <option value="{{$ins->kode}}">{{$ins->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Nama Pengguna</label>
+                            <input required type="text" name="username" class="form-control" id="f16" placeholder="Username">
+                            <small id="usernameHelp" class="form-text text-muted">Berisi antara 3-12 karakter tanpa spasi</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Password</label>
+                            <input required type="password" id="f17" name="password" class="form-control" placeholder="Password">
+                            <small id="passwordHelp" class="form-text text-muted">Minimal 8 karakter tanpa spasi</small>
+                            <input type="checkbox" onclick="showpass2()">Tampilkan Password
+                        </div>
+                    </div>
+                </div> -->
             </div>
             <!--Footer-->
             <div class="modal-footer justify-content-center">
@@ -457,20 +612,29 @@
 
 
     <script type="text/javascript">
+        function editData(id, no_identitas, nama_depan, nama_belakang, tanggal_lahir, tempat_lahir, jenis_kelamin, agama, alamat, alamat_domisili, no_telp, email, tanggal_masuk, tanggal_keluar, status_aktif, nama_instansi)
+        {   document.getElementById("f0").value = id;
+            document.getElementById("f1").value = no_identitas;
+            document.getElementById("f2").value = nama_depan;
+            document.getElementById("f3").value = nama_belakang;
+            document.getElementById("f4").value = tempat_lahir;
+            document.getElementById("f5").value = tanggal_lahir;
+            document.getElementById("f6").value = jenis_kelamin;
+            document.getElementById("f7").value = agama;
+            document.getElementById("f8").value = alamat;
+            document.getElementById("f9").value = alamat_domisili;
+            document.getElementById("f10").value = no_telp;
+            document.getElementById("f11").value = email;
+            document.getElementById("f12").value = tanggal_masuk;
+            document.getElementById("f13").value = tanggal_keluar;
+            document.getElementById("f14").value = status_aktif;
+            document.getElementById("f15").value = nama_instansi;
+            // document.getElementById("f16").value =
+            // document.getElementById("f17").value = 
 
-
-
-        function editData(id, kode, nama, alamat, no_telp, email, status_pusat)
-        {
-            document.getElementById("form0x").value = id;
-            document.getElementById("form1x").value = kode;
-            document.getElementById("form2x").value = nama;
-            document.getElementById("form3x").value = alamat;
-            document.getElementById("form4x").value = no_telp;
-            document.getElementById("form5x").value = email;
 
             var id = id;
-            var url = "/admin/edit_instansi/"+id;
+            var url = "/admin/edit_guru/"+id;
             $("#editForm").attr('action', url);
         }
 
@@ -478,6 +642,17 @@
         {
             $("#editForm").submit();
         }
+
+
+        function showpass2() {
+            var x = document.getElementById("f17");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
 
     </script>
 

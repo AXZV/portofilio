@@ -22,22 +22,29 @@ class AdminController extends Controller
         return view('/admin/admin_dasboard');
     }
     ////////////// User
-        protected function adduser(Request $request)
-        {
-            $validatedData = $request->validate([
-                'username' => 'required|min:3|max:12|alpha_dash|unique:users',
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-            
+        protected function tambah_user($username, $password, $kode_identitas, $role)
+        {            
             //input user
             $data = new Users;
-            $data->username=$request->get('username');
-            $data->password= Hash::make($request->get('password'));
-            $data->kode_identitas=$request->get('jenis_user');
+            $data->username=$username;
+            $data->password= Hash::make($password);
+            $data->kode_identitas=$kode_identitas;
+            $data->role=$role;
             $data->save();
-
-            return redirect()->back()->with('successadd', true);
-
+        }
+        public function hapus_user($id)
+        {
+            $data=Users::find($id);
+            $data->delete();
+        }
+        public function edit_user($id, $username, $password, $kode_identitas, $role)
+        {
+            $data=Users::find($id);
+            $data->username=$username;
+            $data->password= Hash::make($password);
+            $data->kode_identitas=$kode_identitas;
+            $data->role=$role;
+            $data->save();
         }
 
     ////////////// Instansi
@@ -84,19 +91,22 @@ class AdminController extends Controller
     ////////////// Guru
         public function index_guru()
         {
-            $guru = Guru::all();     
-            return view('admin/guru', ['guru' => $guru]);
+            $guru = Guru::all();
+            $instansi = Instansi::all();      
+            return view('admin/guru', ['guru' => $guru], ['instansi' => $instansi] );
         }
         public function tambah_guru(Request $request)
         {
             $validatedData = $request->validate([
                 'no_identitas' => 'required|unique:gurus',
+                'username' => 'required|min:3|max:12|alpha_dash|unique:users',
+                'password' => ['required', 'string', 'min:8']
             ]);
-
             $data = new Guru;
             $data->no_identitas=$request->get('no_identitas');
             $data->nama_depan=$request->get('nama_depan');
             $data->nama_belakang=$request->get('nama_belakang');
+            $data->tanggal_lahir=$request->get('tanggal_lahir');
             $data->tempat_lahir=$request->get('tempat_lahir');
             $data->jenis_kelamin=$request->get('jenis_kelamin');
             $data->agama=$request->get('agama');
@@ -109,6 +119,8 @@ class AdminController extends Controller
             $data->status_aktif=$request->get('status_aktif');
             $data->kode_instansi=$request->get('kode_instansi');
             $data->save();
+            
+            $this->tambah_user($request->get('username'), $request->get('password'), $request->get('no_identitas'), 'Guru');
 
             return redirect()->back()->with('successadd', true);
         }
@@ -116,6 +128,7 @@ class AdminController extends Controller
         {
             $data=Guru::find($id);
             $data->delete();
+            $this->hapus_user($id);
             return redirect()->back()->with('successdelete', true);
         }
         public function edit_guru(Request $request, $id)
@@ -124,6 +137,7 @@ class AdminController extends Controller
             $data->no_identitas=$request->get('no_identitas');
             $data->nama_depan=$request->get('nama_depan');
             $data->nama_belakang=$request->get('nama_belakang');
+            $data->tanggal_lahir=$request->get('tanggal_lahir');
             $data->tempat_lahir=$request->get('tempat_lahir');
             $data->jenis_kelamin=$request->get('jenis_kelamin');
             $data->agama=$request->get('agama');

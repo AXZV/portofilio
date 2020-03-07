@@ -11,11 +11,11 @@ class Instansi extends Model
 
     public function guru()
     {
-        return $this->belongsTo('App\Models\Guru', 'kode', 'kode_instansi');
+        return $this->belongsTo('App\Model\Guru', 'kode', 'kode_instansi');
     }
 
     public function siswa()
     {
-        return $this->belongsTo('App\Models\Siswa', 'kode', 'kode_instansi');
+        return $this->belongsTo('App\Model\Siswa', 'kode', 'kode_instansi');
     }
 }

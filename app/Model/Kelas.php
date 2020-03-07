@@ -11,10 +11,10 @@ class Kelas extends Model
     
     public function pelajaran()
     {
-        return $this->hasOne('App\Models\Pelajaran', 'kode', 'kode_pelajaran');
+        return $this->hasOne('App\Model\Pelajaran', 'kode', 'kode_pelajaran');
     }
     public function guru_kelas()
     {
-        return $this->belongsTo('App\Models\Guru_Kelas', 'kode_kelas', 'kode');
+        return $this->belongsTo('App\Model\Guru_Kelas', 'kode_kelas', 'kode');
     }
 }

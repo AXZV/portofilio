@@ -11,15 +11,15 @@ class Produk extends Model
 
     public function pembelian()
     {
-        return $this->belongsTo('App\Models\Pembelian', 'kode', 'kode_instansi');
+        return $this->belongsTo('App\Model\Pembelian', 'kode', 'kode_instansi');
     }
     public function distribusi_produk()
     {
-        return $this->belongsTo('App\Models\Distribusi_Produk', 'kode', 'kode_produk');
+        return $this->belongsTo('App\Model\Distribusi_Produk', 'kode', 'kode_produk');
     }
     public function instansi()
     {
-        return $this->hasOne('App\Models\Instansi', 'kode', 'kode_instansi');
+        return $this->hasOne('App\Model\Instansi', 'kode', 'kode_instansi');
     }
     
 }

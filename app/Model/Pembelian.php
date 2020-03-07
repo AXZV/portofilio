@@ -11,6 +11,6 @@ class Pembelian extends Model
     
     public function produk()
     {
-        return $this->hasOne('App\Models\Instansi', 'kode', 'kode_produk');
+        return $this->hasOne('App\Model\Instansi', 'kode', 'kode_produk');
     }
 }

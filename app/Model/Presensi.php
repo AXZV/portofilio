@@ -11,6 +11,6 @@ class Presensi extends Model
     
     public function pengajaran()
     {
-        return $this->hasOne('App\Models\pengajaran', 'kode', 'kode_pengajaran');
+        return $this->hasOne('App\Model\pengajaran', 'kode', 'kode_pengajaran');
     }
 }

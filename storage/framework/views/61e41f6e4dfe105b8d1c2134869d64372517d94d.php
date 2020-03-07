@@ -7,12 +7,7 @@
 
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
     <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
-
     <script>
-        /* demo scripts for change table color */
-        /* change background */
-
-
         $(document).ready(function()
         {   
             $('.select2').select2();
@@ -80,7 +75,6 @@
             Sukses Hapus data
         </div>
     <?php endif; ?>
-
     <?php if($errors->has('kode')): ?>
         <div class="alert alert-danger" id="error" role="alert">
             Kode Instansi Tidak Boleh Sama
@@ -139,7 +133,6 @@
                                             <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->alamat); ?>', '<?php echo e($i->no_telp); ?>', '<?php echo e($i->email); ?>', '<?php echo e($i->status_pusat); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
                                         </td>
                                     </tr>                                              
-                                    </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                                 <tfoot>
@@ -252,7 +245,7 @@
 
         <!--Footer-->
         <div class="modal-footer justify-content-center">
-        <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Yes, Hapus</button>
+        <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Ya, Hapus</button>
         <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Batal</button>
         </div>
 
@@ -321,8 +314,8 @@
                 </div>
                 <div class="form-group">
                     <label for="inputState">Status Kantor</label>
-                    <select name="status" id="inputState" class="form-control" required>
-                        <option value="Pusat" selected>Kantor Pusat</option>
+                    <select name="status" id="form6x" class="form-control" required>
+                        <option value="Pusat">Kantor Pusat</option>
                         <option value="Cabang">Kantor Cabang</option>
                     </select>
                 </div>
@@ -353,6 +346,7 @@
             document.getElementById("form3x").value = alamat;
             document.getElementById("form4x").value = no_telp;
             document.getElementById("form5x").value = email;
+            document.getElementById("form6x").value = status_pusat;
 
             var id = id;
             var url = "/admin/edit_instansi/"+id;

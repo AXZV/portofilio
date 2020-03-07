@@ -13,14 +13,14 @@ class Guru_Kelas extends Model
     
     public function kelas()
     {
-        return $this->hasOne('App\Models\Kelas', 'kode', 'kode_kelas');
+        return $this->hasOne('App\Model\Kelas', 'kode', 'kode_kelas');
     }
     public function guru()
     {
-        return $this->hasOne('App\Models\Guru', 'no_identitas', 'kode_guru');
+        return $this->hasOne('App\Model\Guru', 'no_identitas', 'kode_guru');
     }
     public function pengajaran()
     {
-        return $this->belongsTo('App\Models\Pengajaran', 'kode', 'kode_guru_kelas');
+        return $this->belongsTo('App\Model\Pengajaran', 'kode', 'kode_guru_kelas');
     }
 }

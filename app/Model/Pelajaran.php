@@ -11,6 +11,6 @@ class Pelajaran extends Model
     
     public function kelas()
     {
-        return $this->belongsTo('App\Models\Kelas', 'kode', 'kode_pelajaran');
+        return $this->belongsTo('App\Model\Kelas', 'kode', 'kode_pelajaran');
     }
 }

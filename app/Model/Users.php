@@ -12,7 +12,7 @@ class Users extends Model
     use SoftDeletes; //soft
 
     protected $fillable = [
-        'username','password','kode_identitas','status','role',
+        'username','password','kode_identitas','role',
     ];
 
     protected $hidden = [

@@ -115,17 +115,17 @@
                                     <tr style="text-align:center">
 
                                         <th>No</th>
-                                        <th>Nomor Identitas</th>
+                                        <th>No. Identitas</th>
                                         <th>Nama</th>
-                                        <th>Tanggal_Lahir</th>
-                                        <th>Tempat_Lahir</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Tempat Lahir</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
                                         <th>Domisili</th>
                                         <th>Telepon</th>
                                         <th>Email</th>
-                                        <th>tanggal_masuk</th>
-                                        <th>tanggal_keluar</th>
+                                        <th>Masuk</th>
+                                        <th>Keluar</th>
                                         <th>Status</th>
                                         <th>Instansi</th>
                                         <th>Aksi</th>
@@ -160,10 +160,10 @@
                                 <tfoot>
                                     <tr style="text-align:center">
                                         <th>No</th>
-                                        <th>Nomor Identitas</th>
+                                        <th>No. Identitas</th>
                                         <th>Nama</th>
-                                        <th>Tanggal_Lahir</th>
-                                        <th>Tempat_Lahir</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Tempat Lahir</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
                                         <th>Domisili</th>
@@ -200,37 +200,131 @@
                 {{ csrf_field() }}
                 <!--Body-->
                 
-
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Kode Instansi</label>
-                            <input required type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                            <label for="formGroupExampleInput">Nomor Identitas</label>
+                            <input required type="text" name="no_identitas" class="form-control" id="formGroupExampleInput" placeholder="Nomor Identitas">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Nama Depan</label>
+                                    <input required type="text" name="nama_depan" class="form-control" id="formGroupExampleInput2" placeholder="Nama Depan">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Nama Belakang</label>
+                                    <input required type="text" name="nama_belakang" class="form-control" id="formGroupExampleInput2" placeholder="Nama Belakang">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="formGroupExampleInput2">Nama Instansi</label>
-                            <input required type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Tempat Lahir</label>
+                                    <input required type="text" name="tempat_lahir" class="form-control" id="formGroupExampleInput2" placeholder="Tempat Lahir">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Tanggal Lahir</label>
+                                    <input required type="date" name="tanggal_lahir" class="form-control" id="formGroupExampleInput2" placeholder="Tanggal Lahir">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput3">Alamat</label>
-                            <input required type="text" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
+
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Jenis Kelamin</label>
+                                    <select name="jenis_kelamin" id="inputState" class="form-control" required>
+                                        <option value="" disabled selected>Pilih.....</option>
+                                        <option value="L">Laki-Laki</option>
+                                        <option value="P">Perempuan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Agama</label>
+                                    <input required type="text" name="agama" class="form-control" id="formGroupExampleInput2" placeholder="Agama">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput4">Telepon</label>
-                            <input required type="text" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
+
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Alamat (Sesuai KTP)</label>
+                                    <input required type="text" name="alamat" class="form-control" id="formGroupExampleInput2" placeholder="Alamat">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Alamat Domisili</label>
+                                    <input required type="text" name="alamat_domisili" class="form-control" id="formGroupExampleInput2" placeholder="Alamat Domisili">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput5">Email</label>
-                            <input required type="email" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
+
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Telepon</label>
+                                    <input required type="text" name="no_telp" class="form-control" id="formGroupExampleInput2" placeholder="Telepon">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Email</label>
+                                    <input required type="text" name="email" class="form-control" id="formGroupExampleInput2" placeholder="Email">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputState">Status Kantor</label>
-                            <select name="status" id="inputState" class="form-control" required>
-                                <option value="" disabled selected>Pilih.....</option>
-                                <option value="Pusat">Kantor Pusat</option>
-                                <option value="Cabang">Kantor Cabang</option>
-                            </select>
+
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Tanggal Masuk</label>
+                                    <input required type="date" name="tanggal_masuk" class="form-control" id="formGroupExampleInput2" placeholder="Tanggal Masuk">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Tanggal Keluar</label>
+                                    <input required type="date" name="tanggal_keluar" class="form-control" id="formGroupExampleInput2" placeholder="Tanggal Keluar">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Status</label>
+                                    <select name="status_aktif" id="status_aktif" class="form-control" required>
+                                        <option value="" disabled selected>Pilih.....</option>
+                                        <option value="Aktif">Aktif</option>
+                                        <option value="Tidak Aktif">Tidak Aktif</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Nama Pengguna</label>
+                                    <input required type="text" name="username" class="form-control" id="formGroupExampleInput2" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Password</label>
+                                    <input required type="text" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+
+                        
 
                     </div>
                     <!--Footer-->

@@ -29,7 +29,7 @@ class CreateGurusTable extends Migration
             $table->string('email');
             $table->date('tanggal_masuk');
             $table->date('tanggal_keluar')->nullable();
-            $table->boolean('status_aktif');
+            $table->enum('status_aktif', ['Aktif', 'Tidak Aktif']);
             $table->string('kode_instansi');
             $table->softDeletes();
             $table->timestamps();

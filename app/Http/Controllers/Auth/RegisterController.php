@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin_dasboard';
 
     /**
      * Create a new controller instance.
@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -70,34 +70,19 @@ class RegisterController extends Controller
         $firstname = explode(' ',trim($myvalue))[0];
         $date = date("dm");
         $rand = substr(md5(microtime()),rand(0,26),5);
-        $id_user = $date.$rand.$firstname;
+        $id_user = $date.$rand.$firstname."_".$data['jenis_user'];
 
-        // if ($data['jenis_user'] == 'user')
-        // {
             return User::create([
                 'user_id' => $id_user,
                 'username' => $data['username'],
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'role' => $data['jenis_user']
+                'role' => $data['jenis_user'],
             ]);
 
-            $user->sendEmailVerificationNotification();
-        // }
-        // elseif($data['jenis_user'] == 'admin')
-        // {
-        //     return Admin::create([
-        //         'admin_id' => $id_user,
-        //         'username' => $data['username'],
-        //         'name' => $data['name'],
-        //         'email' => $data['email'],
-        //         'password' => Hash::make($data['password']),
-        //         'role' => 'admin'
-        //     ]);
+            // $user->sendEmailVerificationNotification();
 
-        //     $user->sendEmailVerificationNotification();
-        // }
         
     }
 }

@@ -1,7 +1,5 @@
 .btn-color {background: #4d4d4d!important; color: #ffff!important;}
 
-.lupakatasandi{color:black}
-
 .help-block{color:rgb(224, 5, 5);}
 
 
@@ -18,6 +16,12 @@
 }
 @media only screen and (max-width:768px){.navbar{background-color:#4d4d4d;}}
 .navbar{
-    background-color:#4d4d4d6c;
+    background-color:#4d4d4d;
 }
 .top-nav-collapse{background-color:#4d4d4d;}
+
+
+.rowx
+{
+    margin-top:5%;
+}

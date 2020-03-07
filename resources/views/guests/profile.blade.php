@@ -1,3 +1,0 @@
-profil
-
-{{ Auth::user()->name }}

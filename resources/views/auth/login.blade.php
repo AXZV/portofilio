@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_4')
 
 @section('content')
 <section class="container">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <div class="">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -62,35 +62,22 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                         <div class="">
                             <button class="btn btn-color white-text btn-block m-0 mb-3 border-0" type="submit">Masuk</button>
-                            <a class="lupakatasandi" href="{{ route('password.request') }}">Lupa kata sandi?</a>
+                            <a href="{{ route('password.request') }}">Lupa kata sandi?</a>
                         </div>
 
-                            <!-- <div class="">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div> -->
                         </div>
                     </form>
-                    <p>Tidak Punya Akun?
-                    <a href="/register">Daftar Sekarang</a>
+                    <!-- <p>Tidak Punya Akun?
+                    <a href="/register">Daftar Sekarang</a> -->
                 </p>
             </div>
         </div>
     </div>
-    <!-- <div class="col-lg-6 col-sm-12" style="background: url(../asset/image/undraw_complete_task_u2c3.svg); background-size: contain; background-repeat: no-repeat; background-position: center;">
-    </div> -->
 </div>
 </div>
 </section>

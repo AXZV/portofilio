@@ -35,11 +35,14 @@ class LoginController extends Controller
     protected $redirectTo;
     public function redirectTo()
     {
-        if (Auth::user()->role == 'user' ) {
-            return $redirectTo = '/home';
+        if (Auth::user()->role == 'Admin' ) {
+            return $redirectTo = '/dasboard_admin';
         }
-        elseif (Auth::user()->role == 'admin') {
-            return $redirectTo = '/admin_dasboard';
+        elseif (Auth::user()->role == 'Guru') {
+            return $redirectTo = '/dasboard_guru';
+        }
+        elseif (Auth::user()->role == 'Siswa') {
+            return $redirectTo = '/dasboard_siswa';
         }
     }
     /**

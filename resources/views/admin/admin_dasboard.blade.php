@@ -50,14 +50,14 @@
                                                 <span class="d-inline-block ml-auto">{{$siswa_belum_bayar}} / {{$total_siswa}} Siswa</span>
                                             </div>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-fusion-400" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-fusion-400" role="progressbar" style="width: {{$siswa_belum_bayar}}%;" aria-valuenow="{{$siswa_belum_bayar}}" aria-valuemin="0" aria-valuemax="{{$total_siswa}}"></div>
                                             </div>
                                             <div class="d-flex">
                                                 Lunas
                                                 <span class="d-inline-block ml-auto">{{$siswa_sudah_bayar}} / {{$total_siswa}} Siswa</span>
                                             </div>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-success-500" role="progressbar" style="width: 34%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success-500" role="progressbar" style="width: {{$siswa_sudah_bayar}}%;" aria-valuenow="{{$siswa_sudah_bayar}}" aria-valuemin="0" aria-valuemax="{{$total_siswa}}"></div>
                                             </div>
                                         </div>
                                     </div>

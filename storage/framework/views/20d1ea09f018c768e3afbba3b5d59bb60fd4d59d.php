@@ -48,14 +48,14 @@
                                                 <span class="d-inline-block ml-auto"><?php echo e($siswa_belum_bayar); ?> / <?php echo e($total_siswa); ?> Siswa</span>
                                             </div>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-fusion-400" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-fusion-400" role="progressbar" style="width: <?php echo e($siswa_belum_bayar); ?>%;" aria-valuenow="<?php echo e($siswa_belum_bayar); ?>" aria-valuemin="0" aria-valuemax="<?php echo e($total_siswa); ?>"></div>
                                             </div>
                                             <div class="d-flex">
                                                 Lunas
                                                 <span class="d-inline-block ml-auto"><?php echo e($siswa_sudah_bayar); ?> / <?php echo e($total_siswa); ?> Siswa</span>
                                             </div>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-success-500" role="progressbar" style="width: 34%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success-500" role="progressbar" style="width: <?php echo e($siswa_sudah_bayar); ?>%;" aria-valuenow="<?php echo e($siswa_sudah_bayar); ?>" aria-valuemin="0" aria-valuemax="<?php echo e($total_siswa); ?>"></div>
                                             </div>
                                         </div>
                                     </div>

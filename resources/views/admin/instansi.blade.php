@@ -14,7 +14,8 @@
 
             $('#dt-basic-example').dataTable(
             {
-                responsive: true
+                responsive: true,
+                fixedHeader: true,
             });
 
             $('.js-thead-colors a').on('click', function()
@@ -56,29 +57,52 @@
 @extends('layouts.master_3')
 
 @section('Content')
-
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
+    <div class="alert alert-success" style="display:none;" id="suksesedit" role="alert">
+    Sukses Update Data
+    </div>
+    <div class="alert alert-success" style="display:none;" id="suksesadd" role="alert">
+    Sukses Tambah data
+    </div>
+    <div class="alert alert-success" style="display:none;" id="suksesdel" role="alert">
+    Sukses Hapus data
+    </div>
 
     @if (session()->has('successedit'))
-        <div class="alert alert-success" role="alert">
-            Sukses Update Data
-        </div>
+    <script>
+        $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
+            $("#suksesedit").slideUp(900);
+        });
+    </script>
     @endif
     @if (session()->has('successadd'))
-        <div class="alert alert-success" role="alert">
-            Sukses Tambah data
-        </div>
+    <script>
+        $("#suksesadd").fadeTo(5000, 900).slideUp(900, function(){
+            $("#suksesadd").slideUp(900);
+        });
+    </script>
     @endif
-
     @if (session()->has('successdelete'))
-        <div class="alert alert-success" role="alert">
-            Sukses Hapus data
-        </div>
+    <script>
+        $("#suksesdel").fadeTo(5000, 900).slideUp(900, function(){
+            $("#suksesdel").slideUp(900);
+        });
+    </script>
     @endif
-    @if ($errors->has('kode'))
-        <div class="alert alert-danger" id="error" role="alert">
-            Kode Instansi Tidak Boleh Sama
-        </div>
+<!-- /////////////////////////////// Error Code /////////////////////////////// -->
+
+    @if ($errors->any())
+        @if ($errors->has('kode'))
+        <script>
+            $(document).ready(function(){
+                $('#adddata').modal({show: true});
+            });
+        </script>
+        @endif
+        @if ($errors->has('kode2'))
+            <!-- ////ERROREDIT -->
+        @endif
     @endif
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 
@@ -105,7 +129,7 @@
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr style="text-align:center">
                                         <th>No</th>
                                         <th>Kode Instansi</th>
@@ -135,7 +159,7 @@
                                     </tr>                                              
                                     @endforeach
                                 </tbody>
-                                <tfoot>
+                                <tfoot class="thead-dark">
                                     <tr style="text-align:center">
                                     <th>No</th>
                                     <th>Kode Instansi</th>
@@ -173,31 +197,35 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="formGroupExampleInput">Kode Instansi</label>
-                            <input required type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                            <input required value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                            @if ($errors->has('kode'))
+                                <div class="invalid-feedback d-block"> 
+                                    Kode Instansi Tidak Boleh Sama
+                                </div>
+                            @endif
                         </div>
-
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Nama Instansi</label>
-                            <input required type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                            <input required value="{{ old('nama') }}" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput3">Alamat</label>
-                            <input required type="text" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
+                            <input required value="{{ old('alamat') }}" type="text" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput4">Telepon</label>
-                            <input required type="text" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
+                            <input required value="{{ old('telepon') }}" type="text" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput5">Email</label>
-                            <input required type="email" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
+                            <input required value="{{ old('email') }}" type="email" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label for="inputState">Status Kantor</label>
                             <select name="status" id="inputState" class="form-control" required>
                                 <option value="" disabled selected>Pilih.....</option>
-                                <option value="Pusat">Kantor Pusat</option>
-                                <option value="Cabang">Kantor Cabang</option>
+                                <option value="Pusat" {{ old('status') == 'Pusat' ? 'selected' : '' }}>Kantor Pusat</option>
+                                <option value="Cabang" {{ old('status') == 'Cabang' ? 'selected' : '' }}>Kantor Cabang</option>
                             </select>
                         </div>
 
@@ -272,63 +300,63 @@
 
 <!-- /////////////////////////////// Modal Edit Data /////////////////////////////// -->
 
-<div class="modal fade bd-example-modal-lg" id="editdata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Rubah Data Instansi</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="modal fade bd-example-modal-lg" id="editdata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Instansi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="" id="editForm" method="POST">
+            {{ csrf_field() }}
+            <!--Body-->
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="form0x" class="form-control">
+
+                    <!-- <div class="form-group">
+                        <label for="formGroupExampleInput">Kode Instansi</label>
+                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Nama Instansi</label>
+                        <input required type="text" id="form2x" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput3">Alamat</label>
+                        <input required type="text" id="form3x" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput4">Telepon</label>
+                        <input required type="text" id="form4x" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput5">Email</label>
+                        <input required type="email" id="form5x" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputState">Status Kantor</label>
+                        <select name="status" id="form6x" class="form-control" required>
+                            <option value="Pusat">Kantor Pusat</option>
+                            <option value="Cabang">Kantor Cabang</option>
+                        </select>
+                    </div>
+
+                </div>
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
+                    <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
+                </div>
+                
+            </form>
+
         </div>
-
-        <form action="" id="editForm" method="POST">
-        {{ csrf_field() }}
-        <!--Body-->
-            <div class="modal-body">
-                <input type="hidden" name="id" id="form0x" class="form-control">
-
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Kode Instansi</label>
-                    <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
-                </div>
-
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Nama Instansi</label>
-                    <input required type="text" id="form2x" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput3">Alamat</label>
-                    <input required type="text" id="form3x" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput4">Telepon</label>
-                    <input required type="text" id="form4x" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput5">Email</label>
-                    <input required type="email" id="form5x" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label for="inputState">Status Kantor</label>
-                    <select name="status" id="form6x" class="form-control" required>
-                        <option value="Pusat">Kantor Pusat</option>
-                        <option value="Cabang">Kantor Cabang</option>
-                    </select>
-                </div>
-
-            </div>
-            <!--Footer-->
-            <div class="modal-footer justify-content-center">
-                <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
-                <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
-            </div>
-            
-        </form>
-
     </div>
-</div>
-</div>
+    </div>
 
 
     <script type="text/javascript">
@@ -338,7 +366,7 @@
         function editData(id, kode, nama, alamat, no_telp, email, status_pusat)
         {
             document.getElementById("form0x").value = id;
-            document.getElementById("form1x").value = kode;
+            // document.getElementById("form1x").value = kode;
             document.getElementById("form2x").value = nama;
             document.getElementById("form3x").value = alamat;
             document.getElementById("form4x").value = no_telp;

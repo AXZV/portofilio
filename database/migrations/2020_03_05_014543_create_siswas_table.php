@@ -18,7 +18,7 @@ class CreateSiswasTable extends Migration
             $table->bigIncrements('id');
             $table->string('no_daftar')->unique();
             $table->string('nama_depan');
-            $table->string('nama_belakang');
+            $table->string('nama_belakang')->nullable();
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir');
             $table->enum('jenis_kelamin', ['L', 'P']);
@@ -27,11 +27,11 @@ class CreateSiswasTable extends Migration
             $table->string('no_telp');
             $table->string('email');
             $table->date('tanggal_masuk');
-            $table->date('tanggal_keluar');
-            $table->boolean('status_aktif');
-            $table->boolean('status_bayar');
-            $table->double('jumlah_bayar');
-            $table->dateTime('tanggal_bayar');
+            $table->date('tanggal_lulus')->nullable(); 
+            $table->enum('status_aktif', ['Aktif', 'Tidak Aktif']);
+            $table->enum('status_bayar', ['Bayar', 'Belum Bayar']);
+            $table->double('jumlah_bayar')->nullable(); 
+            $table->dateTime('tanggal_bayar')->nullable();
             $table->string('kode_instansi');
             $table->softDeletes();
             $table->timestamps();

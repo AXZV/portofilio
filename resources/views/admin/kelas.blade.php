@@ -1,12 +1,12 @@
-<?php $__env->startSection('CSS'); ?>
-    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
+@section('CSS')
+    <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
     <!-- page related CSS below -->
-    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/select2/select2.bundle.css')); ?>">
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('JS'); ?>
+    <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/select2/select2.bundle.css') }}">
+@endsection
+@section('JS')
 
-    <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
+    <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script>
         $(document).ready(function()
         {   
@@ -52,12 +52,12 @@
 
     </script>
 
-<?php $__env->stopSection(); ?>
+@endsection
 
+@extends('layouts.master_3')
 
-
-<?php $__env->startSection('Content'); ?>
-<script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+@section('Content')
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
     <div class="alert alert-success" style="display:none;" id="suksesedit" role="alert">
     Sukses Update Data
@@ -69,41 +69,40 @@
     Sukses Hapus data
     </div>
 
-    <?php if(session()->has('successedit')): ?>
+    @if (session()->has('successedit'))
     <script>
         $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesedit").slideUp(900);
         });
     </script>
-    <?php endif; ?>
-    <?php if(session()->has('successadd')): ?>
+    @endif
+    @if (session()->has('successadd'))
     <script>
         $("#suksesadd").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesadd").slideUp(900);
         });
     </script>
-    <?php endif; ?>
-    <?php if(session()->has('successdelete')): ?>
+    @endif
+    @if (session()->has('successdelete'))
     <script>
         $("#suksesdel").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesdel").slideUp(900);
         });
     </script>
-    <?php endif; ?>
+    @endif
 <!-- /////////////////////////////// Error Code /////////////////////////////// -->
-
-    <?php if($errors->any()): ?>
-        <?php if($errors->has('kode')): ?>
+    @if ($errors->any())
+        @if ($errors->has('kode'))
         <script>
             $(document).ready(function(){
                 $('#adddata').modal({show: true});
             });
         </script>
-        <?php endif; ?>
-        <?php if($errors->has('kode2')): ?>
+        @endif
+        @if ($errors->has('kode2'))
             <!-- ////ERROREDIT -->
-        <?php endif; ?>
-    <?php endif; ?>
+        @endif
+    @endif
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 
         <div class="row">
@@ -111,7 +110,7 @@
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
-                            Instansi
+                            Kelas
                         </h2>
                         <div class="panel-toolbar">
                             <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -132,42 +131,33 @@
                                 <thead class="thead-dark">
                                     <tr style="text-align:center">
                                         <th>No</th>
-                                        <th>Kode Instansi</th>
+                                        <th>Kode Kelas</th>
                                         <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>Telepon</th>
-                                        <th>Email</th>
-                                        <th>Status Pusat</th>
+                                        <th>Kode Pelajaran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    @foreach($kelas as $i)
                                     <tr>
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
-                                        <td> <?php echo e($i->kode); ?></td>
-                                        <td> <?php echo e($i->nama); ?></td>
-                                        <td> <?php echo e($i->alamat); ?></td>
-                                        <td> <?php echo e($i->no_telp); ?></td>
-                                        <td> <?php echo e($i->email); ?></td>
-                                        <td> <?php echo e($i->status_pusat); ?></td>
+                                        <td> {{$i->kode}}</td>
+                                        <td> {{$i->nama}}</td>
+                                        <td> {{$i->kode_pelajaran}}</td>
                                         <td style="text-align:center">  
-                                            <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->alamat); ?>', '<?php echo e($i->no_telp); ?>', '<?php echo e($i->email); ?>', '<?php echo e($i->status_pusat); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
+                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->kode}}', '{{$i->nama}}', '{{$i->kode_pelajaran}}')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
                                         </td>
                                     </tr>                                              
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    @endforeach
                                 </tbody>
                                 <tfoot class="thead-dark">
                                     <tr style="text-align:center">
                                     <th>No</th>
-                                    <th>Kode Instansi</th>
+                                    <th>Kode Kelas</th>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Telepon</th>
-                                    <th>Email</th>
-                                    <th>Status Pusat</th>
+                                    <th>Kode Pelajaran</th>
                                     <th>Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -185,51 +175,39 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Instansi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kelas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="/admin/tambah_instansi" method="POST">
-                <?php echo e(csrf_field()); ?>
-
+                <form action="/admin/tambah_kelas" method="POST">
+                {{ csrf_field() }}
                 <!--Body-->
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Kode Instansi</label>
-                            <input required value="<?php echo e(old('kode')); ?>" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
-                            <?php if($errors->has('kode')): ?>
+                            <label for="formGroupExampleInput">Kode Kelas</label>
+                            <input required value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Kelas">
+                            @if ($errors->has('kode'))
                                 <div class="invalid-feedback d-block"> 
-                                    Kode Instansi Tidak Boleh Sama
+                                    Kode Kelas Tidak Boleh Sama
                                 </div>
-                            <?php endif; ?>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Nama Instansi</label>
-                            <input required value="<?php echo e(old('nama')); ?>" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                            <label for="formGroupExampleInput2">Nama Kelas</label>
+                            <input required value="{{ old('nama') }}" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Kelas">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput3">Alamat</label>
-                            <input required value="<?php echo e(old('alamat')); ?>" type="text" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput4">Telepon</label>
-                            <input required value="<?php echo e(old('telepon')); ?>" type="text" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput5">Email</label>
-                            <input required value="<?php echo e(old('email')); ?>" type="email" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputState">Status Kantor</label>
-                            <select name="status" id="inputState" class="form-control" required>
-                                <option value="" disabled selected>Pilih.....</option>
-                                <option value="Pusat" <?php echo e(old('status') == 'Pusat' ? 'selected' : ''); ?>>Kantor Pusat</option>
-                                <option value="Cabang" <?php echo e(old('status') == 'Cabang' ? 'selected' : ''); ?>>Kantor Cabang</option>
+                            <label for="formGroupExampleInput218">Kode Pelajaran</label>
+                            <select name="kode_pelajaran" id="kode_pelajaran1" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>                                       
+                                @foreach($pelajaran as $ins)
+                                <option value="{{$ins->kode}}" {{ (old("kode_pelajaran") == $ins->kode ? "selected":"") }}>{{$ins->kode}} - {{$ins->nama}}</option>
+                                @endforeach
                             </select>
                         </div>
-
+                     
                     </div>
                     <!--Footer-->
                     <div class="modal-footer justify-content-center">
@@ -250,8 +228,7 @@
     <div class="modal-dialog modal-notify modal-danger" role="document">
     <!--Content-->
     <form action="" id="deleteForm" method="post">
-    <?php echo e(csrf_field()); ?>
-
+    {{ csrf_field() }}
     <div class="modal-content">
         <!--Header-->
         <div class="modal-header">
@@ -289,7 +266,7 @@
         function deleteData(id)
         {
             var id = id;
-            var url = "/admin/hapus_instansi/"+id;
+            var url = "/admin/hapus_kelas/"+id;
             $("#deleteForm").attr('action', url);
         }
 
@@ -306,48 +283,36 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Instansi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Kelas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <form action="" id="editForm" method="POST">
-            <?php echo e(csrf_field()); ?>
-
+            {{ csrf_field() }}
             <!--Body-->
                 <div class="modal-body">
                     <input type="hidden" name="id" id="form0x" class="form-control">
 
                     <!-- <div class="form-group">
-                        <label for="formGroupExampleInput">Kode Instansi</label>
-                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                        <label for="formGroupExampleInput">Kode Kelas</label>
+                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Kelas">
                     </div> -->
 
                     <div class="form-group">
-                        <label for="formGroupExampleInput2">Nama Instansi</label>
-                        <input required type="text" id="form2x" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                        <label for="nama">Nama Kelas</label>
+                        <input required type="text" id="nama" name="nama" class="form-control" id="nama" placeholder="Nama Kelas">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput3">Alamat</label>
-                        <input required type="text" id="form3x" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput4">Telepon</label>
-                        <input required type="text" id="form4x" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput5">Email</label>
-                        <input required type="email" id="form5x" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputState">Status Kantor</label>
-                        <select name="status" id="form6x" class="form-control" required>
-                            <option value="Pusat">Kantor Pusat</option>
-                            <option value="Cabang">Kantor Cabang</option>
+                        <label for="formGroupExampleInput218">Kode Pelajaran</label>
+                        <select name="kode_pelajaran" id="kode_pelajaran" class="form-control" required>
+                            <option value="" disabled selected>Pilih.....</option>                                       
+                            @foreach($pelajaran as $ins)
+                            <option value="{{$ins->kode}}" {{ (old("kode_pelajaran") == $ins->kode ? "selected":"") }}>{{$ins->kode}} - {{$ins->nama}}</option>
+                            @endforeach
                         </select>
                     </div>
-
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
@@ -366,18 +331,14 @@
 
 
 
-        function editData(id, kode, nama, alamat, no_telp, email, status_pusat)
+        function editData(id, kode, nama, kode_pelajaran)
         {
             document.getElementById("form0x").value = id;
             // document.getElementById("form1x").value = kode;
-            document.getElementById("form2x").value = nama;
-            document.getElementById("form3x").value = alamat;
-            document.getElementById("form4x").value = no_telp;
-            document.getElementById("form5x").value = email;
-            document.getElementById("form6x").value = status_pusat;
-
+            document.getElementById("nama").value = nama;
+            document.getElementById("kode_pelajaran").value = kode_pelajaran;
             var id = id;
-            var url = "/admin/edit_instansi/"+id;
+            var url = "/admin/edit_kelas/"+id;
             $("#editForm").attr('action', url);
         }
 
@@ -391,5 +352,4 @@
 
 
 
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/instansi.blade.php ENDPATH**/ ?>
+@endsection

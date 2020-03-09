@@ -4,7 +4,6 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/select2/select2.bundle.css') }}">
 @endsection
 @section('JS')
-
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
 
@@ -95,19 +94,20 @@
         });
     </script>
     @endif
-<!-- /////////////////////////////// Error Code /////////////////////////////// --> 
+<!-- /////////////////////////////// Error Code /////////////////////////////// -->
     @if ($errors->any())
-        @if ($errors->addguru)
+        @if ($errors->has('no_identitas') || $errors->has('username') || $errors->has('password'))
         <script>
             $(document).ready(function(){
                 $('#adddata').modal({show: true});
             });
         </script>
         @endif
-        @if ($errors->edit)
-            
+        @if ($errors->has('kode2'))
+            <!-- ////ERROREDIT -->
         @endif
     @endif
+
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 
         <div class="row">
@@ -115,7 +115,7 @@
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
-                            Guru
+                            Siswa
                         </h2>
                         <div class="panel-toolbar">
                             <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -136,48 +136,52 @@
                                 <thead class="thead-dark">
                                     <tr style="text-align:center">
                                         <th>No</th>
-                                        <th>Nomor Identitas</th>
+                                        <th>Nomor Daftar</th>
                                         <th>Nama Lengkap</th>
-                                        <th>Status</th>
-                                        <th>Instansi</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Tempat Lahir</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
-                                        <th>Domisili</th>
                                         <th>Telepon</th>
                                         <th>Email</th>
+                                        <th>Status Siswa</th>
                                         <th>Tanggal Masuk</th>
-                                        <th>Tanggal Keluar</th>
+                                        <th>Tanggal Lulus</th>
+                                        <th>Status Bayar</th>
+                                        <th>Jumlah Bayar</th>
+                                        <th>Tanggal Bayar</th>
+                                        <th>Instansi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    @foreach($guru as $i)
+                                    @foreach($siswa as $i)
                                     <tr>
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
-                                        <td> {{$i->no_identitas}}</td>
+                                        <td> {{$i->no_daftar}}</td>
                                         <td> {{$i->nama_depan}}<span> <span>{{$i->nama_belakang}}</td>
-                                        <td> {{$i->status_aktif}}</td>
-                                        <td> {{$i->instansi->nama}}</td>
                                         <td> {{$i->tanggal_lahir}}</td>
                                         <td> {{$i->tempat_lahir}}</td>
                                         <td> {{$i->jenis_kelamin}}</td>
                                         <td> {{$i->agama}}</td>
                                         <td> {{$i->alamat}}</td>
-                                        <td> {{$i->alamat_domisili}}</td>
                                         <td> {{$i->no_telp}}</td>
                                         <td> {{$i->email}}</td>
+                                        <td> {{$i->status_aktif}}</td>
                                         <td> {{$i->tanggal_masuk}}</td>
-                                        <td> {{$i->tanggal_keluar}}</td>
+                                        <td> {{$i->tanggal_lulus}}</td>
+                                        <td> {{$i->status_bayar}}</td>
+                                        <td> {{$i->jumlah_bayar}}</td>
+                                        <td> {{$i->tanggal_bayar}}</td>
+                                        <td> {{$i->instansi->nama}}</td>
                                         <td style="text-align:center">  
                                             <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
                                             <a href="#" data-toggle="modal" 
                                             onclick="editData( 
                                                 '{{$i->id}}',
-                                                '{{$i->no_identitas}}',
+                                                '{{$i->no_daftar}}',
                                                 '{{$i->nama_depan}}', 
                                                 '{{$i->nama_belakang}}',
                                                 '{{$i->tanggal_lahir}}',
@@ -185,12 +189,14 @@
                                                 '{{$i->jenis_kelamin}}',
                                                 '{{$i->agama}}',
                                                 '{{$i->alamat}}',
-                                                '{{$i->alamat_domisili}}',
                                                 '{{$i->no_telp}}',
                                                 '{{$i->email}}',
                                                 '{{$i->tanggal_masuk}}',
-                                                '{{$i->tanggal_keluar}}',
+                                                '{{$i->tanggal_lulus}}',
                                                 '{{$i->status_aktif}}',
+                                                '{{$i->status_bayar}}',
+                                                '{{$i->jumlah_bayar}}',
+                                                '{{$i->tanggal_bayar}}',
                                                 '{{$i->instansi->kode}}',)"
                                             data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
                                         </td>
@@ -201,20 +207,22 @@
                                 <tfoot class="thead-dark">
                                     <tr style="text-align:center">
                                         <th>No</th>
-                                        <th>Nomor Identitas</th>
+                                        <th>Nomor Daftar</th>
                                         <th>Nama Lengkap</th>
-                                        <th>Status</th>
-                                        <th>Instansi</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Tempat Lahir</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
-                                        <th>Domisili</th>
                                         <th>Telepon</th>
                                         <th>Email</th>
+                                        <th>Status Siswa</th>
                                         <th>Tanggal Masuk</th>
-                                        <th>Tanggal Keluar</th>
+                                        <th>Tanggal Lulus</th>
+                                        <th>Status Bayar</th>
+                                        <th>Jumlah Bayar</th>
+                                        <th>Tanggal Bayar</th>
+                                        <th>Instansi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -232,37 +240,37 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Guru</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Siswa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="/admin/tambah_guru" method="POST">
+                <form action="/admin/tambah_siswa" method="POST">
                 {{ csrf_field() }}
                 <!--Body-->
                 
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="formGroupExampleInput1">Nomor Identitas</label>
-                            <input required value="{{ old('no_identitas') }}" type="text" name="no_identitas" class="form-control" id="formGroupExampleInput1" placeholder="Nomor Identitas">
-                            @if ($errors->has('no_identitas'))
+                            <label for="no_daftar">Nomor Daftar</label>
+                            <input required type="text" value="{{ old('no_daftar') }}" name="no_daftar" class="form-control" id="no_daftar" placeholder="Nomor Identitas">
+                            @if ($errors->has('no_daftar'))
                                 <div class="invalid-feedback d-block"> 
-                                    Nomor Identitas Sudah Terdaftar
+                                    Nomor Pendaftaran Sudah Terdaftar
                                 </div>
                             @endif
                         </div>
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput2">Nama Depan</label>
-                                    <input required value="{{ old('nama_depan') }}" type="text" name="nama_depan" class="form-control" id="formGroupExampleInput2" placeholder="Nama Depan">
+                                    <label for="nama_depan">Nama Depan</label>
+                                    <input required value="{{ old('nama_depan') }}" type="text" name="nama_depan" class="form-control" id="nama_depan" placeholder="Nama Depan">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput23">Nama Belakang</label>
-                                    <input value="{{ old('nama_belakang') }}" type="text" name="nama_belakang" class="form-control" id="formGroupExampleInput23" placeholder="Nama Belakang">
+                                    <label for="nama_belakang">Nama Belakang</label>
+                                    <input type="text" value="{{ old('nama_belakang') }}" name="nama_belakang" class="form-control" id="nama_belakang" placeholder="Nama Belakang">
                                 </div>
                             </div>
                         </div>
@@ -270,20 +278,20 @@
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput24">Tempat Lahir</label>
-                                    <input required value="{{ old('tempat_lahir') }}" type="text" name="tempat_lahir" class="form-control" id="formGroupExampleInput24" placeholder="Tempat Lahir">
+                                    <label for="tempat_lahir">Tempat Lahir</label>
+                                    <input required value="{{ old('tempat_lahir') }}" type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput25">Tanggal Lahir</label>
-                                    <input required value="{{ old('tanggal_lahir') }}" type="date" name="tanggal_lahir" class="form-control" id="formGroupExampleInput25" placeholder="Tanggal Lahir">
+                                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                                    <input required value="{{ old('tanggal_lahir') }}" type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Tanggal Lahir">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput26">Jenis Kelamin</label>
-                                    <select name="jenis_kelamin" id="inputState" class="form-control" required>
+                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>
                                         <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-Laki</option>
                                         <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
@@ -292,23 +300,32 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput27">Agama</label>
-                                    <input value="{{ old('agama') }}" required type="text" name="agama" class="form-control" id="formGroupExampleInput27" placeholder="Agama">
+                                    <label for="agama">Agama</label>
+                                    <input required value="{{ old('agama') }}" type="text" name="agama" class="form-control" id="agama" placeholder="Agama">
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput28">Alamat</label>
-                                    <input value="{{ old('alamat') }}" required type="text" name="alamat" class="form-control" id="formGroupExampleInput28" placeholder="Alamat">
+                                    <label for="alamat">Alamat</label>
+                                    <input required value="{{ old('alamat') }}" type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat">
                                     <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput29">Alamat Domisili</label>
-                                    <input required value="{{ old('alamat_domisili') }}" type="text" name="alamat_domisili" class="form-control" id="formGroupExampleInput29" placeholder="Alamat Domisili">
+                                    <label for="no_telp">Telepon</label>
+                                    <input required value="{{ old('no_telp') }}" type="text" name="no_telp" class="form-control" id="no_telp" placeholder="Telepon">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input required value="{{ old('email') }}" type="text" name="email" class="form-control" id="email" placeholder="Email">
                                 </div>
                             </div>
                         </div>
@@ -316,23 +333,8 @@
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput211">Telepon</label>
-                                    <input required value="{{ old('no_telp') }}" type="text" name="no_telp" class="form-control" id="formGroupExampleInput212" placeholder="Telepon">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput213">Email</label>
-                                    <input required value="{{ old('email') }}" type="text" name="email" class="form-control" id="formGroupExampleInput214" placeholder="Email">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput216">Status</label>
-                                    <select name="status_aktif" id="status_aktif1" class="form-control" required>
+                                    <label for="status_aktif">Status</label>
+                                    <select name="status_aktif" id="status_aktif" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>
                                         <option value="Aktif" {{ old('status_aktif') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
                                         <option value="Tidak Aktif" {{ old('status_aktif') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
@@ -341,23 +343,23 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput215">Tanggal Masuk</label>
-                                    <input required value="{{ old('tanggal_masuk') }}" type="date" name="tanggal_masuk" class="form-control" id="formGroupExampleInput215" placeholder="Tanggal Masuk">
+                                    <label for="tanggal_masuk">Tanggal Masuk</label>
+                                    <input required value="{{ old('tanggal_masuk') }}" type="date" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput216">Tanggal Keluar</label>
-                                    <input value="{{ old('tanggal_keluar') }}" type="date" name="tanggal_keluar" class="form-control" id="formGroupExampleInput216" placeholder="Tanggal Keluar">
+                                    <label for="tanggal_lulus">Tanggal Lulus</label>
+                                    <input value="{{ old('tanggal_lulus') }}" type="date" name="tanggal_lulus" class="form-control" id="tanggal_lulus" placeholder="Tanggal Keluar">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput218">Instansi</label>
+                                    <label for="kode_instansi">Instansi</label>
                                     <select name="kode_instansi" id="kode_instansi" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>                                       
                                         @foreach($instansi as $ins)
-                                        <option value="{{$ins->kode}}" {{ (old("kode_instansi") == $ins->kode ? "selected":"") }}>{{$ins->kode}} - {{$ins->nama}}</option>
+                                        <option value="{{$ins->kode}}" {{ (old("kode_instansi") == $ins->kode ? "selected":"") }} >{{$ins->kode}} - {{$ins->nama}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -367,9 +369,39 @@
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput219">Nama Pengguna</label>
-                                    <input required value="{{ old('username') }}" type="text" name="username" class="form-control" id="formGroupExampleInput219" placeholder="Username">
-                                    <small id="usernameHelp" class="form-text text-muted">Berisi antara 3-12 karakter tanpa spasi</small>
+                                    <label for="status_bayar">Status Bayar</label>
+                                    <select name="status_bayar" id="status_bayar" class="form-control" required>
+                                        <option value="" disabled selected>Pilih.....</option>
+                                        <option value="Bayar" {{ old('status_bayar') == 'Bayar' ? 'selected' : '' }}>Lunas</option>
+                                        <option value="Belum Bayar" {{ old('status_bayar') == 'Belum Bayar' ? 'selected' : '' }}>Belum Bayar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jumlah_bayar">Jumlah Bayar</label>
+                                    <div class="input-group" >
+                                    <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp.</span>
+                                        </div>
+                                    <input value="{{ old('jumlah_bayar') }}" type="number" name="jumlah_bayar" class="form-control" id="jumlah_bayar" placeholder="Jumlah Bayar">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="tanggal_bayar">Tanggal Bayar</label>
+                                    <input value="{{ old('tanggal_bayar') }}" type="datetime-local" name="tanggal_bayar" class="form-control" id="tanggal_bayar" placeholder="Tanggal Bayar">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="username">Nama Pengguna</label>
+                                    <input required value="{{ old('username') }}" type="text" name="username" class="form-control" id="username" placeholder="Username">
+                                    <small id="username" class="form-text text-muted">Berisi antara 3-12 karakter tanpa spasi</small>
                                     @if ($errors->has('username'))
                                         <div class="invalid-feedback d-block"> 
                                             Username sudah terdaftar atau tidak sesuai aturan
@@ -379,8 +411,8 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput221">Password</label>
-                                    <input required value="{{ old('password') }}" type="password" id="password" name="password" class="form-control" id="formGroupExampleInput221" placeholder="Password">
+                                    <label for="password">Password</label>
+                                    <input required value="{{ old('password') }}" type="password" id="password" name="password" class="form-control" placeholder="Password">
                                     <small id="passwordHelp" class="form-text text-muted">Minimal 8 karakter tanpa spasi</small>
                                     <input type="checkbox" onclick="showpass()">Tampilkan Password
                                     @if ($errors->has('password'))
@@ -402,7 +434,6 @@
             </div>
         </div>
         </div>
-
         <script>
             function showpass() {
                 var x = document.getElementById("password");
@@ -412,8 +443,8 @@
                     x.type = "password";
                 }
             }
+            
         </script>
-
 <!-- /////////////////////////////// Modal Hapus Data /////////////////////////////// -->
 
    <!-- Central Modal Medium Danger -->
@@ -460,7 +491,7 @@
         function deleteData(id)
         {
             var id = id;
-            var url = "/admin/hapus_guru/"+id;
+            var url = "/admin/hapus_siswa/"+id;
             $("#deleteForm").attr('action', url);
         }
 
@@ -477,7 +508,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Instansi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Siswa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -486,124 +517,149 @@
             <form action="" id="editForm" method="POST">
             {{ csrf_field() }}
             <!--Body-->
+                <input type="hidden" name="id" id="form0x" class="form-control">
                 <div class="modal-body">
-                    <input type="hidden" name="id" id="f0" class="form-control">
-
-                    <!-- <div class="form-group">
-                        <label for="formGroupExampleInput">Nomor Identitas</label>
-                        <input required type="text" name="no_identitas" class="form-control" id="f1" placeholder="Nomor Identitas">
-                    </div> -->
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Nama Depan</label>
-                                <input required type="text" name="nama_depan" class="form-control" id="f2" placeholder="Nama Depan">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Nama Belakang</label>
-                                <input type="text" name="nama_belakang" class="form-control" id="f3" placeholder="Nama Belakang">
-                            </div>
+                <!-- <div class="form-group">
+                    <label for="no_daftar">Nomor Daftar</label>
+                    <input required type="text" name="no_daftar" class="form-control" id="no_daftar1" placeholder="Nomor Identitas">
+                </div> -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="nama_depan">Nama Depan</label>
+                            <input required type="text" name="nama_depan" class="form-control" id="nama_depan1" placeholder="Nama Depan">
                         </div>
                     </div>
-
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Tempat Lahir</label>
-                                <input required type="text" name="tempat_lahir" class="form-control" id="f4" placeholder="Tempat Lahir">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Tanggal Lahir</label>
-                                <input required type="date" name="tanggal_lahir" class="form-control" id="f5" placeholder="Tanggal Lahir">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Jenis Kelamin</label>
-                                <select name="jenis_kelamin" id="f6" class="form-control" required>
-                                    <option value="" disabled selected>Pilih.....</option>
-                                    <option value="L">Laki-Laki</option>
-                                    <option value="P">Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Agama</label>
-                                <input required type="text" name="agama" class="form-control" id="f7" placeholder="Agama">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Alamat</label>
-                                <input required type="text" name="alamat" class="form-control" id="f8" placeholder="Alamat">
-                                <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Alamat Domisili</label>
-                                <input required type="text" name="alamat_domisili" class="form-control" id="f9" placeholder="Alamat Domisili">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Telepon</label>
-                                <input required type="text" name="no_telp" class="form-control" id="f10" placeholder="Telepon">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Email</label>
-                                <input required type="text" name="email" class="form-control" id="f11" placeholder="Email">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Status</label>
-                                <select name="status_aktif" id="f14" class="form-control" required>
-                                    <option value="" disabled>Pilih.....</option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Tidak Aktif">Tidak Aktif</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Tanggal Masuk</label>
-                                <input required type="date" name="tanggal_masuk" class="form-control" id="f12" placeholder="Tanggal Masuk">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Tanggal Keluar</label>
-                                <input type="date" name="tanggal_keluar" class="form-control" id="f13" placeholder="Tanggal Keluar">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Instansi</label>
-                                <select name="kode_instansi" id="f15" class="form-control" required>                                    
-                                    @foreach($instansi as $ins)
-                                    <option value="{{$ins->kode}}">{{$ins->kode}} - {{$ins->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="nama_belakang">Nama Belakang</label>
+                            <input type="text" name="nama_belakang" class="form-control" id="nama_belakang1" placeholder="Nama Belakang">
                         </div>
                     </div>
                 </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <input required type="text" name="tempat_lahir" class="form-control" id="tempat_lahir1" placeholder="Tempat Lahir">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input required type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir1" placeholder="Tanggal Lahir">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="jenis_kelamin">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin1" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="agama">Agama</label>
+                            <input required type="text" name="agama" class="form-control" id="agama1" placeholder="Agama">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <input required type="text" name="alamat" class="form-control" id="alamat1" placeholder="Alamat">
+                            <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="no_telp">Telepon</label>
+                            <input required type="text" name="no_telp" class="form-control" id="no_telp1" placeholder="Telepon">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input required type="text" name="email" class="form-control" id="email1" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="status_aktif">Status</label>
+                            <select name="status_aktif" id="status_aktif1" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>
+                                <option value="Aktif">Aktif</option>
+                                <option value="Tidak Aktif">Tidak Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tanggal_masuk">Tanggal Masuk</label>
+                            <input required type="date" name="tanggal_masuk" class="form-control" id="tanggal_masuk1" placeholder="Tanggal Masuk">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tanggal_lulus">Tanggal Lulus</label>
+                            <input type="date" name="tanggal_lulus" class="form-control" id="tanggal_lulus1" placeholder="Tanggal Keluar">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="kode_instansi">Instansi</label>
+                            <select name="kode_instansi" id="kode_instansi1" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>                                       
+                                @foreach($instansi as $ins)
+                                <option value="{{$ins->kode}}">{{$ins->kode}} - {{$ins->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="status_bayar">Status Bayar</label>
+                            <select name="status_bayar" id="status_bayar1" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>
+                                <option value="Bayar">Lunas</option>
+                                <option value="Belum Bayar">Belum Bayar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="jumlah_bayar">Jumlah Bayar</label>
+                            <div class="input-group" >
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text">Rp.</span>
+                                </div>
+                            <input type="number" name="jumlah_bayar" class="form-control" id="jumlah_bayar1" placeholder="Jumlah Bayar">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tanggal_bayar">Tanggal Bayar</label>
+                            <input type="datetime" name="tanggal_bayar" class="form-control" id="tanggal_bayar1" placeholder="Tanggal Bayar">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
                     <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
@@ -618,27 +674,31 @@
 
 
         <script type="text/javascript">
-            function editData(id, no_identitas, nama_depan, nama_belakang, tanggal_lahir, tempat_lahir, jenis_kelamin, agama, alamat, alamat_domisili, no_telp, email, tanggal_masuk, tanggal_keluar, status_aktif, kode_instansi)
-            {   document.getElementById("f0").value = id;
-                // document.getElementById("f1").value = no_identitas;
-                document.getElementById("f2").value = nama_depan;
-                document.getElementById("f3").value = nama_belakang;
-                document.getElementById("f4").value = tempat_lahir;
-                document.getElementById("f5").value = tanggal_lahir;
-                document.getElementById("f6").value = jenis_kelamin;
-                document.getElementById("f7").value = agama;
-                document.getElementById("f8").value = alamat;
-                document.getElementById("f9").value = alamat_domisili;
-                document.getElementById("f10").value = no_telp;
-                document.getElementById("f11").value = email;
-                document.getElementById("f12").value = tanggal_masuk;
-                document.getElementById("f13").value = tanggal_keluar;
-                document.getElementById("f14").value = status_aktif;
-                document.getElementById("f15").value = kode_instansi;
+            function editData(id, no_identitas, nama_depan, nama_belakang, tanggal_lahir, tempat_lahir, jenis_kelamin, agama, alamat, no_telp, email, tanggal_masuk, tanggal_lulus, status_aktif, status_bayar, jumlah_bayar, tanggal_bayar, kode_instansi)
+            {   
+                console.log("rrrr", tanggal_bayar);
+                document.getElementById("form0x").value = id;
+                // document.getElementById("no_daftar1").value = no_identitas;
+                document.getElementById("nama_depan1").value = nama_depan;
+                document.getElementById("nama_belakang1").value = nama_belakang;
+                document.getElementById("tanggal_lahir1").value = tanggal_lahir;
+                document.getElementById("tempat_lahir1").value = tempat_lahir;
+                document.getElementById("jenis_kelamin1").value = jenis_kelamin;
+                document.getElementById("agama1").value = agama;
+                document.getElementById("alamat1").value = alamat;
+                document.getElementById("no_telp1").value = no_telp;
+                document.getElementById("email1").value = email;
+                document.getElementById("tanggal_masuk1").value = tanggal_masuk;
+                document.getElementById("tanggal_lulus1").value = tanggal_lulus;
+                document.getElementById("status_aktif1").value = status_aktif;
+                document.getElementById("status_bayar1").value = status_bayar;
+                document.getElementById("jumlah_bayar1").value = jumlah_bayar;
+                document.getElementById("tanggal_bayar1").value = tanggal_bayar;
+                document.getElementById("kode_instansi1").value = kode_instansi;
 
 
                 var id = id;
-                var url = "/admin/edit_guru/"+id;
+                var url = "/admin/edit_siswa/"+id;
                 $("#editForm").attr('action', url);
             }
 

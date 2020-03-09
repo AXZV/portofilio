@@ -91,7 +91,6 @@
     </script>
     <?php endif; ?>
 <!-- /////////////////////////////// Error Code /////////////////////////////// -->
-
     <?php if($errors->any()): ?>
         <?php if($errors->has('kode')): ?>
         <script>
@@ -111,7 +110,7 @@
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
-                            Instansi
+                            Produk
                         </h2>
                         <div class="panel-toolbar">
                             <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -132,29 +131,27 @@
                                 <thead class="thead-dark">
                                     <tr style="text-align:center">
                                         <th>No</th>
-                                        <th>Kode Instansi</th>
+                                        <th>Kode Produk</th>
                                         <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>Telepon</th>
-                                        <th>Email</th>
-                                        <th>Status Pusat</th>
+                                        <th>Harga</th>
+                                        <th>Kategori</th>
+                                        <th>Stok</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> <?php echo e($i->kode); ?></td>
                                         <td> <?php echo e($i->nama); ?></td>
-                                        <td> <?php echo e($i->alamat); ?></td>
-                                        <td> <?php echo e($i->no_telp); ?></td>
-                                        <td> <?php echo e($i->email); ?></td>
-                                        <td> <?php echo e($i->status_pusat); ?></td>
+                                        <td> <?php echo e($i->harga); ?></td>
+                                        <td> <?php echo e($i->kategori); ?></td>
+                                        <td> <?php echo e($i->stok_awal); ?></td>
                                         <td style="text-align:center">  
                                             <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->alamat); ?>', '<?php echo e($i->no_telp); ?>', '<?php echo e($i->email); ?>', '<?php echo e($i->status_pusat); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->harga); ?>', '<?php echo e($i->kategori); ?>', '<?php echo e($i->stok_awal); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
                                         </td>
                                     </tr>                                              
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -162,12 +159,11 @@
                                 <tfoot class="thead-dark">
                                     <tr style="text-align:center">
                                     <th>No</th>
-                                    <th>Kode Instansi</th>
+                                    <th>Kode Produk</th>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Telepon</th>
-                                    <th>Email</th>
-                                    <th>Status Pusat</th>
+                                    <th>Harga</th>
+                                    <th>Kategori</th>
+                                    <th>Stok</th>
                                     <th>Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -185,51 +181,42 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Instansi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Produk</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="/admin/tambah_instansi" method="POST">
+                <form action="/admin/tambah_produk" method="POST">
                 <?php echo e(csrf_field()); ?>
 
                 <!--Body-->
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Kode Instansi</label>
-                            <input required value="<?php echo e(old('kode')); ?>" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                            <label for="formGroupExampleInput">Kode Produk</label>
+                            <input required value="<?php echo e(old('kode')); ?>" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Produk">
                             <?php if($errors->has('kode')): ?>
                                 <div class="invalid-feedback d-block"> 
-                                    Kode Instansi Tidak Boleh Sama
+                                    Kode Produk Tidak Boleh Sama
                                 </div>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">Nama Instansi</label>
-                            <input required value="<?php echo e(old('nama')); ?>" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                            <label for="nama">Nama Produk</label>
+                            <input required value="<?php echo e(old('nama')); ?>" type="text" name="nama" class="form-control" id="nama" placeholder="Nama Produk">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput3">Alamat</label>
-                            <input required value="<?php echo e(old('alamat')); ?>" type="text" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
-                        </div>
+                            <label for="harga">Harga</label>
+                            <input required value="<?php echo e(old('harga')); ?>" type="number" name="harga" class="form-control" id="harga" placeholder="Harga">
+                        </div> 
                         <div class="form-group">
-                            <label for="formGroupExampleInput4">Telepon</label>
-                            <input required value="<?php echo e(old('telepon')); ?>" type="text" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
-                        </div>
+                            <label for="kategori">Kategori</label>
+                            <input required value="<?php echo e(old('kategori')); ?>" type="number" name="kategori" class="form-control" id="kategori" placeholder="Kategori">
+                        </div> 
                         <div class="form-group">
-                            <label for="formGroupExampleInput5">Email</label>
-                            <input required value="<?php echo e(old('email')); ?>" type="email" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputState">Status Kantor</label>
-                            <select name="status" id="inputState" class="form-control" required>
-                                <option value="" disabled selected>Pilih.....</option>
-                                <option value="Pusat" <?php echo e(old('status') == 'Pusat' ? 'selected' : ''); ?>>Kantor Pusat</option>
-                                <option value="Cabang" <?php echo e(old('status') == 'Cabang' ? 'selected' : ''); ?>>Kantor Cabang</option>
-                            </select>
-                        </div>
-
+                            <label for="stok_awal">Stok Awal</label>
+                            <input required value="<?php echo e(old('stok_awal')); ?>" type="number" name="stok_awal" class="form-control" id="stok_awal" placeholder="Stok Awal">
+                        </div>                        
                     </div>
                     <!--Footer-->
                     <div class="modal-footer justify-content-center">
@@ -289,7 +276,7 @@
         function deleteData(id)
         {
             var id = id;
-            var url = "/admin/hapus_instansi/"+id;
+            var url = "/admin/hapus_produk/"+id;
             $("#deleteForm").attr('action', url);
         }
 
@@ -306,7 +293,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Instansi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Produk</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -320,34 +307,26 @@
                     <input type="hidden" name="id" id="form0x" class="form-control">
 
                     <!-- <div class="form-group">
-                        <label for="formGroupExampleInput">Kode Instansi</label>
-                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                        <label for="formGroupExampleInput">Kode Produk</label>
+                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Produk">
                     </div> -->
 
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Nama Instansi</label>
-                        <input required type="text" id="form2x" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput3">Alamat</label>
-                        <input required type="text" id="form3x" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput4">Telepon</label>
-                        <input required type="text" id="form4x" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput5">Email</label>
-                        <input required type="email" id="form5x" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputState">Status Kantor</label>
-                        <select name="status" id="form6x" class="form-control" required>
-                            <option value="Pusat">Kantor Pusat</option>
-                            <option value="Cabang">Kantor Cabang</option>
-                        </select>
-                    </div>
-
+                <div class="form-group">
+                    <label for="nama1">Nama Produk</label>
+                    <input required type="text" name="nama" class="form-control" id="nama1" placeholder="Nama Produk">
+                </div>
+                <div class="form-group">
+                    <label for="harga1">Harga</label>
+                    <input required type="number" name="harga" class="form-control" id="harga1" placeholder="Harga">
+                </div> 
+                <div class="form-group">
+                    <label for="kategori1">Kategori</label>
+                    <input required type="number" name="kategori" class="form-control" id="kategori1" placeholder="Kategori">
+                </div> 
+                <div class="form-group">
+                    <label for="stok_awal1">Stok Awal</label>
+                    <input required type="number" name="stok_awal" class="form-control" id="stok_awal1" placeholder="Stok Awal">
+                </div>   
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
@@ -366,18 +345,16 @@
 
 
 
-        function editData(id, kode, nama, alamat, no_telp, email, status_pusat)
+        function editData(id, kode, nama ,harga, kategori, stok_awal)
         {
             document.getElementById("form0x").value = id;
             // document.getElementById("form1x").value = kode;
-            document.getElementById("form2x").value = nama;
-            document.getElementById("form3x").value = alamat;
-            document.getElementById("form4x").value = no_telp;
-            document.getElementById("form5x").value = email;
-            document.getElementById("form6x").value = status_pusat;
-
+            document.getElementById("nama1").value = nama;
+            document.getElementById("harga1").value = harga;
+            document.getElementById("kategori1").value = kategori;
+            document.getElementById("stok_awal1").value = stok_awal;
             var id = id;
-            var url = "/admin/edit_instansi/"+id;
+            var url = "/admin/edit_produk/"+id;
             $("#editForm").attr('action', url);
         }
 
@@ -392,4 +369,4 @@
 
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/instansi.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/produk.blade.php ENDPATH**/ ?>

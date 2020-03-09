@@ -63,14 +63,37 @@
 @section('Content')
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
-    <div class="alert alert-success" style="display:none;" id="suksesedit" role="alert">
-    Sukses Update Data
+    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-edit text-warning"></i>
+        </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Update Data</span>  
+        </div>
     </div>
-    <div class="alert alert-success" style="display:none;" id="suksesadd" role="alert">
-    Sukses Tambah data
     </div>
-    <div class="alert alert-success" style="display:none;" id="suksesdel" role="alert">
-    Sukses Hapus data
+
+    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesadd" role="alert">
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-shield-check text-warning"></i>
+        </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Tambah Data</span>  
+        </div>
+    </div>
+    </div>
+
+    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesdel" role="alert">
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-trash text-warning"></i>
+        </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Hapus data</span>  
+        </div>
+    </div>
     </div>
 
     @if (session()->has('successedit'))

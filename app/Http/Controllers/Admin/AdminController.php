@@ -19,14 +19,11 @@ class AdminController extends Controller
     public function __construct()
     {   
         $this->middleware(['auth']);
-        $xnama = "red";
-        // $instansi = Instansi::all(); 
-        // $flights = App\Flight::where('active', 1)
     }
-
     public function index()
     {
-        return view('/admin/admin_dasboard');
+        $siswa = Siswa::all();      
+        return view('/admin/admin_dasboard', ['siswa' => $siswa]);
     }
     ////////////// User
         protected function tambah_user($username, $password, $kode_identitas, $role)

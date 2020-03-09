@@ -17,5 +17,9 @@ class Guru extends Model
     {
         return $this->belongsTo('App\Model\Guru_Kelas', 'no_identitas', 'kode_guru');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\Model\User', 'kode', 'kode_identitas');
+    }
 
 }

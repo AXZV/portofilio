@@ -17,4 +17,8 @@ class Siswa extends Model
     {
         return $this->belongsTo('App\Model\Pengajaran', 'no_daftar', 'kode_siswa');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\Model\User', 'kode', 'kode_identitas');
+    }
 }

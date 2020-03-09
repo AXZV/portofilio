@@ -35,4 +35,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function admin()
+    {
+        return $this->hasOne('App\Model\Admin', 'kode', 'kode_identitas');;
+    }
+
+    public function guru()
+    {
+        return $this->hasOne('App\Model\Guru', 'no_identitas', 'kode_identitas');;
+    }
+
+    public function siswa()
+    {
+        return $this->hasOne('App\Model\Siswa', 'no_daftar', 'kode_identitas');;
+    }
 }

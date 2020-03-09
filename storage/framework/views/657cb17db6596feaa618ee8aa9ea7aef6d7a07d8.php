@@ -72,26 +72,21 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <?php
                         $role =  Auth::user()->role ;
-                    if ( $role == "admin"){ ?>
+                    if ( $role == "Admin"){ ?>
                         <a class="dropdown-item" href="/dasboard_admin">
                             Dasboard Admin
                         </a>
                     <?php } 
-                    else if($role == "guru") { ?>
+                    else if($role == "Guru") { ?>
                         <a class="dropdown-item" href="/dasboard_guru">
                             Dasboard Guru
                         </a>
                     <?php } 
-                    else if ( $role == "kepala_guru"){ ?>
-                        <a class="dropdown-item" href="/dasboard_kepalaguru">
-                            Dasboard Kepala Guru
+                    else if ( $role == "Siswa"){ ?>
+                        <a class="dropdown-item" href="/dasboard_siswa">
+                            Dasboard Siswa
                         </a>
-                    <?php } 
-                    else if($role == "orangtua") { ?>
-                        <a class="dropdown-item" href="/dasboard_orangtua">
-                            Dasboard Orang Tua
-                        </a>
-                    <?php } ?>
+                    <?php }  ?>
                     <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

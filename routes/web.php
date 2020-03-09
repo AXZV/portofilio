@@ -4,7 +4,7 @@ Route::GET('/', 'Dasboard\DasboardController@index');
 
 Auth::routes();
 
-//admin
+//ADMIN
 Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin');
     //instansi
     Route::GET('/admin/instansi', 'Admin\AdminController@index_instansi')->middleware('Admin');
@@ -36,4 +36,10 @@ Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin'
     Route::POST('/admin/tambah_produk', 'Admin\AdminController@tambah_produk')->middleware('Admin');
     Route::POST('/admin/hapus_produk/{id}', 'Admin\AdminController@hapus_produk')->middleware('Admin');
     Route::POST('/admin/edit_produk/{id}', 'Admin\AdminController@edit_produk')->middleware('Admin');
-        
+
+//GURU
+Route::GET('/dasboard_guru', 'Guru\GuruController@index')->middleware('Guru');   
+
+
+//GURU
+Route::GET('/dasboard_siswa', 'Siswa\SiswaController@index')->middleware('Siswa');   

@@ -152,7 +152,7 @@
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead class="thead-dark">
+                                <thead>
                                     <tr style="text-align:center">
                                         <th>No</th>
                                         <th>Kode Instansi</th>
@@ -182,7 +182,7 @@
                                     </tr>                                              
                                     @endforeach
                                 </tbody>
-                                <tfoot class="thead-dark">
+                                <tfoot>
                                     <tr style="text-align:center">
                                     <th>No</th>
                                     <th>Kode Instansi</th>

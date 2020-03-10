@@ -59,14 +59,37 @@
 <?php $__env->startSection('Content'); ?>
 <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
-    <div class="alert alert-success" style="display:none;" id="suksesedit" role="alert">
-    Sukses Update Data
+    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-edit text-warning"></i>
+        </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Update Data</span>  
+        </div>
     </div>
-    <div class="alert alert-success" style="display:none;" id="suksesadd" role="alert">
-    Sukses Tambah data
     </div>
-    <div class="alert alert-success" style="display:none;" id="suksesdel" role="alert">
-    Sukses Hapus data
+
+    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesadd" role="alert">
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-shield-check text-warning"></i>
+        </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Tambah Data</span>  
+        </div>
+    </div>
+    </div>
+
+    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesdel" role="alert">
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-trash text-warning"></i>
+        </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Hapus data</span>  
+        </div>
+    </div>
     </div>
 
     <?php if(session()->has('successedit')): ?>
@@ -128,7 +151,7 @@
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead class="thead-dark">
+                                <thead>
                                     <tr style="text-align:center">
                                         <th>No</th>
                                         <th>Kode Kelas</th>
@@ -152,7 +175,7 @@
                                     </tr>                                              
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
-                                <tfoot class="thead-dark">
+                                <tfoot>
                                     <tr style="text-align:center">
                                     <th>No</th>
                                     <th>Kode Kelas</th>

@@ -4,7 +4,6 @@
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
     <?php if(session()->has('gagal_login')): ?>
     <script>
-        console.log("fffffff");
         $(document).ready(function(){
             $('#errorModal').modal('show');
           });

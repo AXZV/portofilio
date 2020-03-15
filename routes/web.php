@@ -9,7 +9,7 @@ Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin'
 
     //setting
     Route::GET('/admin/useraccountset', 'Admin\AdminController@index_useraccountset')->middleware('Admin');
-    Route::POST('/admin/edit_useraccountset/{id}', 'Admin\AdminController@edit_useraccountset')->middleware('Admin');
+    Route::POST('/admin/edit_useraccountset', 'Admin\AdminController@edit_useraccountset')->middleware('Admin');
     //instansi
     Route::GET('/admin/instansi', 'Admin\AdminController@index_instansi')->middleware('Admin');
     Route::POST('/admin/tambah_instansi', 'Admin\AdminController@tambah_instansi')->middleware('Admin');

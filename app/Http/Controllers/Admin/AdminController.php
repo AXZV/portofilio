@@ -46,14 +46,35 @@ class AdminController extends Controller
         }
 
     ////////////// Setting
-        public function index_useraccountset($id)
+        public function index_useraccountset()
         {
-            $account = Users::where('role','=','Admin');     
+            $account = Users::where('role','=','Admin')->get();     
             return view('admin/useraccountset', ['account' => $account]);
         }
-        public function edit_useraccountset($id)
+        public function edit_useraccountset(Request $request)
         {
+            $validator = $request->validate([
+                'username' => 'required|min:3|max:12|alpha_dash|unique:users,username,'.$request->get('id').',id',
+                'password' => 'string|min:8|nullable'
+            ]);
 
+            $account = Users::where('id','=', $request->get('id'))->get();
+
+            if ( Hash::check($request->get('password1'), $account[0]->password))
+            {
+                $data=Users::find($request->get('id'));
+                $data->username=$request->get('username');
+                if($request->get('password') != null)
+                {
+                    $data->password=Hash::make($request->get('password'));
+                }
+                $data->save();
+                return redirect()->back()->with('successedit', true);
+            }
+            else
+            {
+                return redirect()->back()->with('passwordnotmatch', true);
+            }
         }
         
 
@@ -361,7 +382,8 @@ class AdminController extends Controller
         {
             $validator = $request->validate([
                 'username' => 'required|min:3|max:12|alpha_dash|unique:users,username,'.$id.',id',
-            ]);
+                'password' => 'string|min:8|nullable'
+                ]);
 
             $data=Users::find($id);
             // $data->kode=$request->get('kode');

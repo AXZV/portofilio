@@ -98,7 +98,7 @@
                     <i class="float-right text-muted fw-n">F11</i>
                 </a>
                 <div class="dropdown-divider m-0"></div>
-                <a href="#" class="dropdown-item" data-action="app-fullscreen">
+                <a href="<?php echo e(url('/admin/useraccountset')); ?>" class="dropdown-item">
                     <span data-i18n="drpdwn.fullscreen">   Pengaturan akun</span>
                 </a>
                 <!-- <a href="#" class="dropdown-item" data-action="app-print">

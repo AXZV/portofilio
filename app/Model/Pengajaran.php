@@ -9,6 +9,8 @@ class Pengajaran extends Model
 {
     use SoftDeletes; //soft
 
+    protected $touches = ['siswa'];
+
     public function pengajaran_level()
     {
         return $this->belongsTo('App\Model\Pengajaran_Level', 'kode', 'kode_pengajaran');
@@ -23,7 +25,7 @@ class Pengajaran extends Model
     }
     public function siswa()
     {
-        return $this->hasOne('App\Model\Siswa', 'no_daftar', 'kode_siswa');
+        return $this->belongsToMany('App\Model\Siswa', 'pengajaran_siswa', 'kode_pengajaran', 'kode_siswa')->withTimestamps();
     }
 
 }

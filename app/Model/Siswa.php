@@ -15,10 +15,10 @@ class Siswa extends Model
     }
     public function pengajaran()
     {
-        return $this->belongsTo('App\Model\Pengajaran', 'no_daftar', 'kode_siswa');
+        return $this->belongsToMany('App\Model\Pengajaran')->withTimestamps();
     }
     public function user()
     {
-        return $this->belongsTo('App\Model\User', 'kode', 'kode_identitas');
+        return $this->belongsTo('App\Model\User', 'no_daftar', 'kode_identitas');
     }
 }

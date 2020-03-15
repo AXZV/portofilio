@@ -18,8 +18,8 @@ class CreatePengajaransTable extends Migration
             $table->string('kode')->unique();
             $table->string('kode_guru_kelas');
             $table->string('kode_siswa');
-            $table->boolean('status_selesai');
-            $table->dateTime('tanggal_selesai');
+            $table->enum('status_selesai', ['Selesai', 'Belum Selesai']);
+            $table->dateTime('tanggal_selesai')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

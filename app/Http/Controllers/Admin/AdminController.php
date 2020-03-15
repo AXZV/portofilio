@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Model\Users;
+use App\Model\User;
 use App\Model\Instansi;
 use App\Model\Guru;
 use App\Model\Siswa;
 use App\Model\Pelajaran;
 use App\Model\Kelas;
 use App\Model\Produk;
+use App\Model\Guru_Kelas;
+use App\Model\Pengajaran;
 
 class AdminController extends Controller
 {
@@ -41,12 +44,18 @@ class AdminController extends Controller
             $data=Users::find($id);
             $data->delete();
         }
-        // public function edit_user($kode_user)
-        // {
-        //     $data=Users::find($kode_user);
-        //     $data->kode_identitas=$kode_user;
-        //     $data->save();
-        // }
+
+    ////////////// Setting
+        public function index_useraccountset($id)
+        {
+            $account = Users::where('role','=','Admin');     
+            return view('admin/useraccountset', ['account' => $account]);
+        }
+        public function edit_useraccountset($id)
+        {
+
+        }
+        
 
     ////////////// Instansi
         public function index_instansi()
@@ -329,6 +338,140 @@ class AdminController extends Controller
             $data->stok_awal=$request->get('stok_awal');
             $data->save();
             return redirect()->back()->with('successedit', true);       
+        }
+    ////////////// pengguna
+        public function index_pengguna()
+        {
+            $pengguna = User::all();
+               
+            return view('admin/pengguna', ['pengguna' => $pengguna]);
+        }
+        public function hapus_pengguna($id)
+        {
+            $data=Users::find($id);
+            $data->delete();
+            return redirect()->back()->with('successdelete', true);
+        }
+        public function back_pengguna($id)
+        {
+            $data=Users::withTrashed()->where('id', $id)->restore();
+            return redirect()->back()->with('successback', true);       
+        }
+        public function edit_pengguna(Request $request, $id)
+        {
+            $validator = $request->validate([
+                'username' => 'required|min:3|max:12|alpha_dash|unique:users,username,'.$id.',id',
+            ]);
+
+            $data=Users::find($id);
+            // $data->kode=$request->get('kode');
+            $data->username=$request->get('username');
+            if($request->get('password') != null)
+            {
+                $data->password=Hash::make($request->get('password'));
+            }
+            $data->save();
+            return redirect()->back()->with('successedit', true);       
+        }
+    ////////////// guru-kelas
+        public function index_guru_kelas()
+        {
+            $guru_kelas = Guru_Kelas::all();
+            $kelas = Kelas::all();
+            $guru = Guru::all();
+            return view('admin/guru_kelas')->with('guru_kelas', $guru_kelas)->with('guru', $guru)->with('kelas', $kelas);            
+        }
+        public function tambah_guru_kelas(Request $request)
+        {
+            $validator = $request->validate([
+                'kode' => 'required|unique:guru_kelas,kode',
+            ]);
+ 
+            $data = new Guru_Kelas;
+            $data->kode=$request->get('kode');
+            $data->kode_kelas=$request->get('kode_kelas');
+            $data->kode_guru=$request->get('kode_guru');
+            $data->save();
+
+            return redirect()->back()->with('successadd', true);
+        }
+        public function hapus_guru_kelas($id)
+        {
+            $data=Guru_Kelas::find($id);
+            $data->delete();
+            return redirect()->back()->with('successdelete', true);
+        }
+        public function edit_guru_kelas(Request $request, $id)
+        {
+            $data=Guru_Kelas::find($id);
+            // $data->kode=$request->get('kode');
+            $data->kode_kelas=$request->get('kode_kelas');
+            $data->kode_guru=$request->get('kode_guru');
+            $data->save();
+            return redirect()->back()->with('successedit', true);       
+        }
+
+    ////////////// Pengajaran
+        public function index_pengajaran()
+        {
+            $pengajaran = Pengajaran::all(); 
+            $guru_kelas = Guru_Kelas::all();
+            $siswa = Siswa::all();
+            $instansi = Instansi::all();
+            return view('admin/pengajaran')->with('pengajaran', $pengajaran)->with('guru_kelas', $guru_kelas)->with('siswa', $siswa)->with('instansi', $instansi);            
+
+                
+            return view('admin/pengajaran', ['pengajaran' => $pengajaran]);
+        }
+        public function tambah_pengajaran(Request $request)
+        {
+            $validator = $request->validate([
+                'kode' => 'required|unique:pengajarans,kode',
+            ]);
+            // $array_siswa = $request->get('kode_siswa');
+            $data = new Pengajaran;
+            $data->kode=$request->get('kode');
+            $data->kode_guru_kelas=$request->get('kode_guru_kelas');
+            $data->status_selesai=$request->get('status_selesai');
+            $data->tanggal_selesai=$request->get('tanggal_selesai');
+            $data->save();
+            $data->Siswa()->attach($request->get('kode_siswa'));
+
+            return redirect()->back()->with('successadd', true);
+        }
+        public function hapus_pengajaran($id)
+        {
+            $data=Pengajaran::find($id);
+            $data->delete();
+            $data->Siswa()->detach($id);
+            return redirect()->back()->with('successdelete', true);
+        }
+        public function edit_pengajaran($id)
+        {            
+            $pengajaran = Pengajaran::where('id','=',$id)->get(); 
+            $guru_kelas = Guru_Kelas::all();
+            $siswa = Siswa::all();
+            return view('admin/edit_pengajaran')->with('pengajaran', $pengajaran)->with('guru_kelas', $guru_kelas)->with('siswa', $siswa);            
+        }
+
+        public function proses_edit_pengajaran(Request $request)
+        {
+            $data=Pengajaran::find($request->get('id'));
+            $data->kode_guru_kelas=$request->get('kode_guru_kelas');
+            $data->status_selesai=$request->get('status_selesai');
+            $data->tanggal_selesai=$request->get('tanggal_selesai');
+            $data->save();
+
+            // $messages  = Message::where('message_id', $id)->get();
+
+            $data->Siswa()->updateExistingPivot($request->get('kode_siswa1'));
+
+            // foreach($messages as $message)
+            // $message->users()->updateExistingPivot($user, array('status' => 1), false);
+            
+            // $data->Siswa()->attach($request->get('kode_siswa'));
+
+            return redirect('/admin/pengajaran')->with('successedit', true);
         }
 
 

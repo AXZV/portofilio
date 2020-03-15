@@ -1,88 +1,58 @@
 <?php $__env->startSection('Content'); ?>
-<!-- <section class="container">
-<div style="margin: 2rem 0 2rem 0">
-    <div class="row">
-        <div class="col-lg-6 col-sm-12 py-5 px-0 px-sm-0 px-md-0 px-lg-3 px-xl-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0 font-weight-bold">Masuk</h5>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="<?php echo e(route('login')); ?>">
-                        <?php echo csrf_field(); ?>
+    <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
+    <?php if(session()->has('gagal_login')): ?>
+    <script>
+        console.log("fffffff");
+        $(document).ready(function(){
+            $('#errorModal').modal('show');
+          });
+    </script>
+    <?php endif; ?>
 
-                        <div class="form-group">
-                            <label for="username" class=""><?php echo e(__('Username')); ?></label>
-                            <div class="">
-                                <input id="username" type="username" class="form-control <?php $__errorArgs = ['username'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="username" value="<?php echo e(old('username')); ?>" required autocomplete="username" autofocus>
+    <!-- /////////////////////////////// Modal ERROR /////////////////////////////// -->
 
-                                <?php $__errorArgs = ['username'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                        </div>
+   <!-- Central Modal Medium Danger -->
+   <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger" role="document">
+    <!--Content-->
+    <form action="" id="errorForm" method="post">
+    <?php echo e(csrf_field()); ?>
 
-                        <div class="form-group">
-                            <label for="password" class=""><?php echo e(__('Kata sandi')); ?></label>
-
-                            <div class="">
-                                <input id="password" type="password" class="form-control <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="password" required autocomplete="current-password">
-
-                                <?php $__errorArgs = ['password'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                        <div class="">
-                            <button class="btn btn-color white-text btn-block m-0 mb-3 border-0" type="submit">Masuk</button>
-                            <a href="<?php echo e(route('password.request')); ?>">Lupa kata sandi?</a>
-                        </div>
-
-                        </div>
-                    </form>
-                </p>
-            </div>
+    <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+        <p class="heading lead">Informasi !</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
         </div>
+
+        <!--Body-->
+        <div class="modal-body">
+        <div class="text-center">
+        <!-- <i class="fas fa-trash-alt"></i> -->
+            <i class="far fa-frown fa-6x mb-3"></i>
+            <p>Anda sudah tidak memiliki hak akses lagi</p>
+            <h2><span class="badge"></span></h2>
+        </div>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer justify-content-center">
+        </div>
+
     </div>
-</div>
-</div>
-</section> -->
+    </form>
+    <!--/.Content-->
+    </div>
+    </div>
+    <!-- Central Modal Medium Danger-->
 
 
+<!-- ///////////////////////////////////////////////////////////////////////// -->
 <div class="row">
 <div class="col col-md-6 col-lg-7 hidden-sm-down">
     <h2 class="fs-xxl fw-500 mt-4 text-white">

@@ -2,11 +2,13 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
     <!-- page related CSS below -->
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/select2/select2.bundle.css') }}">
-@endsection
+    <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css') }}">
+    @endsection
 @section('JS')
 
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
+    <script src="js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 
     <script>
         /* demo scripts for change table color */
@@ -299,8 +301,15 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput25">Tanggal Lahir</label>
-                                    <input required value="{{ old('tanggal_lahir') }}" type="date" name="tanggal_lahir" class="form-control" id="formGroupExampleInput25" placeholder="Tanggal Lahir">
+                                    <label class="">Tanggal Lahir</label>
+                                    <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="{{ old('tanggal_lahir') }}" name="tanggal_lahir" class="form-control" id="datepicker-3" placeholder="Tanggal Lahir">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text fs-xl">
+                                                <i class="fal fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                             <div class="col">
@@ -364,14 +373,28 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput215">Tanggal Masuk</label>
-                                    <input required value="{{ old('tanggal_masuk') }}" type="date" name="tanggal_masuk" class="form-control" id="formGroupExampleInput215" placeholder="Tanggal Masuk">
+                                    <label class="">Tanggal Masuk</label>
+                                    <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="{{ old('tanggal_masuk') }}" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text fs-xl">
+                                                <i class="fal fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput216">Tanggal Keluar</label>
-                                    <input value="{{ old('tanggal_keluar') }}" type="date" name="tanggal_keluar" class="form-control" id="formGroupExampleInput216" placeholder="Tanggal Keluar">
+                                    <label class="">Tanggal Keluar</label>
+                                    <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="{{ old('tanggal_keluar') }}" name="tanggal_keluar" class="form-control" id="tanggal_keluar" placeholder="Tanggal Keluar">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text fs-xl">
+                                                <i class="fal fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                             <div class="col">
@@ -435,6 +458,41 @@
                     x.type = "password";
                 }
             }
+        </script>
+
+        <script src="{{ asset('js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+        <script>
+            var controls = {
+                leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+                rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+            }
+            jQuery(document).ready(function($){
+                // enable clear button 
+                $('#datepicker-3').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_masuk').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_keluar').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+            })
         </script>
 
 <!-- /////////////////////////////// Modal Hapus Data /////////////////////////////// -->
@@ -540,8 +598,15 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Tanggal Lahir</label>
-                                <input required type="date" name="tanggal_lahir" class="form-control" id="f5" placeholder="Tanggal Lahir">
+                                <label class="">Tanggal Lahir</label>
+                                <div class="input-group">
+                                    <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir2" placeholder="tanggal_lahir">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text fs-xl">
+                                            <i class="fal fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col">
@@ -604,15 +669,29 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Tanggal Masuk</label>
-                                <input required type="date" name="tanggal_masuk" class="form-control" id="f12" placeholder="Tanggal Masuk">
-                            </div>
+                        <div class="form-group">
+                            <label class="">Tanggal Masuk</label>
+                            <div class="input-group">
+                                <input required  type="text" autocomplete="off" name="tanggal_masuk" class="form-control" id="tanggal_masuk2" placeholder="Tanggal Masuk">
+                                <div class="input-group-append">
+                                    <span class="input-group-text fs-xl">
+                                        <i class="fal fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                             </div>
+                        </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Tanggal Keluar</label>
-                                <input type="date" name="tanggal_keluar" class="form-control" id="f13" placeholder="Tanggal Keluar">
+                                <label class="">Tanggal Keluar</label>
+                                <div class="input-group">
+                                    <input required  type="text" autocomplete="off" name="tanggal_keluar" class="form-control" id="tanggal_keluar2" placeholder="Tanggal Keluar">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text fs-xl">
+                                            <i class="fal fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col">
@@ -647,15 +726,15 @@
                 document.getElementById("f2").value = nama_depan;
                 document.getElementById("f3").value = nama_belakang;
                 document.getElementById("f4").value = tempat_lahir;
-                document.getElementById("f5").value = tanggal_lahir;
+                document.getElementById("tanggal_lahir2").value = tanggal_lahir;
                 document.getElementById("f6").value = jenis_kelamin;
                 document.getElementById("f7").value = agama;
                 document.getElementById("f8").value = alamat;
                 document.getElementById("f9").value = alamat_domisili;
                 document.getElementById("f10").value = no_telp;
                 document.getElementById("f11").value = email;
-                document.getElementById("f12").value = tanggal_masuk;
-                document.getElementById("f13").value = tanggal_keluar;
+                document.getElementById("tanggal_masuk2").value = tanggal_masuk;
+                document.getElementById("tanggal_keluar2").value = tanggal_keluar;
                 document.getElementById("f14").value = status_aktif;
                 document.getElementById("f15").value = kode_instansi;
 
@@ -681,6 +760,40 @@
             }
 
 
+        </script>
+
+<script>
+            var controls = {
+                leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+                rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+            }
+            jQuery(document).ready(function($){
+                // enable clear button 
+                $('#tanggal_lahir2').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_masuk2').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_keluar2').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+            })
         </script>
 
 

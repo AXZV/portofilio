@@ -6,6 +6,10 @@ Auth::routes();
 
 //ADMIN
 Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin');
+
+    //setting
+    Route::GET('/admin/useraccountset', 'Admin\AdminController@index_useraccountset')->middleware('Admin');
+    Route::POST('/admin/edit_useraccountset/{id}', 'Admin\AdminController@edit_useraccountset')->middleware('Admin');
     //instansi
     Route::GET('/admin/instansi', 'Admin\AdminController@index_instansi')->middleware('Admin');
     Route::POST('/admin/tambah_instansi', 'Admin\AdminController@tambah_instansi')->middleware('Admin');
@@ -36,7 +40,22 @@ Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin'
     Route::POST('/admin/tambah_produk', 'Admin\AdminController@tambah_produk')->middleware('Admin');
     Route::POST('/admin/hapus_produk/{id}', 'Admin\AdminController@hapus_produk')->middleware('Admin');
     Route::POST('/admin/edit_produk/{id}', 'Admin\AdminController@edit_produk')->middleware('Admin');
-
+    //pengguna
+    Route::GET('/admin/pengguna', 'Admin\AdminController@index_pengguna')->middleware('Admin');
+    Route::POST('/admin/hapus_pengguna/{id}', 'Admin\AdminController@hapus_pengguna')->middleware('Admin');
+    Route::POST('/admin/back_pengguna/{id}', 'Admin\AdminController@back_pengguna')->middleware('Admin');
+    Route::POST('/admin/edit_pengguna/{id}', 'Admin\AdminController@edit_pengguna')->middleware('Admin');
+    //guru_kelas
+    Route::GET('/admin/guru_kelas', 'Admin\AdminController@index_guru_kelas')->middleware('Admin');
+    Route::POST('/admin/tambah_guru_kelas', 'Admin\AdminController@tambah_guru_kelas')->middleware('Admin');
+    Route::POST('/admin/hapus_guru_kelas/{id}', 'Admin\AdminController@hapus_guru_kelas')->middleware('Admin');
+    Route::POST('/admin/edit_guru_kelas/{id}', 'Admin\AdminController@edit_guru_kelas')->middleware('Admin');
+    //pengajaran
+    Route::GET('/admin/pengajaran', 'Admin\AdminController@index_pengajaran')->middleware('Admin');
+    Route::POST('/admin/tambah_pengajaran', 'Admin\AdminController@tambah_pengajaran')->middleware('Admin');
+    Route::POST('/admin/hapus_pengajaran/{id}', 'Admin\AdminController@hapus_pengajaran')->middleware('Admin');
+    Route::GET('/admin/edit_pengajaran/{id}', 'Admin\AdminController@edit_pengajaran')->middleware('Admin');
+    Route::POST('/admin/proses_edit_pengajaran', 'Admin\AdminController@proses_edit_pengajaran')->middleware('Admin');
 //GURU
 Route::GET('/dasboard_guru', 'Guru\GuruController@index')->middleware('Guru');   
 

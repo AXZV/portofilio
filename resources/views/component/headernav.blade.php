@@ -93,9 +93,13 @@
                     <span data-i18n="drpdwn.settings">Settings</span>
                 </a> -->
                 <div class="dropdown-divider m-0"></div>
-                <a href="#" class="dropdown-item" data-action="app-fullscreen">
+                <a href="admin/useraccountset" class="dropdown-item" data-action="app-fullscreen">
                     <span data-i18n="drpdwn.fullscreen">   Fullscreen</span>
                     <i class="float-right text-muted fw-n">F11</i>
+                </a>
+                <div class="dropdown-divider m-0"></div>
+                <a href="#" class="dropdown-item" data-action="app-fullscreen">
+                    <span data-i18n="drpdwn.fullscreen">   Pengaturan akun</span>
                 </a>
                 <!-- <a href="#" class="dropdown-item" data-action="app-print">
                     <span data-i18n="drpdwn.print">Print</span>

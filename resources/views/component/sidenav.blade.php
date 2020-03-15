@@ -18,7 +18,7 @@
             </li>
             
 
-            <!-- GROUP Data -->
+        <!-- GROUP Data -->
 
             <li class="nav-title">Data</li>
             <li class="{{ $active == 'instansi' ? 'active' : '' }}">
@@ -30,7 +30,7 @@
 
             <li class="{{ $active == 'guru' ? 'active' : '' }}">
                 <a href="{{ url('admin/guru') }}" title="guru" data-filter-tags="guru">
-                    <i class="fas fa-chalkboard-teacher"></i>
+                    <i class="fas fa-id-badge"></i>
                     <span class="nav-link-text" data-i18n="nav.guru">Guru</span>
                 </a>
             </li>
@@ -60,6 +60,27 @@
                 <a href="{{ url('admin/produk') }}" title="produk" data-filter-tags="produk">
                     <i class="fas fa-dolly-flatbed"></i>
                     <span class="nav-link-text" data-i18n="nav.produk">Produk</span>
+                </a>
+            </li>
+
+        <!-- GROUP Data -->
+            <li class="nav-title">Manajemen</li>
+            <li class="{{ $active == 'pengguna' ? 'active' : '' }}">
+                <a href="{{ url('admin/pengguna') }}" title="pengguna" data-filter-tags="pengguna">
+                    <i class="far fa-address-card"></i>
+                    <span class="nav-link-text" data-i18n="nav.pengguna">Pengguna</span>
+                </a>
+            </li>
+            <li class="{{ $active == 'guru_kelas' ? 'active' : '' }}">
+                <a href="{{ url('admin/guru_kelas') }}" title="guru_kelas" data-filter-tags="guru_kelas">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span class="nav-link-text" data-i18n="nav.guru_kelas">Guru Kelas</span>
+                </a>
+            </li>
+            <li class="{{ $active == 'pengajaran' ? 'active' : '' }}">
+                <a href="{{ url('admin/pengajaran') }}" title="pengajaran" data-filter-tags="pengajaran">
+                    <i class="fas fa-microscope"></i>
+                    <span class="nav-link-text" data-i18n="nav.pengajaran">Pengajaran</span>
                 </a>
             </li>
 

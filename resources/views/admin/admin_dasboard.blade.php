@@ -30,6 +30,7 @@
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content border-faded border-left-0 border-right-0 border-top-0">
+                            <!-- ///pembayaran -->
                             <div class="row no-gutters">
                                 <div class="col-lg-7 col-xl-8">
                                     <div class="position-relative">
@@ -42,7 +43,7 @@
                                                 Pembayaran
                                             </h4>
                                         </div>
-                                        <div>
+                                    <div>
                                         @php
                                             $total_siswa = count($siswa->where('status_aktif', '=', 'Aktif'));
                                             $siswa_belum_bayar = count($siswa->where('status_bayar', '=', 'Belum Bayar')->where('status_aktif', '=', 'Aktif'));
@@ -51,28 +52,16 @@
                                         <div class="row" style="height: 100%;" id="barStacked">
                                             <canvas style="width:60%; height:100%;"></canvas>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div class="panel-content p-0">
                             <div class="row row-grid no-gutters">
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                     <div class="px-3 py-2 d-flex align-items-center">
-                                        <div class="js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center" data-percent="75" data-piesize="50" data-linewidth="5" data-linecap="butt" data-scalelength="0">
-                                            <div class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
-                                                <span class="js-percent d-block text-dark"></span>
-                                            </div>
-                                        </div>
-                                        <span class="d-inline-block ml-2 text-muted">
-                                            SERVER LOAD
-                                            <i class="fal fa-caret-up color-danger-500 ml-1"></i>
-                                        </span>
-                                        <div class="ml-auto d-inline-flex align-items-center">
-                                            <div class="sparklines d-inline-flex" sparktype="line" sparkheight="30" sparkwidth="70" sparklinecolor="#886ab5" sparkfillcolor="false" sparklinewidth="1" values="5,6,5,3,8,6,9,7,4,2"></div>
-                                            <div class="d-inline-flex flex-column small ml-2">
-                                                <span class="d-inline-block badge badge-success opacity-50 text-center p-1 width-6">97%</span>
-                                                <span class="d-inline-block badge bg-fusion-300 opacity-50 text-center p-1 width-6 mt-1">44%</span>
-                                            </div>
+                                            <!-- // -->
+                                        <div class="row" id="barStacked">
+                                            <canvas style="width:100%; height:100%;"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -138,6 +127,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

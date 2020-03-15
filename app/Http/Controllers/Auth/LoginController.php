@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 use Auth;
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,14 +36,20 @@ class LoginController extends Controller
     protected $redirectTo;
     public function redirectTo()
     {
-        if (Auth::user()->role == 'Admin' ) {
+        if (Auth::user()->role == 'Admin' && Auth::user()->deleted_at == NULL) {
             return $redirectTo = '/dasboard_admin';
         }
-        elseif (Auth::user()->role == 'Guru') {
+        elseif (Auth::user()->role == 'Guru'&& Auth::user()->deleted_at == NULL) {
             return $redirectTo = '/dasboard_guru';
         }
-        elseif (Auth::user()->role == 'Siswa') {
+        elseif (Auth::user()->role == 'Siswa' && Auth::user()->deleted_at == NULL) {
             return $redirectTo = '/dasboard_siswa';
+        }
+        else
+        {
+            Auth::logout();
+            Session::flash('gagal_login', True);
+            return $redirectTo = '/login';
         }
     }
     /**

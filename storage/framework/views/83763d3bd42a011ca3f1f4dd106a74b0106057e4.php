@@ -1,6 +1,7 @@
 <?php $__env->startSection('CSS'); ?>
     <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
     <!-- page related CSS below -->
+    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css')); ?>">
     <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/select2/select2.bundle.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
@@ -308,8 +309,15 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="tanggal_lahir">Tanggal Lahir</label>
-                                    <input required value="<?php echo e(old('tanggal_lahir')); ?>" type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Tanggal Lahir">
+                                    <label class="">Tanggal Lahir</label>
+                                    <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_lahir')); ?>" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Tanggal Lahir">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text fs-xl">
+                                                <i class="fal fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                             <div class="col">
@@ -367,14 +375,28 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="tanggal_masuk">Tanggal Masuk</label>
-                                    <input required value="<?php echo e(old('tanggal_masuk')); ?>" type="date" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
+                                    <label class="">Tanggal Masuk</label>
+                                    <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_masuk')); ?>" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text fs-xl">
+                                                <i class="fal fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="tanggal_lulus">Tanggal Lulus</label>
-                                    <input value="<?php echo e(old('tanggal_lulus')); ?>" type="date" name="tanggal_lulus" class="form-control" id="tanggal_lulus" placeholder="Tanggal Keluar">
+                                    <label class="">Tanggal Lulus</label>
+                                    <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_lulus')); ?>" name="tanggal_lulus" class="form-control" id="tanggal_lulus" placeholder="Tanggal Lulus">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text fs-xl">
+                                                <i class="fal fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                             <div class="col">
@@ -414,8 +436,15 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="tanggal_bayar">Tanggal Bayar</label>
-                                    <input value="<?php echo e(old('tanggal_bayar')); ?>" type="datetime-local" name="tanggal_bayar" class="form-control" id="tanggal_bayar" placeholder="Tanggal Bayar">
+                                    <label class="">Tanggal Bayar</label>
+                                    <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_bayar')); ?>" name="tanggal_bayar" class="form-control" id="tanggal_bayar" placeholder="Tanggal Bayar">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text fs-xl">
+                                                <i class="fal fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                     </div>
                                 </div>
                             </div>
                         </div>
@@ -469,6 +498,49 @@
             }
             
         </script>
+        <script src="<?php echo e(asset('js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js')); ?>"></script>
+        <script>
+            var controls = {
+                leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+                rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+            }
+            jQuery(document).ready(function($){
+                // enable clear button 
+                $('#tanggal_lahir').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_masuk').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_lulus').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_bayar').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+            })
+        </script>
+
 <!-- /////////////////////////////// Modal Hapus Data /////////////////////////////// -->
 
    <!-- Central Modal Medium Danger -->
@@ -573,8 +645,15 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input required type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir1" placeholder="Tanggal Lahir">
+                            <label class="">Tanggal Lahir</label>
+                            <div class="input-group">
+                                <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir1" placeholder="Tanggal Lahir">
+                                <div class="input-group-append">
+                                    <span class="input-group-text fs-xl">
+                                        <i class="fal fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                </div>
                         </div>
                     </div>
                     <div class="col">
@@ -632,14 +711,28 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="tanggal_masuk">Tanggal Masuk</label>
-                            <input required type="date" name="tanggal_masuk" class="form-control" id="tanggal_masuk1" placeholder="Tanggal Masuk">
+                            <label class="">Tanggal Masuk</label>
+                            <div class="input-group">
+                                <input required  type="text" autocomplete="off" name="tanggal_masuk" class="form-control" id="tanggal_masuk1" placeholder="Tanggal Masuk">
+                                <div class="input-group-append">
+                                    <span class="input-group-text fs-xl">
+                                        <i class="fal fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="tanggal_lulus">Tanggal Lulus</label>
-                            <input type="date" name="tanggal_lulus" class="form-control" id="tanggal_lulus1" placeholder="Tanggal Keluar">
+                            <label class="">Tanggal Lulus</label>
+                            <div class="input-group">
+                                <input type="text" autocomplete="off" name="tanggal_lulus" class="form-control" id="tanggal_lulus1" placeholder="Tanggal Lulus">
+                                <div class="input-group-append">
+                                    <span class="input-group-text fs-xl">
+                                        <i class="fal fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
@@ -679,8 +772,15 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="tanggal_bayar">Tanggal Bayar</label>
-                            <input type="datetime" name="tanggal_bayar" class="form-control" id="tanggal_bayar1" placeholder="Tanggal Bayar">
+                            <label class="">Tanggal Bayar</label>
+                            <div class="input-group">
+                                <input type="text" autocomplete="off" name="tanggal_bayar" class="form-control" id="tanggal_bayar1" placeholder="Tanggal Bayar">
+                                <div class="input-group-append">
+                                    <span class="input-group-text fs-xl">
+                                        <i class="fal fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -745,7 +845,48 @@
 
 
         </script>
-
+        <script src="<?php echo e(asset('js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js')); ?>"></script>
+        <script>
+            var controls = {
+                leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+                rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+            }
+            jQuery(document).ready(function($){
+                // enable clear button 
+                $('#tanggal_lahir1').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_masuk1').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_lulus1').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+                $('#tanggal_bayar1').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+            })
+        </script>
 
 
 

@@ -19,7 +19,7 @@ class Guru extends Model
     }
     public function user()
     {
-        return $this->belongsTo('App\Model\User', 'kode', 'kode_identitas');
+        return $this->belongsTo('App\Model\User', 'no_identitas', 'kode_identitas');
     }
 
 }

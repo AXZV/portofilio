@@ -450,7 +450,6 @@ class AdminController extends Controller
             $validator = $request->validate([
                 'kode' => 'required|unique:pengajarans,kode',
             ]);
-            // $array_siswa = $request->get('kode_siswa');
             $data = new Pengajaran;
             $data->kode=$request->get('kode');
             $data->kode_guru_kelas=$request->get('kode_guru_kelas');
@@ -465,7 +464,7 @@ class AdminController extends Controller
         {
             $data=Pengajaran::find($id);
             $data->delete();
-            $data->Siswa()->detach($id);
+            $data->Siswa()->detach();
             return redirect()->back()->with('successdelete', true);
         }
         public function edit_pengajaran($id)
@@ -486,7 +485,7 @@ class AdminController extends Controller
 
             // $messages  = Message::where('message_id', $id)->get();
 
-            $data->Siswa()->updateExistingPivot($request->get('kode_siswa1'));
+            $data->Siswa()->sync($request->get('kode_siswa1'));
 
             // foreach($messages as $message)
             // $message->users()->updateExistingPivot($user, array('status' => 1), false);

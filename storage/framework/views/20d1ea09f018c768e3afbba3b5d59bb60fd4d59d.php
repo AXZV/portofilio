@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
 
-                <div id="panel-1" class="panel panel-locked" data-panel-lock="false" data-panel-close="false" data-panel-fullscreen="false" data-panel-collapsed="false" data-panel-color="false" data-panel-locked="false" data-panel-refresh="false" data-panel-reset="false">
+                <div id="panel-1" class="panel" data-panel-close="false" data-panel-fullscreen="false" data-panel-collapsed="false" data-panel-color="false" data-panel-refresh="false" data-panel-reset="false">
                     <div class="panel-hdr">
                         <h2>
                             Data Siswa
@@ -47,84 +47,73 @@
                                             $siswa_belum_bayar = count($siswa->where('status_bayar', '=', 'Belum Bayar')->where('status_aktif', '=', 'Aktif'));
                                             $siswa_sudah_bayar = count($siswa->where('status_bayar', '=', 'Bayar')->where('status_aktif', '=', 'Aktif'));
                                         ?>
-                                        <div class="row" style="height: 100%;" id="barStacked">
-                                            <canvas style="width:60%; height:100%;"></canvas>
+                                        <div class="row h-100" id="barStacked">
+                                            <canvas style="width:80%; height:100%"></canvas>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <div class="panel-content p-0">
-                            <div class="row row-grid no-gutters">
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                                    <div class="px-3 py-2 d-flex align-items-center">
-                                            <!-- // -->
-                                        <div class="row" id="barStacked">
-                                            <canvas style="width:100%; height:100%;"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                                    <div class="px-3 py-2 d-flex align-items-center">
-                                        <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center" data-percent="79" data-piesize="50" data-linewidth="5" data-linecap="butt">
-                                            <div class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
-                                                <span class="js-percent d-block text-dark"></span>
+
+                            <div class="panel-content p-0">
+                                <div class="container">
+                                    <div class="row">
+                                        <?php
+                                            $total_siswa2  = count($siswa);
+                                            $siswa_aktif2  = count($siswa->where('status_aktif', '=', 'Aktif'));
+                                            $siswa_tidak_aktif2 = count($siswa->where('status_aktif', '=', 'Tidak Aktif'));
+                                            $p_siswa_aktif = ($siswa_aktif2/$total_siswa2)*100;
+                                            $p_siswa_tidak_aktif = ($siswa_tidak_aktif2/$total_siswa2)*100;
+                                        ?>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="d-flex">
+                                                        Aktif
+                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_aktif2 ?></span>
+                                                    </div>
+                                                    <div class="progress progress mb-3">
+                                                        <div class="progress-bar bg-success-500 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_aktif ?>%" aria-valuenow="<?php echo $p_siswa_aktif ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <div class="d-flex mt-2">
+                                                        Tidak Aktif
+                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_tidak_aktif2 ?></span>
+                                                    </div>
+                                                    <div class="progress progress mb-3">
+                                                        <div class="progress-bar bg-fusion-400 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_tidak_aktif ?>%" aria-valuenow="<?php echo $p_siswa_tidak_aktif ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>  
                                             </div>
                                         </div>
-                                        <span class="d-inline-block ml-2 text-muted">
-                                            DISK SPACE
-                                            <i class="fal fa-caret-down color-success-500 ml-1"></i>
-                                        </span>
-                                        <div class="ml-auto d-inline-flex align-items-center">
-                                            <div class="sparklines d-inline-flex" sparktype="line" sparkheight="30" sparkwidth="70" sparklinecolor="#1dc9b7" sparkfillcolor="false" sparklinewidth="1" values="5,9,7,3,5,2,5,3,9,6"></div>
-                                            <div class="d-inline-flex flex-column small ml-2">
-                                                <span class="d-inline-block badge badge-info opacity-50 text-center p-1 width-6">76%</span>
-                                                <span class="d-inline-block badge bg-warning-300 opacity-50 text-center p-1 width-6 mt-1">3%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                                    <div class="px-3 py-2 d-flex align-items-center">
-                                        <div class="js-easy-pie-chart color-info-500 position-relative d-inline-flex align-items-center justify-content-center" data-percent="23" data-piesize="50" data-linewidth="5" data-linecap="butt">
-                                            <div class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
-                                                <span class="js-percent d-block text-dark"></span>
-                                            </div>
-                                        </div>
-                                        <span class="d-inline-block ml-2 text-muted">
-                                            DATA TTF
-                                            <i class="fal fa-caret-up color-success-500 ml-1"></i>
-                                        </span>
-                                        <div class="ml-auto d-inline-flex align-items-center">
-                                            <div class="sparklines d-inline-flex" sparktype="line" sparkheight="30" sparkwidth="70" sparklinecolor="#51adf6" sparkfillcolor="false" sparklinewidth="1" values="3,5,2,5,3,9,6,5,9,7"></div>
-                                            <div class="d-inline-flex flex-column small ml-2">
-                                                <span class="d-inline-block badge bg-fusion-500 opacity-50 text-center p-1 width-6">10GB</span>
-                                                <span class="d-inline-block badge bg-fusion-300 opacity-50 text-center p-1 width-6 mt-1">10%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                                    <div class="px-3 py-2 d-flex align-items-center">
-                                        <div class="js-easy-pie-chart color-fusion-500 position-relative d-inline-flex align-items-center justify-content-center" data-percent="36" data-piesize="50" data-linewidth="5" data-linecap="butt">
-                                            <div class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
-                                                <span class="js-percent d-block text-dark"></span>
-                                            </div>
-                                        </div>
-                                        <span class="d-inline-block ml-2 text-muted">
-                                            TEMP.
-                                            <i class="fal fa-caret-down color-success-500 ml-1"></i>
-                                        </span>
-                                        <div class="ml-auto d-inline-flex align-items-center">
-                                            <div class="sparklines d-inline-flex" sparktype="line" sparkheight="30" sparkwidth="70" sparklinecolor="#fd3995" sparkfillcolor="false" sparklinewidth="1" values="5,3,9,6,5,9,7,3,5,2"></div>
-                                            <div class="d-inline-flex flex-column small ml-2">
-                                                <span class="d-inline-block badge badge-danger opacity-50 text-center p-1 width-6">124</span>
-                                                <span class="d-inline-block badge bg-info-300 opacity-50 text-center p-1 width-6 mt-1">40F</span>
+
+                                        <?php
+                                            $siswa_laki  = count($siswa->where('jenis_kelamin', '=', 'L')->where('status_aktif', '=', 'Aktif'));
+                                            $siswa_perempuan = count($siswa->where('jenis_kelamin', '=', 'P')->where('status_aktif', '=', 'Aktif'));
+                                            $p_siswa_laki = ($siswa_laki/$total_siswa)*100;
+                                            $p_siswa_perempuan = ($siswa_perempuan/$total_siswa)*100;
+                                        ?>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="d-flex">
+                                                        Laki-Laki
+                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_laki ?></span>
+                                                    </div>
+                                                    <div class="progress progress mb-3">
+                                                        <div class="progress-bar bg-warning-500 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_laki ?>%;" aria-valuenow="<?php echo $p_siswa_laki ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <div class="d-flex mt-2">
+                                                        Perempuan
+                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_perempuan ?></span>
+                                                    </div>
+                                                    <div class="progress progress mb-3">
+                                                        <div class="progress-bar bg-fusion-400 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_perempuan ?>%;" aria-valuenow="<?php echo $p_siswa_perempuan?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>  
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                     </div>
                 </div>
@@ -139,7 +128,7 @@
     <script>
          function barChart()
             {
-                var total_siswa= "Total : "+<?php echo json_encode($total_siswa); ?>+" Siswa";
+                var total_siswa= "Total : "+<?php echo json_encode($total_siswa); ?>+" Siswa Aktif";
                 var belum_lunas = <?php echo json_encode($siswa_belum_bayar); ?>;
                 var lunas = <?php echo json_encode($siswa_sudah_bayar); ?>;                   
                 console.log(total_siswa);

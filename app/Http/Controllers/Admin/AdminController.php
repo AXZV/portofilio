@@ -482,16 +482,7 @@ class AdminController extends Controller
             $data->status_selesai=$request->get('status_selesai');
             $data->tanggal_selesai=$request->get('tanggal_selesai');
             $data->save();
-
-            // $messages  = Message::where('message_id', $id)->get();
-
             $data->Siswa()->sync($request->get('kode_siswa1'));
-
-            // foreach($messages as $message)
-            // $message->users()->updateExistingPivot($user, array('status' => 1), false);
-            
-            // $data->Siswa()->attach($request->get('kode_siswa'));
-
             return redirect('/admin/pengajaran')->with('successedit', true);
         }
 

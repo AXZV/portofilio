@@ -32,11 +32,13 @@
                         <div class="panel-content border-faded border-left-0 border-right-0 border-top-0">
                             <!-- ///pembayaran -->
                             <div class="row no-gutters">
+                                
                                 <div class="col-lg-7 col-xl-8">
                                     <div class="position-relative">
                                         <div id="updating-chart" style="height:242px"></div>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-5 col-xl-4 pl-lg-3">
                                         <div class="row" style="justify-content:center;">  
                                             <h4 class="text-center fw-300 text-muted">

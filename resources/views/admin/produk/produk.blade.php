@@ -1,12 +1,12 @@
-<?php $__env->startSection('CSS'); ?>
-    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
+@section('CSS')
+    <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
     <!-- page related CSS below -->
-    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/select2/select2.bundle.css')); ?>">
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('JS'); ?>
+    <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/select2/select2.bundle.css') }}">
+@endsection
+@section('JS')
 
-    <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
+    <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script>
     $(document).ready(function()
     {   
@@ -26,12 +26,12 @@
     });
     </script>
 
-<?php $__env->stopSection(); ?>
+@endsection
 
+@extends('layouts.master_3')
 
-
-<?php $__env->startSection('Content'); ?>
-<script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+@section('Content')
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
     <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
         <div class="d-flex align-items-center">
@@ -68,40 +68,40 @@
 
 
 
-    <?php if(session()->has('successedit')): ?>
+    @if (session()->has('successedit'))
     <script>
         $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesedit").slideUp(900);
         });
     </script>
-    <?php endif; ?>
-    <?php if(session()->has('successadd')): ?>
+    @endif
+    @if (session()->has('successadd'))
     <script>
         $("#suksesadd").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesadd").slideUp(900);
         });
     </script>
-    <?php endif; ?>
-    <?php if(session()->has('successdelete')): ?>
+    @endif
+    @if (session()->has('successdelete'))
     <script>
         $("#suksesdel").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesdel").slideUp(900);
         });
     </script>
-    <?php endif; ?>
+    @endif
 <!-- /////////////////////////////// Error Code /////////////////////////////// -->
-    <?php if($errors->any()): ?>
-        <?php if($errors->has('kode')): ?>
+    @if ($errors->any())
+        @if ($errors->has('kode'))
         <script>
             $(document).ready(function(){
                 $('#adddata').modal({show: true});
             });
         </script>
-        <?php endif; ?>
-        <?php if($errors->has('kode2')): ?>
+        @endif
+        @if ($errors->has('kode2'))
             <!-- ////ERROREDIT -->
-        <?php endif; ?>
-    <?php endif; ?>
+        @endif
+    @endif
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 
         <div class="row">
@@ -132,20 +132,20 @@
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    @foreach($produk as $i)
                                     <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
-                                        <td> <?php echo e($i->kode); ?></td>
-                                        <td> <?php echo e($i->nama); ?></td>
-                                        <td> <?php echo e($i->harga); ?></td>
-                                        <td> <?php echo e($i->kategori); ?></td>
-                                        <td> <?php echo e($i->stok_awal); ?></td>
+                                        <td> {{$i->kode}}</td>
+                                        <td> {{$i->nama}}</td>
+                                        <td> {{$i->harga}}</td>
+                                        <td> {{$i->kategori}}</td>
+                                        <td> {{$i->stok_awal}}</td>
                                         <td style="text-align:center">  
-                                            <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->harga); ?>', '<?php echo e($i->kategori); ?>', '<?php echo e($i->stok_awal); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
+                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->kode}}', '{{$i->nama}}', '{{$i->harga}}', '{{$i->kategori}}', '{{$i->stok_awal}}')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
                                         </td>
                                     </tr>                                              
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <!-- datatable end -->
@@ -168,34 +168,33 @@
                 </div>
 
                 <form action="/admin/tambah_produk" method="POST">
-                <?php echo e(csrf_field()); ?>
-
+                {{ csrf_field() }}
                 <!--Body-->
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="formGroupExampleInput">Kode Produk</label>
-                            <input required value="<?php echo e(old('kode')); ?>" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Produk">
-                            <?php if($errors->has('kode')): ?>
+                            <input required value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Produk">
+                            @if ($errors->has('kode'))
                                 <div class="invalid-feedback d-block"> 
                                     Kode Produk Tidak Boleh Sama
                                 </div>
-                            <?php endif; ?>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama Produk</label>
-                            <input required value="<?php echo e(old('nama')); ?>" type="text" name="nama" class="form-control" id="nama" placeholder="Nama Produk">
+                            <input required value="{{ old('nama') }}" type="text" name="nama" class="form-control" id="nama" placeholder="Nama Produk">
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga</label>
-                            <input required value="<?php echo e(old('harga')); ?>" type="number" name="harga" class="form-control" id="harga" placeholder="Harga">
+                            <input required value="{{ old('harga') }}" type="number" name="harga" class="form-control" id="harga" placeholder="Harga">
                         </div> 
                         <div class="form-group">
                             <label for="kategori">Kategori</label>
-                            <input required value="<?php echo e(old('kategori')); ?>" type="number" name="kategori" class="form-control" id="kategori" placeholder="Kategori">
+                            <input required value="{{ old('kategori') }}" type="number" name="kategori" class="form-control" id="kategori" placeholder="Kategori">
                         </div> 
                         <div class="form-group">
                             <label for="stok_awal">Stok Awal</label>
-                            <input required value="<?php echo e(old('stok_awal')); ?>" type="number" name="stok_awal" class="form-control" id="stok_awal" placeholder="Stok Awal">
+                            <input required value="{{ old('stok_awal') }}" type="number" name="stok_awal" class="form-control" id="stok_awal" placeholder="Stok Awal">
                         </div>                        
                     </div>
                     <!--Footer-->
@@ -217,8 +216,7 @@
     <div class="modal-dialog modal-notify modal-danger" role="document">
     <!--Content-->
     <form action="" id="deleteForm" method="post">
-    <?php echo e(csrf_field()); ?>
-
+    {{ csrf_field() }}
     <div class="modal-content">
         <!--Header-->
         <div class="modal-header">
@@ -280,8 +278,7 @@
             </div>
 
             <form action="" id="editForm" method="POST">
-            <?php echo e(csrf_field()); ?>
-
+            {{ csrf_field() }}
             <!--Body-->
                 <div class="modal-body">
                     <input type="hidden" name="id" id="form0x" class="form-control">
@@ -348,5 +345,4 @@
 
 
 
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/produk.blade.php ENDPATH**/ ?>
+@endsection

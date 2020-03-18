@@ -6,50 +6,17 @@
 @section('JS')
 
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script>
         $(document).ready(function()
         {   
-            $('.select2').select2();
 
             $('#dt-basic-example').dataTable(
             {
-                responsive: true,
-                fixedHeader: true,
+                scrollY: 500,
+                paging: true,
             });
 
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
-                {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
-            });
-
-        });
-
+        })
     </script>
 
 @endsection
@@ -125,17 +92,15 @@
                             Pengguna
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            
                         </div>
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
-                                    <tr style="text-align:center">
+                                <thead class="thead-dark">
+                                <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
                                         <th>Kode Identitas</th>
                                         <th>Nama</th>
@@ -147,39 +112,33 @@
                                 <tbody>
                                     <?php $r=1 ?>
                                     @foreach($pengguna->where('role','!=','Admin') as $i)
-                                    <tr>
+                                    <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> {{$i->kode_identitas}}</td>
-
                                         @if ($i->role === 'Siswa')
                                             <td> {{$i->siswa->nama_depan}} {{$i->siswa->nama_belakang}}</td>
                                         @elseif ($i->role === 'Guru')
                                             <td> {{$i->guru->nama_depan}} {{$i->guru->nama_belakang}}</td>
                                         @endif
-
                                         <td> {{$i->username}}</td>
-                                        <td> {{$i->role}}</td>
+                                        <td style="text-align:center">
+                                            @if($i->role == 'Guru')
+                                                <span class="badge badge-info">Guru</span>
+                                            @elseif($i->role == 'Siswa')
+                                                <span class="badge badge-warning">Siswa</span>
+                                            @endif
+                                        </td>
                                         <td style="text-align:center">
                                             @if($i->deleted_at === NULL)  
-                                                <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Hapus Hak Akses</a>
+                                                <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" style="width:45%;" class="btn btn-sm btn-danger "> Hapus Hak Akses</a>
                                             @elseif($i->deleted_at != NULL) 
-                                                <a href="#" data-toggle="modal" onclick="backData({{$i->id}})" data-target="#BackModal" class="btn btn-sm btn-success"> Kembalikan Hak Akses</a>
+                                                <a href="#" data-toggle="modal" onclick="backData({{$i->id}})" data-target="#BackModal" style="width:45%;" class="btn btn-sm btn-success "> Kembalikan Hak Akses</a>
                                             @endif
-                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->username}}')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->username}}')" data-target="#editdata" class="btn btn-sm btn-primary "> Edit</a>
                                         </td>
                                     </tr>                                              
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr style="text-align:center">
-                                    <th>No</th>
-                                    <th>Kode Identitas</th>
-                                    <th>Nama</th>
-                                    <th>Username</th>
-                                    <th>Role</th>
-                                    <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                             <!-- datatable end -->
                         </div>

@@ -6,53 +6,6 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
 
-    <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
-    <script>
-        $(document).ready(function()
-        {   
-            $('.select2').select2();
-
-            $('#dt-basic-example').dataTable(
-            {
-                responsive: true,
-                fixedHeader: true,
-            });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
-                {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
-            });
-
-        });
-
-    </script>
-
 <?php $__env->stopSection(); ?>
 
 
@@ -69,9 +22,6 @@
                             Rubah Data Pengajaran
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <a class="btn btn-panel btn-danger" href="<?php echo e(url('admin/pengajaran')); ?>" data-original-title="Close"></a>
                         </div>
                     </div>
                     <div class="panel-container show">
@@ -202,4 +152,4 @@
     </script>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/edit_pengajaran.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/pengajaran/edit_pengajaran.blade.php ENDPATH**/ ?>

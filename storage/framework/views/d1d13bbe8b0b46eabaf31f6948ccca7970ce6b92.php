@@ -8,48 +8,22 @@
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
     <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
     <script>
-        $(document).ready(function()
-        {   
-            $('.select2').select2();
-
-            $('#dt-basic-example').dataTable(
-            {
-                responsive: true,
-                fixedHeader: true,
-            });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
-                {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
-            });
-
+    $(document).ready(function()
+    {   
+        $('#dt-basic-example').dataTable(
+        {
+            scrollY: 500,
+            scrollX: true,
+            scrollCollapse: true,
+            paging: true,
+            // fixedColumns:
+            // {
+            //     leftColumns: 2,
+            //     rightColumns:1
+            // },
+               
         });
-
+    });
     </script>
 
 <?php $__env->stopSection(); ?>
@@ -136,23 +110,15 @@
                             Kelas
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
                         </div>
                     </div>
                     <div class="panel-container show">
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col text-center">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
-                        </div>
-                    </div>
-
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
-                                    <tr style="text-align:center">
+                                <thead class="thead-dark">
+                                <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
                                         <th>Kode Kelas</th>
                                         <th>Nama</th>
@@ -163,27 +129,18 @@
                                 <tbody>
                                     <?php $r=1 ?>
                                     <?php $__currentLoopData = $kelas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr>
+                                    <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> <?php echo e($i->kode); ?></td>
                                         <td> <?php echo e($i->nama); ?></td>
                                         <td> <?php echo e($i->kode_pelajaran); ?></td>
                                         <td style="text-align:center">  
-                                            <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->kode_pelajaran); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger "> Delete</a>
+                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->kode_pelajaran); ?>')" data-target="#editdata" class="btn btn-sm btn-primary "> Edit</a>
                                         </td>
                                     </tr>                                              
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr style="text-align:center">
-                                    <th>No</th>
-                                    <th>Kode Kelas</th>
-                                    <th>Nama</th>
-                                    <th>Kode Pelajaran</th>
-                                    <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                             <!-- datatable end -->
                         </div>

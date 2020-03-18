@@ -56,6 +56,7 @@ Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin'
     Route::POST('/admin/hapus_pengajaran/{id}', 'Admin\AdminController@hapus_pengajaran')->middleware('Admin');
     Route::GET('/admin/edit_pengajaran/{id}', 'Admin\AdminController@edit_pengajaran')->middleware('Admin');
     Route::POST('/admin/proses_edit_pengajaran', 'Admin\AdminController@proses_edit_pengajaran')->middleware('Admin');
+    Route::GET('/admin/detail_pengajaran/{id}', 'Admin\AdminController@detail_pengajaran')->middleware('Admin');
 //GURU
 Route::GET('/dasboard_guru', 'Guru\GuruController@index')->middleware('Guru');   
 

@@ -1,63 +1,35 @@
-@section('CSS')
-    <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
+<?php $__env->startSection('CSS'); ?>
+    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
     <!-- page related CSS below -->
-    <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/select2/select2.bundle.css') }}">
-@endsection
-@section('JS')
-
-    <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
+    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/select2/select2.bundle.css')); ?>">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('JS'); ?>
+    <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
     <script>
         $(document).ready(function()
         {   
-            $('.select2').select2();
-
             $('#dt-basic-example').dataTable(
             {
-                responsive: true,
-                fixedHeader: true,
-            });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
+                scrollY: 500,
+                scrollX: true,
+                scrollCollapse: true,
+                paging: true,
+                fixedColumns:
                 {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
+                    leftColumns: 3,
+                    rightColumns:1
+                },
+                   
             });
-
         });
-
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@extends('layouts.master_3')
 
-@section('Content')
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+
+<?php $__env->startSection('Content'); ?>
+<script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
     <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
     <div class="d-flex align-items-center">
@@ -92,41 +64,41 @@
     </div>
     </div>
 
-    @if (session()->has('successedit'))
+    <?php if(session()->has('successedit')): ?>
     <script>
         $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesedit").slideUp(900);
         });
     </script>
-    @endif
-    @if (session()->has('successadd'))
+    <?php endif; ?>
+    <?php if(session()->has('successadd')): ?>
     <script>
         $("#suksesadd").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesadd").slideUp(900);
         });
     </script>
-    @endif
-    @if (session()->has('successdelete'))
+    <?php endif; ?>
+    <?php if(session()->has('successdelete')): ?>
     <script>
         $("#suksesdel").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesdel").slideUp(900);
         });
     </script>
-    @endif
+    <?php endif; ?>
 <!-- /////////////////////////////// Error Code /////////////////////////////// -->
 
-    @if ($errors->any())
-        @if ($errors->has('kode'))
+    <?php if($errors->any()): ?>
+        <?php if($errors->has('kode')): ?>
         <script>
             $(document).ready(function(){
                 $('#adddata').modal({show: true});
             });
         </script>
-        @endif
-        @if ($errors->has('kode2'))
+        <?php endif; ?>
+        <?php if($errors->has('kode2')): ?>
             <!-- ////ERROREDIT -->
-        @endif
-    @endif
+        <?php endif; ?>
+    <?php endif; ?>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 
         <div class="row">
@@ -137,28 +109,25 @@
                             Instansi
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                        </div>
-                    </div>
-                    <div class="panel-container show">
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col text-center">
                             <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
                         </div>
                     </div>
-
+                    <div class="panel-container show">
                         <div class="panel-content">
                             <!-- datatable start -->
-                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
-                                    <tr style="text-align:center">
+                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100" style="width:100%">
+                                <thead class="thead-dark">
+                                    <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
                                         <th>Kode Instansi</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
                                         <th>Telepon</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
                                         <th>Email</th>
                                         <th>Status Pusat</th>
                                         <th>Aksi</th>
@@ -166,34 +135,29 @@
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    @foreach($instansi as $i)
-                                    <tr>
+                                    <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
-                                        <td> {{$i->kode}}</td>
-                                        <td> {{$i->nama}}</td>
-                                        <td> {{$i->alamat}}</td>
-                                        <td> {{$i->no_telp}}</td>
-                                        <td> {{$i->email}}</td>
-                                        <td> {{$i->status_pusat}}</td>
-                                        <td style="text-align:center">  
-                                            <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->kode}}', '{{$i->nama}}', '{{$i->alamat}}', '{{$i->no_telp}}', '{{$i->email}}', '{{$i->status_pusat}}')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                        <td> <?php echo e($i->kode); ?></td>
+                                        <td> <?php echo e($i->nama); ?></td>
+                                        <td> <?php echo e($i->alamat); ?></td>
+                                        <td> <?php echo e($i->no_telp); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->status_pusat); ?></td>
+                                        <td>
+                                            <div class="wrapper">
+                                                <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
+                                                <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->alamat); ?>', '<?php echo e($i->no_telp); ?>', '<?php echo e($i->email); ?>', '<?php echo e($i->status_pusat); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            </div>
                                         </td>
                                     </tr>                                              
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr style="text-align:center">
-                                    <th>No</th>
-                                    <th>Kode Instansi</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Telepon</th>
-                                    <th>Email</th>
-                                    <th>Status Pusat</th>
-                                    <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>                           
                             </table>
                             <!-- datatable end -->
                         </div>
@@ -201,8 +165,6 @@
                 </div>
             </div>
         </div>
-
-
 <!-- /////////////////////////////// Modal Tambah Data /////////////////////////////// -->
         <div class="modal fade bd-example-modal-lg" id="adddata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -215,40 +177,41 @@
                 </div>
 
                 <form action="/admin/tambah_instansi" method="POST">
-                {{ csrf_field() }}
+                <?php echo e(csrf_field()); ?>
+
                 <!--Body-->
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="formGroupExampleInput">Kode Instansi</label>
-                            <input required value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
-                            @if ($errors->has('kode'))
+                            <input required value="<?php echo e(old('kode')); ?>" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Instansi">
+                            <?php if($errors->has('kode')): ?>
                                 <div class="invalid-feedback d-block"> 
                                     Kode Instansi Tidak Boleh Sama
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Nama Instansi</label>
-                            <input required value="{{ old('nama') }}" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
+                            <input required value="<?php echo e(old('nama')); ?>" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Instansi">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput3">Alamat</label>
-                            <input required value="{{ old('alamat') }}" type="text" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
+                            <input required value="<?php echo e(old('alamat')); ?>" type="text" name="alamat" class="form-control" id="formGroupExampleInput3" placeholder="Alamat">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput4">Telepon</label>
-                            <input required value="{{ old('telepon') }}" type="text" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
+                            <input required value="<?php echo e(old('telepon')); ?>" type="text" name="telepon" class="form-control" id="formGroupExampleInput4" placeholder="Telepon">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput5">Email</label>
-                            <input required value="{{ old('email') }}" type="email" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
+                            <input required value="<?php echo e(old('email')); ?>" type="email" name="email" class="form-control" id="formGroupExampleInput5" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label for="inputState">Status Kantor</label>
                             <select name="status" id="inputState" class="form-control" required>
                                 <option value="" disabled selected>Pilih.....</option>
-                                <option value="Pusat" {{ old('status') == 'Pusat' ? 'selected' : '' }}>Kantor Pusat</option>
-                                <option value="Cabang" {{ old('status') == 'Cabang' ? 'selected' : '' }}>Kantor Cabang</option>
+                                <option value="Pusat" <?php echo e(old('status') == 'Pusat' ? 'selected' : ''); ?>>Kantor Pusat</option>
+                                <option value="Cabang" <?php echo e(old('status') == 'Cabang' ? 'selected' : ''); ?>>Kantor Cabang</option>
                             </select>
                         </div>
 
@@ -272,7 +235,8 @@
     <div class="modal-dialog modal-notify modal-danger" role="document">
     <!--Content-->
     <form action="" id="deleteForm" method="post">
-    {{ csrf_field() }}
+    <?php echo e(csrf_field()); ?>
+
     <div class="modal-content">
         <!--Header-->
         <div class="modal-header">
@@ -334,7 +298,8 @@
             </div>
 
             <form action="" id="editForm" method="POST">
-            {{ csrf_field() }}
+            <?php echo e(csrf_field()); ?>
+
             <!--Body-->
                 <div class="modal-body">
                     <input type="hidden" name="id" id="form0x" class="form-control">
@@ -411,4 +376,5 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/instansi/instansi.blade.php ENDPATH**/ ?>

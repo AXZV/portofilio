@@ -7,56 +7,24 @@
 @section('JS')
 
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script src="js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-
     <script>
-        /* demo scripts for change table color */
-        /* change background */
-
-
-        $(document).ready(function()
-        {   
-            $('.select2').select2();
-
-            $('#dt-basic-example').dataTable(
+    $(document).ready(function()
+    {   
+        $('#dt-basic-example').dataTable(
+        {
+            scrollY: 500,
+            scrollX: true,
+            scrollCollapse: true,
+            paging: true,
+            fixedColumns:
             {
-                responsive: true,
-                fixedHeader: true,
-            });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
-                {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
-            });
-
+                leftColumns: 3,
+                rightColumns:1
+            },
+               
         });
-
+    });
     </script>
 
 @endsection
@@ -143,23 +111,15 @@
                             Guru
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
                         </div>
                     </div>
                     <div class="panel-container show">
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col text-center">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
-                        </div>
-                    </div>
-
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
-                                    <tr style="text-align:center">
+                                <thead class="thead-dark">
+                                    <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
                                         <th>Nomor Identitas</th>
                                         <th>Nama Lengkap</th>
@@ -181,11 +141,17 @@
                                 <tbody>
                                     <?php $r=1 ?>
                                     @foreach($guru as $i)
-                                    <tr>
+                                    <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> {{$i->no_identitas}}</td>
                                         <td> {{$i->nama_depan}}<span> <span>{{$i->nama_belakang}}</td>
-                                        <td> {{$i->status_aktif}}</td>
+                                        <td style="text-align:center">
+                                            @if($i->status_aktif == 'Aktif')
+                                                <span class="badge badge-success">Aktif</span>
+                                            @else
+                                                <span class="badge badge-danger">Tidak Aktif</span>
+                                            @endif
+                                        </td>
                                         <td> {{$i->instansi->nama}}</td>
                                         <td> {{$i->tanggal_lahir}}</td>
                                         <td> {{$i->tempat_lahir}}</td>
@@ -196,7 +162,13 @@
                                         <td> {{$i->no_telp}}</td>
                                         <td> {{$i->email}}</td>
                                         <td> {{$i->tanggal_masuk}}</td>
-                                        <td> {{$i->tanggal_keluar}}</td>
+                                        <td style="text-align:center">
+                                            @if($i->status_aktif == 'Aktif')
+                                                ~
+                                            @else
+                                                {{$i->tanggal_keluar}}
+                                            @endif
+                                        </td>
                                         <td style="text-align:center">  
                                             <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
                                             <a href="#" data-toggle="modal" 
@@ -223,26 +195,6 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr style="text-align:center">
-                                        <th>No</th>
-                                        <th>Nomor Identitas</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Status</th>
-                                        <th>Instansi</th>
-                                        <th>Tanggal Lahir</th>
-                                        <th>Tempat Lahir</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Agama</th>
-                                        <th>Alamat</th>
-                                        <th>Domisili</th>
-                                        <th>Telepon</th>
-                                        <th>Email</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th>Tanggal Keluar</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                             <!-- datatable end -->
                         </div>
@@ -388,7 +340,7 @@
                                 <div class="form-group">
                                     <label class="">Tanggal Keluar</label>
                                     <div class="input-group">
-                                        <input required  type="text" autocomplete="off" value="{{ old('tanggal_keluar') }}" name="tanggal_keluar" class="form-control" id="tanggal_keluar" placeholder="Tanggal Keluar">
+                                        <input type="text" autocomplete="off" value="{{ old('tanggal_keluar') }}" name="tanggal_keluar" class="form-control" id="tanggal_keluar" placeholder="Tanggal Keluar">
                                         <div class="input-group-append">
                                             <span class="input-group-text fs-xl">
                                                 <i class="fal fa-calendar-alt"></i>
@@ -458,6 +410,19 @@
                     x.type = "password";
                 }
             }
+        </script>
+
+        <script>          
+            document.getElementById('status_aktif').addEventListener('change', function() {
+                if(this.value == 'Tidak Aktif')
+                {
+                    $("#tanggal_keluar").attr('required', '');
+                }
+                else
+                {
+                    $("#tanggal_keluar").removeAttr('required');
+                }
+            });
         </script>
 
         <script src="{{ asset('js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
@@ -748,8 +713,7 @@
             {
                 $("#editForm").submit();
             }
-
-
+            
             function showpass2() {
                 var x = document.getElementById("f17");
                 if (x.type === "password") {
@@ -758,11 +722,21 @@
                     x.type = "password";
                 }
             }
-
-
+        </script>
+        <script>          
+            document.getElementById('f14').addEventListener('change', function() {
+                if(this.value == 'Tidak Aktif')
+                {
+                    $("#tanggal_keluar2").attr('required', '');
+                }
+                else
+                {
+                    $("#tanggal_keluar2").removeAttr('required');
+                }
+            });
         </script>
 
-<script>
+    <script>
             var controls = {
                 leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
                 rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'

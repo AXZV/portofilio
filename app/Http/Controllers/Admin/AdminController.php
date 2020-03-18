@@ -82,7 +82,7 @@ class AdminController extends Controller
         public function index_instansi()
         {
             $instansi = Instansi::all();     
-            return view('admin/instansi', ['instansi' => $instansi]);
+            return view('admin/instansi/instansi', ['instansi' => $instansi]);
         }
         public function tambah_instansi(Request $request)
         {
@@ -124,7 +124,7 @@ class AdminController extends Controller
         {
             $guru = Guru::all();
             $instansi = Instansi::all();      
-            return view('admin/guru', ['guru' => $guru], ['instansi' => $instansi] );
+            return view('admin/guru/guru', ['guru' => $guru], ['instansi' => $instansi] );
         }
         public function tambah_guru(Request $request)
         {
@@ -189,7 +189,7 @@ class AdminController extends Controller
         {
             $siswa = Siswa::all();
             $instansi = Instansi::all();          
-            return view('admin/siswa', ['siswa' => $siswa], ['instansi' => $instansi]);
+            return view('admin/siswa/siswa', ['siswa' => $siswa], ['instansi' => $instansi]);
         }
         public function tambah_siswa(Request $request)
         {
@@ -257,7 +257,7 @@ class AdminController extends Controller
         public function index_pelajaran()
         {
             $pelajaran = Pelajaran::all();     
-            return view('admin/pelajaran', ['pelajaran' => $pelajaran]);
+            return view('admin/pelajaran/pelajaran', ['pelajaran' => $pelajaran]);
         }
         public function tambah_pelajaran(Request $request)
         {
@@ -291,7 +291,7 @@ class AdminController extends Controller
         {
             $kelas = Kelas::all();
             $pelajaran = Pelajaran::all();          
-            return view('admin/kelas', ['kelas' => $kelas], ['pelajaran' => $pelajaran]);
+            return view('admin/kelas/kelas', ['kelas' => $kelas], ['pelajaran' => $pelajaran]);
         }
         public function tambah_kelas(Request $request)
         {
@@ -326,7 +326,7 @@ class AdminController extends Controller
         public function index_produk()
         {
             $produk = Produk::all();     
-            return view('admin/produk', ['produk' => $produk]);
+            return view('admin/produk/produk', ['produk' => $produk]);
         }
         public function tambah_produk(Request $request)
         {
@@ -365,7 +365,7 @@ class AdminController extends Controller
         {
             $pengguna = User::all();
                
-            return view('admin/pengguna', ['pengguna' => $pengguna]);
+            return view('admin/pengguna/pengguna', ['pengguna' => $pengguna]);
         }
         public function hapus_pengguna($id)
         {
@@ -401,7 +401,7 @@ class AdminController extends Controller
             $guru_kelas = Guru_Kelas::all();
             $kelas = Kelas::all();
             $guru = Guru::all();
-            return view('admin/guru_kelas')->with('guru_kelas', $guru_kelas)->with('guru', $guru)->with('kelas', $kelas);            
+            return view('admin/guru_kelas/guru_kelas')->with('guru_kelas', $guru_kelas)->with('guru', $guru)->with('kelas', $kelas);            
         }
         public function tambah_guru_kelas(Request $request)
         {
@@ -440,10 +440,7 @@ class AdminController extends Controller
             $guru_kelas = Guru_Kelas::all();
             $siswa = Siswa::all();
             $instansi = Instansi::all();
-            return view('admin/pengajaran')->with('pengajaran', $pengajaran)->with('guru_kelas', $guru_kelas)->with('siswa', $siswa)->with('instansi', $instansi);            
-
-                
-            return view('admin/pengajaran', ['pengajaran' => $pengajaran]);
+            return view('admin/pengajaran/pengajaran')->with('pengajaran', $pengajaran)->with('guru_kelas', $guru_kelas)->with('siswa', $siswa)->with('instansi', $instansi);                            
         }
         public function tambah_pengajaran(Request $request)
         {
@@ -472,7 +469,7 @@ class AdminController extends Controller
             $pengajaran = Pengajaran::where('id','=',$id)->get(); 
             $guru_kelas = Guru_Kelas::all();
             $siswa = Siswa::all();
-            return view('admin/edit_pengajaran')->with('pengajaran', $pengajaran)->with('guru_kelas', $guru_kelas)->with('siswa', $siswa);            
+            return view('admin/pengajaran/edit_pengajaran')->with('pengajaran', $pengajaran)->with('guru_kelas', $guru_kelas)->with('siswa', $siswa);            
         }
 
         public function proses_edit_pengajaran(Request $request)
@@ -483,7 +480,13 @@ class AdminController extends Controller
             $data->tanggal_selesai=$request->get('tanggal_selesai');
             $data->save();
             $data->Siswa()->sync($request->get('kode_siswa1'));
-            return redirect('/admin/pengajaran')->with('successedit', true);
+            return redirect('/admin/pengajaran/pengajaran')->with('successedit', true);
+        }
+
+        public function detail_pengajaran($id)
+        {
+            $pengajaran = Pengajaran::where('id','=',$id)->get();
+            return view('admin/pengajaran/detail_pengajaran')->with('pengajaran', $pengajaran);
         }
 
 

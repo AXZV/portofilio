@@ -6,53 +6,6 @@
 @endsection
 @section('JS')
 
-    <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
-    <script>
-        $(document).ready(function()
-        {   
-            $('.select2').select2();
-
-            $('#dt-basic-example').dataTable(
-            {
-                responsive: true,
-                fixedHeader: true,
-            });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
-                {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
-            });
-
-        });
-
-    </script>
-
 @endsection
 
 @extends('layouts.master_3')
@@ -69,9 +22,6 @@
                             Rubah Data Pengajaran
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <a class="btn btn-panel btn-danger" href="{{ url('admin/pengajaran') }}" data-original-title="Close"></a>
                         </div>
                     </div>
                     <div class="panel-container show">
@@ -185,6 +135,19 @@
                 templates: controls
             });
         })
+    </script>
+
+    <script>          
+        document.getElementById('status_selesai').addEventListener('change', function() {
+            if(this.value == 'Selesai')
+            {
+                $("#tanggal_selesai").attr('required', '');
+            }
+            else
+            {
+                $("#tanggal_selesai").removeAttr('required');
+            }
+        });
     </script>
 
 @endsection

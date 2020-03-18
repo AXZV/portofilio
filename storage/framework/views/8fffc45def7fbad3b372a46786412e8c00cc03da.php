@@ -132,7 +132,7 @@
                                     <?php $__currentLoopData = $pengajaran; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
-                                        <td> <a href=""> <?php echo e($i->kode); ?> </a></td>
+                                        <td> <a href="/admin/detail_pengajaran/<?php echo e($i->id); ?>"> <?php echo e($i->kode); ?> </a></td>
                                         <td> <?php echo e($i->guru_kelas->guru->instansi->nama); ?></td>
                                         <td> <?php echo e($i->guru_kelas->guru->nama_depan); ?> <?php echo e($i->guru_kelas->guru->nama_belakang); ?></td>
                                         <td> <?php echo e($i->guru_kelas->kelas->nama); ?></td>
@@ -369,4 +369,4 @@
 
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/pengajaran.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/pengajaran/pengajaran.blade.php ENDPATH**/ ?>

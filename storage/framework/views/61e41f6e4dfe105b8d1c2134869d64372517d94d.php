@@ -4,52 +4,24 @@
     <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/select2/select2.bundle.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
-
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
     <script>
         $(document).ready(function()
         {   
-            $('.select2').select2();
-
             $('#dt-basic-example').dataTable(
             {
-                responsive: true,
-                fixedHeader: true,
-            });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
+                scrollY: 500,
+                scrollX: true,
+                scrollCollapse: true,
+                paging: true,
+                fixedColumns:
                 {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
+                    leftColumns: 3,
+                    rightColumns:1
+                },
+                   
             });
-
         });
-
     </script>
 
 <?php $__env->stopSection(); ?>
@@ -137,28 +109,25 @@
                             Instansi
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                        </div>
-                    </div>
-                    <div class="panel-container show">
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col text-center">
                             <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
                         </div>
                     </div>
-
+                    <div class="panel-container show">
                         <div class="panel-content">
                             <!-- datatable start -->
-                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
-                                    <tr style="text-align:center">
+                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100" style="width:100%">
+                                <thead class="thead-dark">
+                                    <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
                                         <th>Kode Instansi</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
                                         <th>Telepon</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
+                                        <th>Email</th>
                                         <th>Email</th>
                                         <th>Status Pusat</th>
                                         <th>Aksi</th>
@@ -167,33 +136,28 @@
                                 <tbody>
                                     <?php $r=1 ?>
                                     <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr>
+                                    <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> <?php echo e($i->kode); ?></td>
                                         <td> <?php echo e($i->nama); ?></td>
                                         <td> <?php echo e($i->alamat); ?></td>
                                         <td> <?php echo e($i->no_telp); ?></td>
                                         <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
+                                        <td> <?php echo e($i->email); ?></td>
                                         <td> <?php echo e($i->status_pusat); ?></td>
-                                        <td style="text-align:center">  
-                                            <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->alamat); ?>', '<?php echo e($i->no_telp); ?>', '<?php echo e($i->email); ?>', '<?php echo e($i->status_pusat); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                        <td>
+                                            <div class="wrapper">
+                                                <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
+                                                <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->alamat); ?>', '<?php echo e($i->no_telp); ?>', '<?php echo e($i->email); ?>', '<?php echo e($i->status_pusat); ?>')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            </div>
                                         </td>
                                     </tr>                                              
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr style="text-align:center">
-                                    <th>No</th>
-                                    <th>Kode Instansi</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Telepon</th>
-                                    <th>Email</th>
-                                    <th>Status Pusat</th>
-                                    <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
+                                </tbody>                           
                             </table>
                             <!-- datatable end -->
                         </div>
@@ -201,8 +165,6 @@
                 </div>
             </div>
         </div>
-
-
 <!-- /////////////////////////////// Modal Tambah Data /////////////////////////////// -->
         <div class="modal fade bd-example-modal-lg" id="adddata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

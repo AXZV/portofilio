@@ -1,63 +1,37 @@
-@section('CSS')
-    <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
+<?php $__env->startSection('CSS'); ?>
+    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
     <!-- page related CSS below -->
-    <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/select2/select2.bundle.css') }}">
-@endsection
-@section('JS')
+    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/select2/select2.bundle.css')); ?>">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('JS'); ?>
 
-    <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
+    <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
     <script>
-        $(document).ready(function()
-        {   
-            $('.select2').select2();
-
-            $('#dt-basic-example').dataTable(
-            {
-                responsive: true,
-                fixedHeader: true,
-            });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
-                {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
-            });
-
+    $(document).ready(function()
+    {   
+        $('#dt-basic-example').dataTable(
+        {
+            scrollY: 500,
+            scrollX: true,
+            scrollCollapse: true,
+            paging: true,
+            // fixedColumns:
+            // {
+            //     leftColumns: 2,
+            //     rightColumns:1
+            // },
+               
         });
-
+    });
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@extends('layouts.master_3')
 
-@section('Content')
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+
+<?php $__env->startSection('Content'); ?>
+<script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
     <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
     <div class="d-flex align-items-center">
@@ -92,40 +66,40 @@
     </div>
     </div>
 
-    @if (session()->has('successedit'))
+    <?php if(session()->has('successedit')): ?>
     <script>
         $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesedit").slideUp(900);
         });
     </script>
-    @endif
-    @if (session()->has('successadd'))
+    <?php endif; ?>
+    <?php if(session()->has('successadd')): ?>
     <script>
         $("#suksesadd").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesadd").slideUp(900);
         });
     </script>
-    @endif
-    @if (session()->has('successdelete'))
+    <?php endif; ?>
+    <?php if(session()->has('successdelete')): ?>
     <script>
         $("#suksesdel").fadeTo(5000, 900).slideUp(900, function(){
             $("#suksesdel").slideUp(900);
         });
     </script>
-    @endif
+    <?php endif; ?>
 <!-- /////////////////////////////// Error Code /////////////////////////////// -->
-    @if ($errors->any())
-        @if ($errors->has('kode'))
+    <?php if($errors->any()): ?>
+        <?php if($errors->has('kode')): ?>
         <script>
             $(document).ready(function(){
                 $('#adddata').modal({show: true});
             });
         </script>
-        @endif
-        @if ($errors->has('kode2'))
+        <?php endif; ?>
+        <?php if($errors->has('kode2')): ?>
             <!-- ////ERROREDIT -->
-        @endif
-    @endif
+        <?php endif; ?>
+    <?php endif; ?>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 
         <div class="row">
@@ -136,23 +110,15 @@
                             Kelas
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
                         </div>
                     </div>
                     <div class="panel-container show">
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col text-center">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
-                        </div>
-                    </div>
-
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
-                                    <tr style="text-align:center">
+                                <thead class="thead-dark">
+                                <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
                                         <th>Kode Kelas</th>
                                         <th>Nama</th>
@@ -162,28 +128,19 @@
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    @foreach($kelas as $i)
-                                    <tr>
+                                    <?php $__currentLoopData = $kelas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
-                                        <td> {{$i->kode}}</td>
-                                        <td> {{$i->nama}}</td>
-                                        <td> {{$i->kode_pelajaran}}</td>
+                                        <td> <?php echo e($i->kode); ?></td>
+                                        <td> <?php echo e($i->nama); ?></td>
+                                        <td> <?php echo e($i->kode_pelajaran); ?></td>
                                         <td style="text-align:center">  
-                                            <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->kode}}', '{{$i->nama}}', '{{$i->kode_pelajaran}}')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" onclick="deleteData(<?php echo e($i->id); ?>)" data-target="#DeleteModal" class="btn btn-sm btn-danger "> Delete</a>
+                                            <a href="#" data-toggle="modal" onclick="editData( '<?php echo e($i->id); ?>', '<?php echo e($i->kode); ?>', '<?php echo e($i->nama); ?>', '<?php echo e($i->kode_pelajaran); ?>')" data-target="#editdata" class="btn btn-sm btn-primary "> Edit</a>
                                         </td>
                                     </tr>                                              
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr style="text-align:center">
-                                    <th>No</th>
-                                    <th>Kode Kelas</th>
-                                    <th>Nama</th>
-                                    <th>Kode Pelajaran</th>
-                                    <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                             <!-- datatable end -->
                         </div>
@@ -205,29 +162,30 @@
                 </div>
 
                 <form action="/admin/tambah_kelas" method="POST">
-                {{ csrf_field() }}
+                <?php echo e(csrf_field()); ?>
+
                 <!--Body-->
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="formGroupExampleInput">Kode Kelas</label>
-                            <input required value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Kelas">
-                            @if ($errors->has('kode'))
+                            <input required value="<?php echo e(old('kode')); ?>" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Kelas">
+                            <?php if($errors->has('kode')): ?>
                                 <div class="invalid-feedback d-block"> 
                                     Kode Kelas Tidak Boleh Sama
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Nama Kelas</label>
-                            <input required value="{{ old('nama') }}" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Kelas">
+                            <input required value="<?php echo e(old('nama')); ?>" type="text" name="nama" class="form-control" id="formGroupExampleInput2" placeholder="Nama Kelas">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput218">Kode Pelajaran</label>
                             <select name="kode_pelajaran" id="kode_pelajaran1" class="form-control" required>
                                 <option value="" disabled selected>Pilih.....</option>                                       
-                                @foreach($pelajaran as $ins)
-                                <option value="{{$ins->kode}}" {{ (old("kode_pelajaran") == $ins->kode ? "selected":"") }}>{{$ins->kode}} - {{$ins->nama}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $pelajaran; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ins): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($ins->kode); ?>" <?php echo e((old("kode_pelajaran") == $ins->kode ? "selected":"")); ?>><?php echo e($ins->kode); ?> - <?php echo e($ins->nama); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                      
@@ -251,7 +209,8 @@
     <div class="modal-dialog modal-notify modal-danger" role="document">
     <!--Content-->
     <form action="" id="deleteForm" method="post">
-    {{ csrf_field() }}
+    <?php echo e(csrf_field()); ?>
+
     <div class="modal-content">
         <!--Header-->
         <div class="modal-header">
@@ -313,7 +272,8 @@
             </div>
 
             <form action="" id="editForm" method="POST">
-            {{ csrf_field() }}
+            <?php echo e(csrf_field()); ?>
+
             <!--Body-->
                 <div class="modal-body">
                     <input type="hidden" name="id" id="form0x" class="form-control">
@@ -331,9 +291,9 @@
                         <label for="formGroupExampleInput218">Kode Pelajaran</label>
                         <select name="kode_pelajaran" id="kode_pelajaran" class="form-control" required>
                             <option value="" disabled selected>Pilih.....</option>                                       
-                            @foreach($pelajaran as $ins)
-                            <option value="{{$ins->kode}}" {{ (old("kode_pelajaran") == $ins->kode ? "selected":"") }}>{{$ins->kode}} - {{$ins->nama}}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $pelajaran; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ins): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($ins->kode); ?>" <?php echo e((old("kode_pelajaran") == $ins->kode ? "selected":"")); ?>><?php echo e($ins->kode); ?> - <?php echo e($ins->nama); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                 </div>
@@ -375,4 +335,5 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/kelas/kelas.blade.php ENDPATH**/ ?>

@@ -6,48 +6,17 @@
 @section('JS')
 
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script>
         $(document).ready(function()
         {   
-            $('.select2').select2();
-
+           
             $('#dt-basic-example').dataTable(
             {
-                responsive: true,
-                fixedHeader: true,
+                scrollY: 500,
+                scrollX: true,
+                scrollCollapse: true,
+                paging: true,
             });
-
-            $('.js-thead-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $('.js-tbody-colors a').on('click', function()
-            {
-                var theadColor = $(this).attr("data-bg");
-                console.log(theadColor);
-                $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-            });
-
-            $("#js-btn-form").click(function(event)
-            {
-
-                // Fetch form to apply custom Bootstrap validation
-                var form = $("#js-form")
-
-                if (form[0].checkValidity() === false)
-                {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.addClass('was-validated');
-                // Perform ajax submit here...
-            });
-
         });
 
     </script>
@@ -60,39 +29,37 @@
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
     <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
-        <div class="d-flex align-items-center">
-            <div class="alert-icon">
-                <i class="fal fa-edit text-warning"></i>
-            </div>
-            <div class="flex-1">
-                <span class="h5">Sukses Update Data</span>  
-            </div>
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-edit text-warning"></i>
         </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Update Data</span>  
+        </div>
+    </div>
     </div>
 
     <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesadd" role="alert">
-        <div class="d-flex align-items-center">
-            <div class="alert-icon">
-                <i class="fal fa-shield-check text-warning"></i>
-            </div>
-            <div class="flex-1">
-                <span class="h5">Sukses Tambah Data</span>  
-            </div>
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-shield-check text-warning"></i>
         </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Tambah Data</span>  
+        </div>
+    </div>
     </div>
 
     <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesdel" role="alert">
-        <div class="d-flex align-items-center">
-            <div class="alert-icon">
-                <i class="fal fa-trash text-warning"></i>
-            </div>
-            <div class="flex-1">
-                <span class="h5">Sukses Hapus data</span>  
-            </div>
+    <div class="d-flex align-items-center">
+        <div class="alert-icon">
+            <i class="fal fa-trash text-warning"></i>
+        </div>
+        <div class="flex-1">
+            <span class="h5">Sukses Hapus data</span>  
         </div>
     </div>
-
-
+    </div>
 
     @if (session()->has('successedit'))
     <script>
@@ -116,6 +83,7 @@
     </script>
     @endif
 <!-- /////////////////////////////// Error Code /////////////////////////////// -->
+
     @if ($errors->any())
         @if ($errors->has('kode'))
         <script>
@@ -135,63 +103,42 @@
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
-                            Produk
+                            Guru-Kelas
                         </h2>
                         <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
                         </div>
                     </div>
                     <div class="panel-container show">
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col text-center">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
-                        </div>
-                    </div>
-
                         <div class="panel-content">
                             <!-- datatable start -->
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                <thead>
-                                    <tr style="text-align:center">
+                                <thead class="thead-dark">
+                                <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
-                                        <th>Kode Produk</th>
-                                        <th>Nama</th>
-                                        <th>Harga</th>
-                                        <th>Kategori</th>
-                                        <th>Stok</th>
+                                        <th>Kode</th>
+                                        <th>Nama Guru</th>
+                                        <th>Instansi</th>
+                                        <th>Kelas</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    @foreach($produk as $i)
-                                    <tr>
+                                    @foreach($guru_kelas as $i)
+                                    <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> {{$i->kode}}</td>
-                                        <td> {{$i->nama}}</td>
-                                        <td> {{$i->harga}}</td>
-                                        <td> {{$i->kategori}}</td>
-                                        <td> {{$i->stok_awal}}</td>
+                                        <td> {{$i->guru->nama_depan}} {{$i->guru->nama_belakang}}</td>
+                                        <td> {{$i->guru->instansi->nama}}</td>
+                                        <td> {{$i->kelas->nama}}</td>
                                         <td style="text-align:center">  
-                                            <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger"> Delete</a>
-                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->kode}}', '{{$i->nama}}', '{{$i->harga}}', '{{$i->kategori}}', '{{$i->stok_awal}}')" data-target="#editdata" class="btn btn-sm btn-primary"> Edit</a>
+                                            <a href="#" data-toggle="modal" onclick="deleteData({{$i->id}})" data-target="#DeleteModal" class="btn btn-sm btn-danger "> Delete</a>
+                                            <a href="#" data-toggle="modal" onclick="editData( '{{$i->id}}', '{{$i->kode_kelas}}', '{{$i->kode_guru}}')" data-target="#editdata" class="btn btn-sm btn-primary "> Edit</a>
                                         </td>
                                     </tr>                                              
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr style="text-align:center">
-                                    <th>No</th>
-                                    <th>Kode Produk</th>
-                                    <th>Nama</th>
-                                    <th>Harga</th>
-                                    <th>Kategori</th>
-                                    <th>Stok</th>
-                                    <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                             <!-- datatable end -->
                         </div>
@@ -206,41 +153,43 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Produk</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Guru-Kelas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="/admin/tambah_produk" method="POST">
+                <form action="/admin/tambah_guru_kelas" method="POST">
                 {{ csrf_field() }}
                 <!--Body-->
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Kode Produk</label>
-                            <input required value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Produk">
+                            <label for="formGroupExampleInput">Kode Guru-Kelas</label>
+                            <input required value="{{ old('kode') }}" type="text" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Guru-Kelas">
                             @if ($errors->has('kode'))
                                 <div class="invalid-feedback d-block"> 
-                                    Kode Produk Tidak Boleh Sama
+                                    Kode Guru-Kelas Tidak Boleh Sama
                                 </div>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="nama">Nama Produk</label>
-                            <input required value="{{ old('nama') }}" type="text" name="nama" class="form-control" id="nama" placeholder="Nama Produk">
+                            <label for="kode_kelas">Kelas</label>
+                            <select name="kode_kelas" id="kode_kelas" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>                                       
+                                @foreach($kelas as $ins)
+                                <option value="{{$ins->kode}}" {{ (old("kode_kelas") == $ins->kode ? "selected":"") }} >{{$ins->kode}} - {{$ins->nama}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="harga">Harga</label>
-                            <input required value="{{ old('harga') }}" type="number" name="harga" class="form-control" id="harga" placeholder="Harga">
-                        </div> 
-                        <div class="form-group">
-                            <label for="kategori">Kategori</label>
-                            <input required value="{{ old('kategori') }}" type="number" name="kategori" class="form-control" id="kategori" placeholder="Kategori">
-                        </div> 
-                        <div class="form-group">
-                            <label for="stok_awal">Stok Awal</label>
-                            <input required value="{{ old('stok_awal') }}" type="number" name="stok_awal" class="form-control" id="stok_awal" placeholder="Stok Awal">
-                        </div>                        
+                            <label for="kode_guru">Guru</label>
+                            <select name="kode_guru" id="kode_guru" class="form-control" required>
+                                <option value="" disabled selected>Pilih.....</option>                                       
+                                @foreach($guru as $ins)
+                                <option value="{{$ins->no_identitas}}" {{ (old("kode_guru") == $ins->no_identitas ? "selected":"") }} >{{$ins->no_identitas}} - {{$ins->instansi->nama}} - {{$ins->nama_depan}} {{$ins->nama_belakang}}</option>
+                                @endforeach
+                            </select>
+                        </div>                     
                     </div>
                     <!--Footer-->
                     <div class="modal-footer justify-content-center">
@@ -299,7 +248,7 @@
         function deleteData(id)
         {
             var id = id;
-            var url = "/admin/hapus_produk/"+id;
+            var url = "/admin/hapus_guru_kelas/"+id;
             $("#deleteForm").attr('action', url);
         }
 
@@ -316,7 +265,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Rubah Data Guru-Kelas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -329,26 +278,28 @@
                     <input type="hidden" name="id" id="form0x" class="form-control">
 
                     <!-- <div class="form-group">
-                        <label for="formGroupExampleInput">Kode Produk</label>
-                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Produk">
+                        <label for="formGroupExampleInput">Kode Guru-Kelas</label>
+                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Guru-Kelas">
                     </div> -->
 
-                <div class="form-group">
-                    <label for="nama1">Nama Produk</label>
-                    <input required type="text" name="nama" class="form-control" id="nama1" placeholder="Nama Produk">
-                </div>
-                <div class="form-group">
-                    <label for="harga1">Harga</label>
-                    <input required type="number" name="harga" class="form-control" id="harga1" placeholder="Harga">
-                </div> 
-                <div class="form-group">
-                    <label for="kategori1">Kategori</label>
-                    <input required type="number" name="kategori" class="form-control" id="kategori1" placeholder="Kategori">
-                </div> 
-                <div class="form-group">
-                    <label for="stok_awal1">Stok Awal</label>
-                    <input required type="number" name="stok_awal" class="form-control" id="stok_awal1" placeholder="Stok Awal">
-                </div>   
+                    <div class="form-group">
+                        <label for="kode_kelas1">Kelas</label>
+                        <select name="kode_kelas" id="kode_kelas1" class="form-control" required>
+                            <option value="" disabled selected>Pilih.....</option>                                       
+                            @foreach($kelas as $ins)
+                            <option value="{{$ins->kode}}">{{$ins->kode}} - {{$ins->nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kode_guru1">Guru</label>
+                        <select name="kode_guru" id="kode_guru1" class="form-control" required>
+                            <option value="" disabled selected>Pilih.....</option>                                       
+                            @foreach($guru as $ins)
+                            <option value="{{$ins->no_identitas }}">{{$ins->no_identitas}} - {{$ins->instansi->nama}} - {{$ins->nama_depan}} {{$ins->nama_belakang}}</option>
+                            @endforeach
+                        </select>
+                    </div> 
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
@@ -367,16 +318,14 @@
 
 
 
-        function editData(id, kode, nama ,harga, kategori, stok_awal)
+        function editData(id, kode_kelas, kode_guru)
         {
             document.getElementById("form0x").value = id;
             // document.getElementById("form1x").value = kode;
-            document.getElementById("nama1").value = nama;
-            document.getElementById("harga1").value = harga;
-            document.getElementById("kategori1").value = kategori;
-            document.getElementById("stok_awal1").value = stok_awal;
+            document.getElementById("kode_kelas1").value = kode_kelas;
+            document.getElementById("kode_guru1").value = kode_guru;
             var id = id;
-            var url = "/admin/edit_produk/"+id;
+            var url = "/admin/edit_guru_kelas/"+id;
             $("#editForm").attr('action', url);
         }
 

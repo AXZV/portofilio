@@ -740,7 +740,7 @@
             });
         </script>
 
-<script>
+    <script>
             var controls = {
                 leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
                 rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
@@ -778,4 +778,4 @@
 
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/guru.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/admin/guru/guru.blade.php ENDPATH**/ ?>

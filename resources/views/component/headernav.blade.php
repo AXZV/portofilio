@@ -48,6 +48,23 @@
             </a>
         </div> -->
         <!-- app user menu -->
+        <?php
+            $user = Auth::user();
+            $role = Auth::user()->role;
+            if($role == 'Admin')
+            { 
+                $nama= $user->admin->nama;
+            }
+            else if($role == 'Guru')
+            { 
+                $nama= $user->guru->nama_depan;
+            }
+            else if($role == 'Siswa')
+            { 
+                $nama= $user->siswa->nama;
+            }
+        ?>
+
         <div>
             <a href="#" data-toggle="dropdown" title="user" class="header-icon d-flex align-items-center justify-content-center ml-2">
                 <i class='fas fa-user-cog'></i>
@@ -56,26 +73,9 @@
                 <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                     <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                         <span class="mr-2">
-                            <!-- <img src="{{ asset('img/demo/avatars/avatar-admin.png') }}" class="rounded-circle profile-image" alt="Dr. Codex Lantern"> -->
                             <i class='fas fa-user-cog' style='font-size:36px'></i>
                         </span>
                         <div class="info-card-text">
-                            <?php
-                                $user = Auth::user();
-                                $role = Auth::user()->role;
-                                if($role = 'Admin')
-                                { 
-                                    $nama= $user->admin->nama;
-                                }
-                                else if($role = 'Guru')
-                                { 
-                                    $nama= $user->guru->nama;
-                                }
-                                else if($role = 'Siswa')
-                                { 
-                                    $nama= $user->siswa->nama;
-                                }
-                            ?>
                             <div class="fs-lg text-truncate text-truncate-lg">Hi, {{$nama}}</div>
                             <span class="text-truncate text-truncate-md opacity-80">You are Login as {{$role}}</span>
                         </div>

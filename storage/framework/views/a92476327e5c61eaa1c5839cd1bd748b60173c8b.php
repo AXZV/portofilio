@@ -33,13 +33,7 @@
             <div class="page-inner">
 
                 <!-- Side nav -->
-                <?php if(Auth::user()->role == 'Admin'): ?>
-                    <?php echo $__env->make('component.sidenav', ['active' => $active ?? ''], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                <?php elseif(Auth::user()->role == 'Guru'): ?>
-                    <?php echo $__env->make('component.sidenav_guru', ['active' => $active ?? ''], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                <?php elseif(Auth::user()->role == 'Siswa'): ?>
-
-                <?php endif; ?>
+                <?php echo $__env->make('component.sidenav', ['active' => $active ?? ''], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                 <div class="page-content-wrapper">
                     <?php echo $__env->make('component.headernav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -59,4 +53,4 @@
         <?php echo $__env->yieldContent('JS'); ?>
     </body>
 </html>
-<?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/layouts/master_3.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/layouts/master_guru.blade.php ENDPATH**/ ?>

@@ -1,12 +1,4 @@
 <!DOCTYPE html>
-<!-- 
-Template Name:  SmartAdmin Responsive WebApp - Template build with Twitter Bootstrap 4
-Version: 4.0.2
-Author: Sunnyat Ahmmed
-Website: http://gootbootstrap.com
-Purchase: https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0
-License: You must have a valid license purchased only from wrapbootstrap.com (link above) in order to legally use this theme for your project.
--->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -41,7 +33,13 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
             <div class="page-inner">
 
                 <!-- Side nav -->
-                @include('component.sidenav', ['active' => $active ?? ''])
+                @if(Auth::user()->role == 'Admin')
+                    @include('component.sidenav', ['active' => $active ?? ''])
+                @elseif(Auth::user()->role == 'Guru')
+                    @include('component.sidenav_guru', ['active' => $active ?? ''])
+                @elseif(Auth::user()->role == 'Siswa')
+
+                @endif
 
                 <div class="page-content-wrapper">
                     @include('component.headernav')

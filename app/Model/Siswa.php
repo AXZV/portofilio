@@ -17,6 +17,10 @@ class Siswa extends Model
     {
         return $this->belongsToMany('App\Model\Pengajaran')->withTimestamps();
     }
+    public function presensi()
+    {
+        return $this->belongsToMany('App\Model\Presensi')->withPivot('status', 'catatan')->withTimestamps();
+    }
     public function user()
     {
         return $this->belongsTo('App\Model\User', 'no_daftar', 'kode_identitas');

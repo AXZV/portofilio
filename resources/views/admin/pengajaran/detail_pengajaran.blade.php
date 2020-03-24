@@ -34,7 +34,7 @@
 <!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="subheader">
             <h1 class="subheader-title">
-                <i class='subheader-icon fas fa-microscope'></i> Pengajaran <span class='font-weight-light font-italic'>#{{$pengajaran[0]->kode}}</span>
+                <i class='subheader-icon fas fa-microscope'></i> Pengajaran <span class='font-weight-light font-italic'>#{{$pengajaran->kode}}</span>
             </h1>
         </div>
 

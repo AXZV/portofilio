@@ -57,9 +57,23 @@ Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin'
     Route::GET('/admin/edit_pengajaran/{id}', 'Admin\AdminController@edit_pengajaran')->middleware('Admin');
     Route::POST('/admin/proses_edit_pengajaran', 'Admin\AdminController@proses_edit_pengajaran')->middleware('Admin');
     Route::GET('/admin/detail_pengajaran/{id}', 'Admin\AdminController@detail_pengajaran')->middleware('Admin');
-//GURU
-Route::GET('/dasboard_guru', 'Guru\GuruController@index')->middleware('Guru');   
 
 
 //GURU
+Route::GET('/dasboard_guru', 'Guru\GuruController@index')->middleware('Guru'); 
+
+     //presensi
+     Route::GET('/guru/presensi', 'Guru\GuruController@index_presensi')->middleware('Guru');
+     Route::GET('/guru/presensi/log_presensi/{id}', 'Guru\GuruController@index_log_presensi')->middleware('Guru');
+     Route::GET('/guru/presensi/detail_presensi/{id}', 'Guru\GuruController@detail_presensi')->middleware('Guru');
+     Route::GET('/guru/presensi/detail_presensi_harian/{id}', 'Guru\GuruController@detail_presensi_harian')->middleware('Guru');
+     Route::GET('/guru/presensi/tambah_presensi/{id}', 'Guru\GuruController@tambah_presensi')->middleware('Guru');
+     Route::POST('/guru/proses_presensi', 'Guru\GuruController@proses_presensi')->middleware('Guru');
+     Route::POST('/guru/hapus_presensi/{id}', 'Guru\GuruController@hapus_presensi')->middleware('Guru');
+     //level_pengajaran
+    Route::GET('/guru/level_pengajaran', 'Guru\GuruController@index_level_pengajaran')->middleware('Guru');
+    Route::GET('/guru/presensi/log_level_pengajaran/{id}', 'Guru\GuruController@index_log_level_pengajaran')->middleware('Guru');
+
+
+//SISWA
 Route::GET('/dasboard_siswa', 'Siswa\SiswaController@index')->middleware('Siswa');   

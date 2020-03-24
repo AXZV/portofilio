@@ -17,9 +17,7 @@ class CreatePresensisTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode_pengajaran');
             $table->dateTime('waktu');
-            $table->boolean('status');
             $table->text('pembahasan');
-            $table->text('catatan');
             $table->integer('jumlah_bahasan');
             $table->softDeletes();
             $table->timestamps();

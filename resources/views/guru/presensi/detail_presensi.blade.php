@@ -2,6 +2,7 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
 @endsection
 @section('JS')
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script>
     $(document).ready(function()
@@ -27,17 +28,24 @@
 
 @section('Content')
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Presensi</li>
+        <li class="breadcrumb-item">Daftar Sesi</li>
+        <li class="breadcrumb-item">Rekap Presensi</li>
+        <li class="breadcrumb-item active">Rekap Presensi Siswa</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fas fa-flask'></i> Kelas <span class='font-weight-light font-italic'>#{{$pengajaran->guru_kelas->kelas->nama}}</span>
+            <i class='subheader-icon fas fa-flask'></i> Sesi <span class='font-weight-light font-italic'>#{{$pengajaran->guru_kelas->kelas->nama}}</span>
         </h1>
     </div>
 
     <div id="panel-1" class="panel">
     <div class="panel-hdr">
         <h2>
-            Detail Presensi Kelas
+            Detail Presensi
         </h2>
         <div class="panel-toolbar">
             <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
@@ -57,8 +65,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($presensi as $psx)
+                    {{$presensisiswa->where('status','=','Masuk')->where('id_presensi','=', $psx->id)->count()}}
+                @endforeach  
                     <?php $r=1 ?>
                     @foreach($pengajaran->siswa as $ps)
+                    
                     <tr style=" width:1px; white-space:nowrap;">
                         <td class="text-center"> <?php echo $r++ ?></td>
                         <td> {{$ps->nama_depan}} {{$ps->nama_belakang}}</td>
@@ -72,23 +84,21 @@
                         <td>
                         @foreach($presensi as $psx)
                             @foreach($presensisiswa->where('status','=','Masuk')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id) as $psy)
-                                {{$psy->id}}
+                                {{$psy->count()}}
                             @endforeach
                         @endforeach  
                         </td>
                         <td>
                         @foreach($presensi as $psx)
-                            @foreach($presensisiswa->where('status','=','Tidak Masuk')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id) as $psy)
-                                {{$psy->id}}
-                            @endforeach
-                        @endforeach  
+                            {{$presensisiswa->where('status','=','Ijin')->where('id_presensi','=', $psx->id)->where('id_siswa','=', $ps->id)->first()}}
+                        @endforeach 
                         </td>
                         <td>
-                            @foreach($presensi as $psx)
-                                @foreach($presensisiswa->where('status','=','Ijin')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id) as $psy)
-                                    {{$psy->id}}
-                                @endforeach
-                            @endforeach  
+                        @foreach($presensi as $psx)
+                            @foreach($presensisiswa->where('status','=','Ijin')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id) as $psy)
+                                {{$psy->id_siswa}}
+                            @endforeach
+                        @endforeach  
                         </td>
                         
                     </tr>  
@@ -99,4 +109,7 @@
         </div>
     </div>
     </div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
 @endsection

@@ -2,9 +2,8 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
 @endsection
 @section('JS')
-    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
-    
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script>
     $(document).ready(function()
     {   
@@ -23,37 +22,20 @@
         });
     });
     </script>
+    
 @endsection
 
 @extends('layouts.master_3')
 
 @section('Content')
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-<!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
-    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
-        <div class="d-flex align-items-center">
-            <div class="alert-icon">
-                <i class="fal fa-shield-check text-warning"></i>
-            </div>
-            <div class="flex-1">
-                <span class="h5">Sukses Input Presensi</span>  
-            </div>
-        </div>
-    </div>
-    @if (session()->has('successadd'))
-        <script>
-            $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
-                $("#suksesedit").slideUp(900);
-            });
-        </script>
-    @endif
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
     <ol class="breadcrumb page-breadcrumb ">
         <li class="breadcrumb-item">Guru</li>
         <li class="breadcrumb-item">Level Pengajaran</li>
         <li class="breadcrumb-item">Daftar Sesi</li>
-        <li class="breadcrumb-item active">Level Pengajaran Sesi</li>
+        <li class="breadcrumb-item active">Detail Level Pengajaran Sesi</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
     </ol>
     <div class="subheader">
@@ -68,7 +50,7 @@
             Tingkatan Pengajaran Siswa
         </h2>
         <div class="panel-toolbar">
-            <a class="btn btn-primary" href="/guru/level_pengajaran">Kembali</a>
+            <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
         </div>
     </div>
     <div class="panel-container show">
@@ -77,42 +59,23 @@
                 <thead class="thead-dark">
                 <tr style="text-align:center; width:1px; white-space:nowrap;">
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Status</th>
-                        <th>Tingkat</th>
+                        <th>Tingakat</th>
                         <th>Catatan</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $r=1 ?>
-                    @foreach($pengajaran->siswa as $ps)
+                    @foreach($pengajaran_level_siswa as $ps)
                     <tr style=" width:1px; white-space:nowrap;">
                         <td class="text-center"> <?php echo $r++ ?></td>
-                        <td> <a href="/guru/level_pengajaran/detail_level_pengajaran/{{$pengajaran->kode}}/{{$ps->no_daftar}}"> {{$ps->nama_depan}} {{$ps->nama_belakang}} </a> </td>
-                        <td style="text-align:center"> 
-                            @if( $ps->status_aktif == 'Aktif')
-                                <span class="badge badge-success">Aktif</span>
-                            @else
-                                <span class="badge badge-danger">Tidak Aktif</span>
-                            @endif
-                        </td>
-                        <td class="text-warning">
-                        @foreach($pengajaran_level->where('id_siswa', $ps->no_daftar) as $pl)
-                            @for($i=0; $i<$pl->tingkat; $i++)
-                                <span class="fa fa-star"></span>
+                        <td> 
+                            @for($i=0; $i<$ps->tingkat; $i++)
+                                <span class="fa fa-star text-warning"></span>
                             @endfor
-                        @endforeach
                         </td>
-                        <td>
-                        @foreach($pengajaran_level->where('id_siswa', $ps->no_daftar) as $pl)
-                                {{$pl->catatan}}
-                        @endforeach
-                        </td>
-                        <td class="text-center">
-                            <a class="btn btn-success text-white" data-toggle="modal" onclick="level( '{{$pengajaran->kode}}', '{{$ps->no_daftar}}')" data-target="#level"> <span class="fas fa-angle-double-up"></span> Tingkatkan</a>
-                        </td>                      
-                    </tr>  
+                        <td> {{$ps->catatan}} </td>
+                    </tr>
+
                     @endforeach
 
                 </tbody>
@@ -122,9 +85,8 @@
     </div>
     </div>
 <!-- ///////////////////////////////////////////////////////////////////////// -->  
-    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
     <div class="modal fade bd-example-modal-lg" id="level" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">

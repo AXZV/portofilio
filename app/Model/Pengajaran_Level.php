@@ -14,4 +14,9 @@ class Pengajaran_Level extends Model
     {
         return $this->hasOne('App\Model\pengajaran', 'kode', 'kode_pengajaran');
     }
+    public function siswa()
+    {
+        return $this->belongsToMany('App\Model\Siswa', 'pengajaran_level_siswa', 'kode_pengajaran_level', 'id_siswa')->withPivot('tingkat', 'catatan')->withTimestamps();
+    }
+
 }

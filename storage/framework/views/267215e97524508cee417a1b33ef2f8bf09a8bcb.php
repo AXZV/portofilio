@@ -2,9 +2,8 @@
     <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
-    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
-    
+    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script>
     $(document).ready(function()
     {   
@@ -23,36 +22,19 @@
         });
     });
     </script>
+    
 <?php $__env->stopSection(); ?>
 
 
 
 <?php $__env->startSection('Content'); ?>
     <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
-<!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
-    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
-        <div class="d-flex align-items-center">
-            <div class="alert-icon">
-                <i class="fal fa-shield-check text-warning"></i>
-            </div>
-            <div class="flex-1">
-                <span class="h5">Sukses Input Presensi</span>  
-            </div>
-        </div>
-    </div>
-    <?php if(session()->has('successadd')): ?>
-        <script>
-            $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
-                $("#suksesedit").slideUp(900);
-            });
-        </script>
-    <?php endif; ?>
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
     <ol class="breadcrumb page-breadcrumb ">
         <li class="breadcrumb-item">Level Pengajaran</li>
         <li class="breadcrumb-item">Daftar Sesi</li>
-        <li class="breadcrumb-item active">Level Pengajaran Sesi</li>
+        <li class="breadcrumb-item active">Detail Level Pengajaran Sesi</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
     </ol>
     <div class="subheader">
@@ -67,7 +49,7 @@
             Tingkatan Pengajaran Siswa
         </h2>
         <div class="panel-toolbar">
-            <a class="btn btn-primary" href="/guru/level_pengajaran">Kembali</a>
+            <a class="btn btn-primary" href="<?php echo e(URL::previous()); ?>">Kembali</a>
         </div>
     </div>
     <div class="panel-container show">
@@ -76,43 +58,23 @@
                 <thead class="thead-dark">
                 <tr style="text-align:center; width:1px; white-space:nowrap;">
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Status</th>
-                        <th>Tingkat</th>
+                        <th>Tingakat</th>
                         <th>Catatan</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $r=1 ?>
-                    <?php $__currentLoopData = $pengajaran->siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $pengajaran_level_siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr style=" width:1px; white-space:nowrap;">
                         <td class="text-center"> <?php echo $r++ ?></td>
-                        <td> <a href="/guru/level_pengajaran/detail_level_pengajaran/<?php echo e($pengajaran->kode); ?>/<?php echo e($ps->no_daftar); ?>"> <?php echo e($ps->nama_depan); ?> <?php echo e($ps->nama_belakang); ?> </a> </td>
-                        <td style="text-align:center"> 
-                            <?php if( $ps->status_aktif == 'Aktif'): ?>
-                                <span class="badge badge-success">Aktif</span>
-                            <?php else: ?>
-                                <span class="badge badge-danger">Tidak Aktif</span>
-                            <?php endif; ?>
-                        </td>
-                        <td class="text-warning">
-                        <?php $__currentLoopData = $pengajaran_level->where('id_siswa', $ps->no_daftar); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pl): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php for($i=0; $i<$pl->tingkat; $i++): ?>
-                                <span class="fa fa-star"></span>
+                        <td> 
+                            <?php for($i=0; $i<$ps->tingkat; $i++): ?>
+                                <span class="fa fa-star text-warning"></span>
                             <?php endfor; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </td>
-                        <td>
-                        <?php $__currentLoopData = $pengajaran_level->where('id_siswa', $ps->no_daftar); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pl): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php echo e($pl->catatan); ?>
+                        <td> <?php echo e($ps->catatan); ?> </td>
+                    </tr>
 
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </td>
-                        <td class="text-center">
-                            <a class="btn btn-success text-white" data-toggle="modal" onclick="level( '<?php echo e($pengajaran->kode); ?>', '<?php echo e($ps->no_daftar); ?>')" data-target="#level"> <span class="fas fa-angle-double-up"></span> Tingkatkan</a>
-                        </td>                      
-                    </tr>  
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>
@@ -122,9 +84,8 @@
     </div>
     </div>
 <!-- ///////////////////////////////////////////////////////////////////////// -->  
-    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
     <div class="modal fade bd-example-modal-lg" id="level" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -186,4 +147,4 @@
     </script>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/level_pengajaran/log_level_pengajaran.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/level_pengajaran/detail_level_pengajaran.blade.php ENDPATH**/ ?>

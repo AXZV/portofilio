@@ -73,7 +73,12 @@ Route::GET('/dasboard_guru', 'Guru\GuruController@index')->middleware('Guru');
      //level_pengajaran
     Route::GET('/guru/level_pengajaran', 'Guru\GuruController@index_level_pengajaran')->middleware('Guru');
     Route::GET('/guru/presensi/log_level_pengajaran/{id}', 'Guru\GuruController@index_log_level_pengajaran')->middleware('Guru');
-
+    Route::POST('/guru/level_pengajaran/proses_level_pengajaran', 'Guru\GuruController@proses_level_pengajaran')->middleware('Guru');
+    Route::GET('/guru/level_pengajaran/detail_level_pengajaran/{kode_pengajaran}/{id_siswa}', 'Guru\GuruController@detail_level_pengajaran')->middleware('Guru');
+    //Pengaturan
+    Route::GET('/guru/pengaturan', 'Guru\GuruController@index_pengaturan')->middleware('Guru');
+    Route::POST('/guru/edit_user/{id}', 'Guru\GuruController@edit_user')->middleware('Guru');
+    Route::POST('/guru/edit_data_guru/{id}', 'Guru\GuruController@edit_guru')->middleware('Guru');
 
 //SISWA
 Route::GET('/dasboard_siswa', 'Siswa\SiswaController@index')->middleware('Siswa');   

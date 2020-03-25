@@ -3,6 +3,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script>
     $(document).ready(function()
     {   
@@ -27,20 +28,45 @@
 
 <?php $__env->startSection('Content'); ?>
     <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+<!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
+    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
+        <div class="d-flex align-items-center">
+            <div class="alert-icon">
+                <i class="fal fa-shield-check text-warning"></i>
+            </div>
+            <div class="flex-1">
+                <span class="h5">Sukses Input Presensi</span>  
+            </div>
+        </div>
+    </div>
+    <?php if(session()->has('successpresensi')): ?>
+        <script>
+            $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
+                $("#suksesedit").slideUp(900);
+            });
+        </script>
+    <?php endif; ?>
 
+<!-- ///////////////////////////////////////////////////////////////////////// -->
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Presensi</li>
+        <li class="breadcrumb-item">Daftar Sesi</li>
+        <li class="breadcrumb-item active">Rekap Presensi Sesi</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fas fa-flask'></i> Kelas <span class='font-weight-light font-italic'>#<?php echo e($pengajaran->guru_kelas->kelas->nama); ?></span>
+            <i class='subheader-icon fas fa-flask'></i> Sesi <span class='font-weight-light font-italic'>#<?php echo e($pengajaran->guru_kelas->kelas->nama); ?></span>
         </h1>
     </div>
 
     <div id="panel-1" class="panel">
     <div class="panel-hdr">
         <h2>
-            Daftar Presensi Kelas
+            Daftar Presensi
         </h2>
         <div class="panel-toolbar">
-            <a class="btn btn-warning m-2" href="/guru/presensi/detail_presensi/<?php echo e($pengajaran->kode); ?>"><span style="color:white;">Detail Presensi Siswa</span></a>
+            <a class="btn btn-warning m-2" href="/guru/presensi/detail_presensi/<?php echo e($pengajaran->kode); ?>"><span style="color:white;">Rekap Presensi</span></a>
             <a class="btn btn-success" href="/guru/presensi/tambah_presensi/<?php echo e($pengajaran->id); ?>"><span style="color:white;">Tambah Presensi</span></a>
         </div>
     </div>
@@ -63,7 +89,7 @@
                     <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr style=" width:1px; white-space:nowrap;">
                         <td class="text-center"> <?php echo $r++ ?></td>
-                        <td> <a href="/guru/presensi/detail_presensi_harian/<?php echo e($ps->id); ?>"><?php echo e($ps->waktu); ?></a></td>
+                        <td> <a href="/guru/presensi/detail_presensi_harian/<?php echo e($ps->id); ?>"><?php echo date('d F Y', strtotime($ps->waktu)); ?></a></td>
                         <td> <?php echo e($ps->pembahasan); ?></td>
                         <td class="text-center"> <?php echo e($ps->jumlah_bahasan); ?></td>                        
                         <td class="text-center"> 
@@ -95,5 +121,8 @@
         </div>
     </div>
     </div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/presensi/log_presensi.blade.php ENDPATH**/ ?>

@@ -7,6 +7,7 @@
 @section('JS')
 
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script>
         $(document).ready(function()
         {   
@@ -98,7 +99,15 @@
         @endif
     @endif
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
+<ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item">Pengajaran</li>
+        <li class="breadcrumb-item active">Daftar Pengajaran</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="row">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">

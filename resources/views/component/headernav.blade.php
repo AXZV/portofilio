@@ -54,14 +54,17 @@
             if($role == 'Admin')
             { 
                 $nama= $user->admin->nama;
+                $urlset = "/admin/useraccountset";
             }
             else if($role == 'Guru')
             { 
                 $nama= $user->guru->nama_depan;
+                $urlset = "/guru/pengaturan";
             }
             else if($role == 'Siswa')
             { 
                 $nama= $user->siswa->nama;
+                $urlset = "{{ url('/admin/useraccountset') }}";
             }
         ?>
 
@@ -88,7 +91,7 @@
                     <i class="float-right text-muted fw-n">F11</i>
                 </a>
                 <div class="dropdown-divider m-0"></div>
-                <a href="{{ url('/admin/useraccountset') }}" class="dropdown-item">
+                <a href="<?php echo $urlset ?>" class="dropdown-item">
                     <span data-i18n="drpdwn.fullscreen">   Pengaturan akun</span>
                 </a>
                 <div class="dropdown-divider m-0"></div>

@@ -5,7 +5,7 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css') }}">
 @endsection
 @section('JS')
-
+<script src="{{ asset('js/theme.js') }}"></script>
 @endsection
 
 @extends('layouts.master_3')
@@ -13,7 +13,16 @@
 @section('Content')
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
+<ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item">Pengajaran</li>
+        <li class="breadcrumb-item">Daftar Pengajaran</li>
+        <li class="breadcrumb-item active">Rubah Data Pengajaran</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="row">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
@@ -22,6 +31,7 @@
                             Rubah Data Pengajaran
                         </h2>
                         <div class="panel-toolbar">
+                            <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
                         </div>
                     </div>
                     <div class="panel-container show">

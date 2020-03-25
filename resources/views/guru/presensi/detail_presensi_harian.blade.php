@@ -2,6 +2,7 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
 @endsection
 @section('JS')
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script>
     $(document).ready(function()
@@ -27,7 +28,14 @@
 
 @section('Content')
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Presensi</li>
+        <li class="breadcrumb-item">Daftar Sesi</li>
+        <li class="breadcrumb-item">Rekap Presensi</li>
+        <li class="breadcrumb-item active">Rekap Presensi Harian</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
     <div class="subheader">
         <h1 class="subheader-title">
             <i class='subheader-icon fas fa-user-check'></i> Presensi <span class='font-weight-light font-italic'>#{{$presensi[0]->id}}-{{$presensi[0]->pengajaran->guru_kelas->kelas->nama}}</span>
@@ -37,7 +45,7 @@
     <div id="panel-1" class="panel">
     <div class="panel-hdr">
         <h2>
-            Detail Presensi Kelas Tanggal @php echo date('d - F - yy', strtotime($presensi[0]->waktu)); @endphp
+            Detail Presensi Tanggal @php echo date('d - F - Y', strtotime($presensi[0]->waktu)); @endphp
         </h2>
         <div class="panel-toolbar">
             <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
@@ -96,4 +104,7 @@
         </div>
     </div>
     </div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
 @endsection

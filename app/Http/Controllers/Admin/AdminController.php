@@ -485,7 +485,7 @@ class AdminController extends Controller
 
         public function detail_pengajaran($id)
         {
-            $pengajaran = Pengajaran::where('id','=',$id)->get();
+            $pengajaran = Pengajaran::where('id','=',$id)->first();
             return view('admin/pengajaran/detail_pengajaran')->with('pengajaran', $pengajaran);
         }
 

@@ -24,7 +24,7 @@
             <li class="{{ $active == 'instansi' ? 'active' : '' }}">
                 <a href="{{ url('admin/instansi') }}" title="instansi" data-filter-tags="instansi">
                     <i class="fas fa-university"></i>
-                    <span class="nav-link-text" data-i18n="nav.instansi">Instansi</span>
+                    <span class="nav-link-text" data-i18n="nav.instansi">Center</span>
                 </a>
             </li>
 
@@ -45,21 +45,21 @@
             <li class="{{ $active == 'pelajaran' ? 'active' : '' }}">
                 <a href="{{ url('admin/pelajaran') }}" title="pelajaran" data-filter-tags="pelajaran">
                     <i class="fas fa-book"></i>
-                    <span class="nav-link-text" data-i18n="nav.pelajaran">Pelajaran</span>
+                    <span class="nav-link-text" data-i18n="nav.pelajaran">Subjek</span>
                 </a>
             </li>
 
             <li class="{{ $active == 'kelas' ? 'active' : '' }}">
                 <a href="{{ url('admin/kelas') }}" title="kelas" data-filter-tags="kelas">
                     <i class="fas fa-flask"></i>
-                    <span class="nav-link-text" data-i18n="nav.kelas">Kelas</span>
+                    <span class="nav-link-text" data-i18n="nav.kelas">Sesi</span>
                 </a>
             </li>
 
             <li class="{{ $active == 'produk' ? 'active' : '' }}">
                 <a href="{{ url('admin/produk') }}" title="produk" data-filter-tags="produk">
                     <i class="fas fa-dolly-flatbed"></i>
-                    <span class="nav-link-text" data-i18n="nav.produk">Produk</span>
+                    <span class="nav-link-text" data-i18n="nav.produk">Peralatan Belajar</span>
                 </a>
             </li>
 

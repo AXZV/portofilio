@@ -6,6 +6,7 @@
 @section('JS')
 
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script>
         $(document).ready(function()
@@ -80,7 +81,14 @@
     @endif
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
+<ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item active">Admin Setting</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
     <div class="row">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
@@ -91,7 +99,7 @@
                         <div class="panel-toolbar">
                             <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                             <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <a class="btn btn-panel btn-danger" href="{{ url('admin/pengajaran') }}" data-original-title="Close"></a>
+                            <a class="btn btn-panel btn-danger" href="/dasboard_admin" data-original-title="Close"></a>
                         </div>
                     </div>
                     <div class="panel-container show">
@@ -141,7 +149,7 @@
                                     <!--Footer-->
                                     <div class="modal-footer justify-content-center">
                                         <button type="submit" id="submitx" name="submit" class="btn btn-primary btn-sm" >Simpan</button>
-                                        <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
+                                        <a type="button" href="/dasboard_admin" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</a>
                                     </div>
                                     
                                 </form>

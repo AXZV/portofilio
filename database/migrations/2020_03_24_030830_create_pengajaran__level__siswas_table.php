@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePengajaranLevelsTable extends Migration
+class CreatePengajaranLevelSiswasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,13 @@ class CreatePengajaranLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengajaran_levels', function (Blueprint $table) {
+        Schema::create('pengajaran_level_siswa', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode')->unique();
+            $table->string('kode_pengajaran_level');
             $table->string('id_siswa');
             $table->integer('tingkat');
-            $table->text('catatan');
-            $table->string('kode_pengajaran');
-            $table->softDeletes();
+            $table->string('catatan')->nullable();
             $table->timestamps();
-        });
-
-        Schema::table('pengajaran_levels', function (Blueprint $table) {
-            $table->foreign('kode_pengajaran')->references('kode')->on('pengajarans');
         });
     }
 
@@ -36,6 +30,6 @@ class CreatePengajaranLevelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengajaran__levels');
+        Schema::dropIfExists('pengajaran_level_siswa');
     }
 }

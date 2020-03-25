@@ -2,6 +2,7 @@
     <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
+    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
     <script>
     $(document).ready(function()
@@ -27,17 +28,23 @@
 
 <?php $__env->startSection('Content'); ?>
     <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
-
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Presensi</li>
+        <li class="breadcrumb-item">Daftar Sesi</li>
+        <li class="breadcrumb-item">Rekap Presensi</li>
+        <li class="breadcrumb-item active">Rekap Presensi Siswa</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fas fa-flask'></i> Kelas <span class='font-weight-light font-italic'>#<?php echo e($pengajaran->guru_kelas->kelas->nama); ?></span>
+            <i class='subheader-icon fas fa-flask'></i> Sesi <span class='font-weight-light font-italic'>#<?php echo e($pengajaran->guru_kelas->kelas->nama); ?></span>
         </h1>
     </div>
 
     <div id="panel-1" class="panel">
     <div class="panel-hdr">
         <h2>
-            Detail Presensi Kelas
+            Detail Presensi
         </h2>
         <div class="panel-toolbar">
             <a class="btn btn-primary" href="<?php echo e(URL::previous()); ?>">Kembali</a>
@@ -57,8 +64,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psx): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo e($presensisiswa->where('status','=','Masuk')->where('id_presensi','=', $psx->id)->count()); ?>
+
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
                     <?php $r=1 ?>
                     <?php $__currentLoopData = $pengajaran->siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
                     <tr style=" width:1px; white-space:nowrap;">
                         <td class="text-center"> <?php echo $r++ ?></td>
                         <td> <?php echo e($ps->nama_depan); ?> <?php echo e($ps->nama_belakang); ?></td>
@@ -72,26 +84,24 @@
                         <td>
                         <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psx): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php $__currentLoopData = $presensisiswa->where('status','=','Masuk')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php echo e($psy->id); ?>
+                                <?php echo e($psy->count()); ?>
 
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
                         </td>
                         <td>
                         <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psx): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php $__currentLoopData = $presensisiswa->where('status','=','Tidak Masuk')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php echo e($psy->id); ?>
+                            <?php echo e($presensisiswa->where('status','=','Ijin')->where('id_presensi','=', $psx->id)->where('id_siswa','=', $ps->id)->first()); ?>
+
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+                        </td>
+                        <td>
+                        <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psx): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $presensisiswa->where('status','=','Ijin')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php echo e($psy->id_siswa); ?>
 
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
-                        </td>
-                        <td>
-                            <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psx): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php $__currentLoopData = $presensisiswa->where('status','=','Ijin')->where('id_siswa','=', $ps->id)->where('id_presensi','=', $psx->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psy): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php echo e($psy->id); ?>
-
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
                         </td>
                         
                     </tr>  
@@ -102,5 +112,8 @@
         </div>
     </div>
     </div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/presensi/detail_presensi.blade.php ENDPATH**/ ?>

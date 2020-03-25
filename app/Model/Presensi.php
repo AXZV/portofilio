@@ -25,10 +25,15 @@ class Presensi extends Model
     {
         return $this->siswa()->wherePivot('id_siswa','=', $id_siswa);
     }
-    // public function kehadiran_persiswa($id_presensi, $id_siswa, $status)
-    // {
-    //     return $this->siswa()->wherePivot('id_presensi','=', $id_presensi)->wherePivot('id_siswa','=', $id_siswa)->wherePivot('status','=', $status);
-    // }
+    public function kehadiran_persiswa($id_presensi, $id_siswa, $status)
+    {
+        return $this->siswa()->wherePivot('id_presensi','=', $id_presensi)->wherePivot('id_siswa','=', $id_siswa)->wherePivot('status','=', $status);
+    }
+
+    public function kehadiran_x($id_siswa, $status)
+    {
+        return $this->siswa()->wherePivot('id_siswa','=', $id_siswa)->wherePivot('status','=', $status)->get();
+    }
     // public function kehadiran_persiswa2($status, $id_siswa)
     // {
     //     return $this->siswa()->wherePivot('status','=', $status)->wherePivot('id_siswa','=', $id_siswa)->get();

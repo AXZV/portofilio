@@ -5,6 +5,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script>
     $(document).ready(function()
     {   
@@ -32,9 +33,19 @@
 <?php $__env->startSection('Content'); ?>
 <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////// -->
+<ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Pengajaran</li>
+        <li class="breadcrumb-item">Daftar Pengajaran</li>
+        <li class="breadcrumb-item active">Detail Data Pengajaran</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="subheader">
             <h1 class="subheader-title">
-                <i class='subheader-icon fas fa-microscope'></i> Pengajaran <span class='font-weight-light font-italic'>#<?php echo e($pengajaran[0]->kode); ?></span>
+                <i class='subheader-icon fas fa-microscope'></i> Pengajaran <span class='font-weight-light font-italic'>#<?php echo e($pengajaran->kode); ?></span>
             </h1>
         </div>
 
@@ -46,6 +57,7 @@
                             Data Guru
                         </h2>
                         <div class="panel-toolbar">
+                            <a class="btn btn-primary" href="<?php echo e(URL::previous()); ?>">Kembali</a>
                         </div>
                     </div>
                     <div class="panel-container show">
@@ -57,20 +69,20 @@
                                         <div class="col font-weight-bold">Nama</div>
                                         <div class="col font-weight-bold">Instansi</div>
                                         <div class="w-100"></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->guru->no_identitas); ?> </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->guru->nama_depan); ?> <?php echo e($pengajaran[0]->guru_kelas->guru->nama_belakang); ?> </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->guru->instansi->nama); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->guru->no_identitas); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->guru->nama_depan); ?> <?php echo e($pengajaran->guru_kelas->guru->nama_belakang); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->guru->instansi->nama); ?> </h3></div>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col font-weight-bold">Nomor Telepon</div>
                                         <div class="col font-weight-bold">Alamat Email</div>
                                         <div class="col font-weight-bold">Status</div>
                                         <div class="w-100"></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->guru->no_telp); ?> </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->guru->email); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->guru->no_telp); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->guru->email); ?> </h3></div>
                                         <div class="col">
                                             <h3 class="display-5 font-weight-light"> 
-                                                <?php if($pengajaran[0]->guru_kelas->guru->status_aktif == 'Aktif'): ?>
+                                                <?php if($pengajaran->guru_kelas->guru->status_aktif == 'Aktif'): ?>
                                                     <span class="badge badge-success">Aktif</span> 
                                                 <?php else: ?>
                                                     <span class="badge badge-danger">Tidak Aktif</span>
@@ -106,9 +118,9 @@
                                         <div class="col font-weight-bold">Nama</div>
                                         <div class="col font-weight-bold">Pelajaran</div>
                                         <div class="w-100"></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->kelas->kode); ?> </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->kelas->nama); ?> </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran[0]->guru_kelas->kelas->pelajaran->nama); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->kelas->kode); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->kelas->nama); ?> </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> <?php echo e($pengajaran->guru_kelas->kelas->pelajaran->nama); ?> </h3></div>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +157,7 @@
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    <?php $__currentLoopData = $pengajaran[0]->siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $pengajaran->siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> <?php echo e($s->no_daftar); ?> </td>

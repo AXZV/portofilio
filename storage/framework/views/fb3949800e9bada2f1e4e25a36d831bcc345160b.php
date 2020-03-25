@@ -6,6 +6,7 @@
 <?php $__env->startSection('JS'); ?>
 
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script src="<?php echo e(asset('js/formplugins/select2/select2.bundle.js')); ?>"></script>
     <script>
     $(document).ready(function()
@@ -103,13 +104,21 @@
         <?php endif; ?>
     <?php endif; ?>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
+<ol class="breadcrumb page-breadcrumb ">
+<li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item">Peralatan Belajar</li>
+        <li class="breadcrumb-item active">Daftar Peralatan Belajar</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="row">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
-                            Produk
+                            Peralatan Belajar
                         </h2>
                         <div class="panel-toolbar">
                         <a class="btn btn-primary" data-toggle="modal" data-target="#adddata"><span style="color:white;">Add Data</span></a>
@@ -122,7 +131,7 @@
                                 <thead class="thead-dark">
                                 <tr style="text-align:center; width:1px; white-space:nowrap;">
                                         <th>No</th>
-                                        <th>Kode Produk</th>
+                                        <th>Kode</th>
                                         <th>Nama</th>
                                         <th>Harga</th>
                                         <th>Kategori</th>
@@ -310,7 +319,7 @@
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
+                    <button type="submit" class="btn btn-primary btn-sm" >Simpan</button>
                     <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
                 </div>
                 
@@ -338,10 +347,6 @@
             $("#editForm").attr('action', url);
         }
 
-        function formSubmit2()
-        {
-            $("#editForm").submit();
-        }
 
     </script>
 

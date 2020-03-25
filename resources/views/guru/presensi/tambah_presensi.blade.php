@@ -5,6 +5,7 @@
 @endsection
 @section('JS')
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script>
     $(document).ready(function()
@@ -30,10 +31,23 @@
 
 @section('Content')
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Presensi</li>
+        <li class="breadcrumb-item">Daftar Sesi</li>
+        <li class="breadcrumb-item">Rekap Presensi</li>
+        <li class="breadcrumb-item active">Tambah Presensi</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fas fa-flask'></i> Sesi <span class='font-weight-light font-italic'>#{{$pengajaran[0]->guru_kelas->kelas->nama}}</span>
+        </h1>
+    </div>
     <div id="panel-1" class="panel">
     <div class="panel-hdr">
         <h2>
-            Daftar Siswa
+            Presensi
         </h2>
         <div class="panel-toolbar">
             <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
@@ -157,7 +171,9 @@
         </div>
     </div>
     </div>
-
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
     <script src="{{ asset('js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
     <script>
         var controls = {

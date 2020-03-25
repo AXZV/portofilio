@@ -4,7 +4,7 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('css/formplugins/select2/select2.bundle.css') }}">
 @endsection
 @section('JS')
-
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script>
         $(document).ready(function()
@@ -82,6 +82,15 @@
     </script>
     @endif
 
+<!-- ///////////////////////////////////////////////////////////////////////// -->
+<ol class="breadcrumb page-breadcrumb ">
+<li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item">Pengguna</li>
+        <li class="breadcrumb-item active">Daftar Pengguna</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 
         <div class="row">
@@ -278,11 +287,6 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="form0x" class="form-control">
 
-                    <!-- <div class="form-group">
-                        <label for="formGroupExampleInput">Kode Pengguna</label>
-                        <input required type="text" id="form1x" name="kode" class="form-control" id="formGroupExampleInput" placeholder="Kode Pengguna">
-                    </div> -->
-
                     <div class="form-group">
                         <label for="nama1">Username</label>
                         <input required type="text" name="username" class="form-control" id="username" placeholder="Username">
@@ -311,7 +315,7 @@
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" id="submitx" name="submitx" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
+                    <button type="submit" id="submitx" name="submitx" class="btn btn-primary btn-sm" >Simpan</button>
                     <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
                 </div>
                 
@@ -331,11 +335,6 @@
             var id = id;
             var url = "/admin/edit_pengguna/"+id;
             $("#editForm").attr('action', url);
-        }
-
-        function formSubmit2()
-        {
-            $("#editForm").submit();
         }
     </script>
 

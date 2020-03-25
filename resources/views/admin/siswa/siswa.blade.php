@@ -6,6 +6,7 @@
 @endsection
 @section('JS')
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script>
         $(document).ready(function()
@@ -102,7 +103,12 @@
     @endif
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
+    <ol class="breadcrumb page-breadcrumb ">
+    <li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item">Siswa</li>
+        <li class="breadcrumb-item active">Daftar Siswa</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
         <div class="row">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
@@ -228,7 +234,9 @@
             </div>
         </div>
 
-
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// --
 <!-- /////////////////////////////// Modal Tambah Data /////////////////////////////// -->
         <div class="modal fade bd-example-modal-lg" id="adddata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -612,10 +620,6 @@
             <!--Body-->
                 <input type="hidden" name="id" id="form0x" class="form-control">
                 <div class="modal-body">
-                <!-- <div class="form-group">
-                    <label for="no_daftar">Nomor Daftar</label>
-                    <input required type="text" name="no_daftar" class="form-control" id="no_daftar1" placeholder="Nomor Identitas">
-                </div> -->
                 <div class="row mb-4">
                     <div class="col">
                         <div class="form-group">
@@ -630,7 +634,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row mb-4">
                     <div class="col">
                         <div class="form-group">
@@ -782,7 +785,7 @@
             </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
+                    <button type="submit" class="btn btn-primary btn-sm" >Simpan</button>
                     <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
                 </div>
                 
@@ -821,24 +824,6 @@
                 var url = "/admin/edit_siswa/"+id;
                 $("#editForm").attr('action', url);
             }
-
-            function formSubmit2()
-            {
-                $("#editForm").submit();
-            }
-
-
-
-            function showpass2() {
-                var x = document.getElementById("f17");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
-                    x.type = "password";
-                }
-            }
-
-
         </script>
         <script>          
             document.getElementById('status_aktif1').addEventListener('change', function() {

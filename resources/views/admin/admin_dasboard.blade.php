@@ -3,12 +3,18 @@
 @section('Content')
 
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="js/statistics/chartjs/chartjs.bundle.js"></script>
     
     <main id="js-page-content" role="main" class="page-content">
-        <ol class="breadcrumb page-breadcrumb">
-            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-        </ol>
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item active">Admin Dasboard</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+    <!-- ///////////////////////////////////////////////////////////////////////// -->  
+    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+    <!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-chart-area'></i> Admin <span class='fw-300'>Dashboard</span>

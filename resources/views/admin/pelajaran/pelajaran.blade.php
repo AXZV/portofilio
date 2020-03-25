@@ -6,6 +6,7 @@
 @section('JS')
 
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/formplugins/select2/select2.bundle.js') }}"></script>
     <script>
     $(document).ready(function()
@@ -101,7 +102,15 @@
         @endif
     @endif
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
+    <ol class="breadcrumb page-breadcrumb ">
+    <li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item">Subjek</li>
+        <li class="breadcrumb-item active">Daftar Subjek</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="row">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
@@ -146,7 +155,6 @@
                 </div>
             </div>
         </div>
-
 
 <!-- /////////////////////////////// Modal Tambah Data /////////////////////////////// -->
         <div class="modal fade bd-example-modal-lg" id="adddata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -275,7 +283,7 @@
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
+                    <button type="submit" class="btn btn-primary btn-sm" >Simpan</button>
                     <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
                 </div>
                 
@@ -298,11 +306,6 @@
             var id = id;
             var url = "/admin/edit_pelajaran/"+id;
             $("#editForm").attr('action', url);
-        }
-
-        function formSubmit2()
-        {
-            $("#editForm").submit();
         }
 
     </script>

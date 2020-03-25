@@ -1,40 +1,27 @@
 <?php $__env->startSection('CSS'); ?>
-
+<link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/vendors.bundle.css')); ?>">
+<link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/app.bundle.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
-
+<script src="<?php echo e(asset('js/theme.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 
 
 <?php $__env->startSection('Content'); ?>
 <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
-<!-- /////////////////////////////// Toast CTRL /////////////////////////////// -->
-    <div class="alert bg-fusion-400 border-0 fade" style="display:none;" id="suksesedit" role="alert">
-        <div class="d-flex align-items-center">
-            <div class="alert-icon">
-                <i class="fal fa-shield-check text-warning"></i>
-            </div>
-            <div class="flex-1">
-                <span class="h5">Sukses Input Data Presensi</span>  
-            </div>
-        </div>
-    </div>
-    <?php if(session()->has('successadd')): ?>
-        <script>
-            $("#suksesedit").fadeTo(5000, 900).slideUp(900, function(){
-                $("#suksesedit").slideUp(900);
-            });
-        </script>
-    <?php endif; ?>
-
 <!-- ///////////////////////////////////////////////////////////////////////// -->
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Level Pengajaran</li>
+        <li class="breadcrumb-item active">Daftar Sesi</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
     <div class="subheader">
         <h1 class="subheader-title">
             <i class='subheader-icon fas fa-chart-line'></i> Level Pengajaran
         </h1>
     </div>
-
 
         <!-- Team -->
         <section id="team" class="pb-5">
@@ -52,7 +39,7 @@
                                         <!-- Card content -->
                                     <div class="card-body card-body-cascade">
                                         <!-- Label -->
-                                        <h5 class="text-danger text-italic pb-2 pt-1 font-italic"><i class="fas fa-chalkboard-teacher"></i> #Kelas <?php echo $e++ ?></h5>
+                                        <h5 class="text-danger text-italic pb-2 pt-1 font-italic"><i class="fas fa-chalkboard-teacher"></i> #Sesi <?php echo $e++ ?></h5>
                                         <!-- Title -->
                                         <h4 class="font-weight-bold card-title"><?php echo e($gk->kelas->nama); ?></h4>
                                         <!-- Text -->
@@ -93,7 +80,7 @@
             </div>
         </section>
         <!-- Team -->
-
+    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/level_pengajaran/level_pengajaran.blade.php ENDPATH**/ ?>

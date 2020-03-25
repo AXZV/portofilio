@@ -5,6 +5,7 @@
 @endsection
 @section('JS')
     <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script>
     $(document).ready(function()
     {   
@@ -32,6 +33,17 @@
 @section('Content')
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////// -->
+<ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Admin</li>
+        <li class="breadcrumb-item">Pengajaran</li>
+        <li class="breadcrumb-item">Daftar Pengajaran</li>
+        <li class="breadcrumb-item active">Detail Data Pengajaran</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fas fa-microscope'></i> Pengajaran <span class='font-weight-light font-italic'>#{{$pengajaran->kode}}</span>
@@ -46,6 +58,7 @@
                             Data Guru
                         </h2>
                         <div class="panel-toolbar">
+                            <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
                         </div>
                     </div>
                     <div class="panel-container show">
@@ -57,20 +70,20 @@
                                         <div class="col font-weight-bold">Nama</div>
                                         <div class="col font-weight-bold">Instansi</div>
                                         <div class="w-100"></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->guru->no_identitas}} </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->guru->nama_depan}} {{$pengajaran[0]->guru_kelas->guru->nama_belakang}} </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->guru->instansi->nama}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->guru->no_identitas}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->guru->nama_depan}} {{$pengajaran->guru_kelas->guru->nama_belakang}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->guru->instansi->nama}} </h3></div>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col font-weight-bold">Nomor Telepon</div>
                                         <div class="col font-weight-bold">Alamat Email</div>
                                         <div class="col font-weight-bold">Status</div>
                                         <div class="w-100"></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->guru->no_telp}} </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->guru->email}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->guru->no_telp}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->guru->email}} </h3></div>
                                         <div class="col">
                                             <h3 class="display-5 font-weight-light"> 
-                                                @if($pengajaran[0]->guru_kelas->guru->status_aktif == 'Aktif')
+                                                @if($pengajaran->guru_kelas->guru->status_aktif == 'Aktif')
                                                     <span class="badge badge-success">Aktif</span> 
                                                 @else
                                                     <span class="badge badge-danger">Tidak Aktif</span>
@@ -106,9 +119,9 @@
                                         <div class="col font-weight-bold">Nama</div>
                                         <div class="col font-weight-bold">Pelajaran</div>
                                         <div class="w-100"></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->kelas->kode}} </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->kelas->nama}} </h3></div>
-                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran[0]->guru_kelas->kelas->pelajaran->nama}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->kelas->kode}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->kelas->nama}} </h3></div>
+                                        <div class="col"><h3 class="display-5 font-weight-light"> {{$pengajaran->guru_kelas->kelas->pelajaran->nama}} </h3></div>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +158,7 @@
                                 </thead>
                                 <tbody>
                                     <?php $r=1 ?>
-                                    @foreach($pengajaran[0]->siswa as $s)
+                                    @foreach($pengajaran->siswa as $s)
                                     <tr style="width:1px; white-space:nowrap;">
                                         <td style="text-align:center" ><?php echo $r++ ?></td>
                                         <td> {{$s->no_daftar}} </td>

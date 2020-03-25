@@ -4,7 +4,7 @@
     <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/formplugins/select2/select2.bundle.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
-
+<script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
     <script>
         $(document).ready(function()
@@ -97,7 +97,14 @@
         <?php endif; ?>
     <?php endif; ?>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-
+<ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Guru-Kelas</li>
+        <li class="breadcrumb-item active">Daftar Guru-Kelas</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
         <div class="row">
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">

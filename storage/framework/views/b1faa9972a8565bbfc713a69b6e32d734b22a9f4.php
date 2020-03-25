@@ -2,7 +2,7 @@
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('JS'); ?>
-
+<script src="<?php echo e(asset('js/theme.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 
@@ -29,6 +29,11 @@
     <?php endif; ?>
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
+    <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Presensi</li>
+        <li class="breadcrumb-item active">Daftar Sesi</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
     <div class="subheader">
         <h1 class="subheader-title">
             <i class='subheader-icon fas fa-user-check'></i> Presensi
@@ -37,7 +42,7 @@
         <!-- Team -->
         <section id="team" class="pb-5">
             <div class="container">
-                <!-- <h5 class="section-title h1">Daftar Kelas</h5> -->
+                <!-- <h5 class="section-title h1">Daftar Sesi</h5> -->
                 <div class="row">
                     <!-- Team member -->
                     <?php $e=1 ?>
@@ -50,7 +55,7 @@
                                         <!-- Card content -->
                                     <div class="card-body card-body-cascade">
                                         <!-- Label -->
-                                        <h5 class="text-danger text-italic pb-2 pt-1 font-italic"><i class="fas fa-chalkboard-teacher"></i> #Kelas <?php echo $e++ ?></h5>
+                                        <h5 class="text-danger text-italic pb-2 pt-1 font-italic"><i class="fas fa-chalkboard-teacher"></i> #Sesi <?php echo $e++ ?></h5>
                                         <!-- Title -->
                                         <h4 class="font-weight-bold card-title"><?php echo e($gk->kelas->nama); ?></h4>
                                         <!-- Text -->
@@ -91,6 +96,8 @@
             </div>
         </section>
         <!-- Team -->
-
+<!-- ///////////////////////////////////////////////////////////////////////// -->  
+<div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+<!-- ///////////////////////////////////////////////////////////////////////// -->
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/presensi/presensi.blade.php ENDPATH**/ ?>

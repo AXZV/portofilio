@@ -31,7 +31,7 @@
                     <div class="row no-gutters row-grid">
                         <div class="col-12">
                             <div class="d-flex flex-column align-items-center justify-content-center p-4">
-                                <i class="fas fa-user-graduate fa-5x text-primary"></i>
+                                <i class="fas fa-id-badge fa-5x text-primary"></i>
                                 <h5 class="mb-0 fw-700 text-center mt-3" style="text-transform: capitalize">
                                     <?php echo e($guru->nama_depan); ?> <?php echo e($guru->nama_belakang); ?>
 
@@ -274,7 +274,26 @@
                                 </h2>
                             </div>
                         </div>
-                      
+                        <?php $__currentLoopData = $guru_kelas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $pengajaran->where('kode_guru_kelas','=', $gk->kode); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                     
+                                <div class="col-12 hover-highlight">
+                                    <a href="siswa/level_pengajaran/log_level_pengajaran/<?php echo e($p->kode); ?>" class="text-dark">
+                                        <div class="p-3">
+                                            <div class="fw-500 fs-xs"><?php echo e($gk->kelas->pelajaran->nama); ?></div>
+                                            <?php $__empty_1 = true; $__currentLoopData = $pengajaran_level->where('kode_pengajaran', $p->kode); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pl): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+
+                                                <?php for($i=0; $i<$pl->tingkat; $i++): ?>
+                                                    <span class="fas fa-star text-warning"></span>
+                                                <?php endfor; ?>
+
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                                    <span class="fal fa-star text-warning"></span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
+                                </div>                          
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                     </div>
                 </div>

@@ -14,6 +14,7 @@
 <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Admin</li>
         <li class="breadcrumb-item">Pengajaran</li>
         <li class="breadcrumb-item">Daftar Pengajaran</li>
         <li class="breadcrumb-item active">Rubah Data Pengajaran</li>

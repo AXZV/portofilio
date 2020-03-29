@@ -50,12 +50,14 @@ class GuruController extends Controller
         $pengajaran = Pengajaran::all();
         $jumlah_presensi =  Jumlah_Presensi::all();
         $presensi =  Presensi::all();
+        $pengajaran_level = Pengajaran_Level::all();
         return view('/guru/guru_dasboard')
                 ->with('guru', $guru)
                 ->with('guru_kelas', $guru_kelas)
                 ->with('pengajaran', $pengajaran)
                 ->with('jumlah_presensi', $jumlah_presensi)
-                ->with('presensi', $presensi); 
+                ->with('presensi', $presensi)
+                ->with('pengajaran_level', $pengajaran_level);
     }
     ////////////// PRESENSI
         public function index_presensi()

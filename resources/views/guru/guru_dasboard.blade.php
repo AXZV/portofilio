@@ -31,7 +31,7 @@
                     <div class="row no-gutters row-grid">
                         <div class="col-12">
                             <div class="d-flex flex-column align-items-center justify-content-center p-4">
-                                <i class="fas fa-user-graduate fa-5x text-primary"></i>
+                                <i class="fas fa-id-badge fa-5x text-primary"></i>
                                 <h5 class="mb-0 fw-700 text-center mt-3" style="text-transform: capitalize">
                                     {{$guru->nama_depan}} {{$guru->nama_belakang}}
                                     <small class="text-muted mb-0">{{$guru->alamat}}</small>
@@ -271,7 +271,26 @@
                                 </h2>
                             </div>
                         </div>
-                      
+                        @foreach($guru_kelas as $gk)
+                            @foreach($pengajaran->where('kode_guru_kelas','=', $gk->kode) as $p)                     
+                                <div class="col-12 hover-highlight">
+                                    <a href="siswa/level_pengajaran/log_level_pengajaran/{{$p->kode}}" class="text-dark">
+                                        <div class="p-3">
+                                            <div class="fw-500 fs-xs">{{$gk->kelas->pelajaran->nama}}</div>
+                                            @forelse($pengajaran_level->where('kode_pengajaran', $p->kode) as $pl)
+
+                                                @for($i=0; $i<$pl->tingkat; $i++)
+                                                    <span class="fas fa-star text-warning"></span>
+                                                @endfor
+
+                                                @empty
+                                                    <span class="fal fa-star text-warning"></span>
+                                            @endforelse
+                                        </div>
+                                    </a>
+                                </div>                          
+                            @endforeach
+                        @endforeach
 
                     </div>
                 </div>

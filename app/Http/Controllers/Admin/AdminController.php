@@ -480,7 +480,7 @@ class AdminController extends Controller
             $data->tanggal_selesai=$request->get('tanggal_selesai');
             $data->save();
             $data->Siswa()->sync($request->get('kode_siswa1'));
-            return redirect('/admin/pengajaran/pengajaran')->with('successedit', true);
+            return redirect('/admin/pengajaran')->with('successedit', true);
         }
 
         public function detail_pengajaran($id)

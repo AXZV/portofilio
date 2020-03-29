@@ -286,7 +286,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput27">Agama <span class="text-white">xxxxxxxxx</span> </label>
+                                    <label for="formGroupExampleInput27">Agama <small class="text-white">xxxxxxx</small> </label>
                                     <input value="<?php echo e(old('agama')); ?>" required type="text" name="agama" class="form-control" id="formGroupExampleInput27" placeholder="Agama">
                                 </div>
                             </div>
@@ -325,7 +325,7 @@
                         <div class="row mb-4">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput216">Status <span class="text-white">xxxxxxxxx</span> </label>
+                                    <label for="formGroupExampleInput216">Status <small class="text-white">xxxxxxx</small> </label>
                                     <select name="status_aktif" id="status_aktif1" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>
                                         <option value="Aktif" <?php echo e(old('status_aktif') == 'Aktif' ? 'selected' : ''); ?>>Aktif</option>
@@ -361,7 +361,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput218">Instansi <span class="text-white">xxxxxxxxx</span> </label>
+                                    <label for="formGroupExampleInput218">Instansi <small class="text-white">xxxxxxx</small> </label>
                                     <select name="kode_instansi" id="kode_instansi" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>                                       
                                         <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ins): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -633,7 +633,7 @@
                     <div class="row mb-4">
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Status <span class="text-white">xxxxxxxxx</span> </label>
+                                <label for="formGroupExampleInput2">Status <small class="text-white">xxxxxxx</small> </label>
                                 <select name="status_aktif" id="f14" class="form-control" required>
                                     <option value="" disabled>Pilih.....</option>
                                     <option value="Aktif">Aktif</option>
@@ -669,7 +669,7 @@
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Instansi <span class="text-white">xxxxxxxxx</span> </label>
+                                <label for="formGroupExampleInput2">Instansi <small class="text-white">xxxxxxx</small> </label>
                                 <select name="kode_instansi" id="f15" class="form-control" required>                                    
                                     <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ins): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($ins->kode); ?>"><?php echo e($ins->kode); ?> - <?php echo e($ins->nama); ?></option>

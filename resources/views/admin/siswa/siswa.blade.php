@@ -309,7 +309,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="agama">Agama <span class="text-white">xxxxxxxxx</span> </label>
+                                    <label for="agama">Agama <small class="text-white">xxxxxxx</small> </label>
                                     <input required value="{{ old('agama') }}" type="text" name="agama" class="form-control" id="agama" placeholder="Agama">
                                 </div>
                             </div>
@@ -342,7 +342,7 @@
                         <div class="row mb-4">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="status_aktif">Status <span class="text-white">xxxxxxxxx</span> </label>
+                                    <label for="status_aktif">Status <small class="text-white">xxxxxxx</small> </label>
                                     <select name="status_aktif" id="status_aktif" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>
                                         <option value="Aktif" {{ old('status_aktif') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
@@ -378,7 +378,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="kode_instansi">Instansi <span class="text-white">xxxxxxxxx</span> </label>
+                                    <label for="kode_instansi">Instansi <small class="text-white">xxxxxxx</small> </label>
                                     <select name="kode_instansi" id="kode_instansi" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>                                       
                                         @foreach($instansi as $ins)
@@ -666,7 +666,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="agama">Agama <span class="text-white">xxxxxxxxx</span> </label>
+                            <label for="agama">Agama <small class="text-white">xxxxxxx</small> </label>
                             <input required type="text" name="agama" class="form-control" id="agama1" placeholder="Agama">
                         </div>
                     </div>
@@ -699,7 +699,7 @@
                 <div class="row mb-4">
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="status_aktif">Status <span class="text-white">xxxxxxxxx</span> </label>
+                            <label for="status_aktif">Status <small class="text-white">xxxxxxx</small> </label>
                             <select name="status_aktif" id="status_aktif1" class="form-control" required>
                                 <option value="" disabled selected>Pilih.....</option>
                                 <option value="Aktif">Aktif</option>
@@ -735,7 +735,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="kode_instansi">Instansi <span class="text-white">xxxxxxxxx</span> </label>
+                            <label for="kode_instansi">Instansi <small class="text-white">xxxxxxx</small> </label>
                             <select name="kode_instansi" id="kode_instansi1" class="form-control" required>
                                 <option value="" disabled selected>Pilih.....</option>                                       
                                 @foreach($instansi as $ins)

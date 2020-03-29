@@ -26,9 +26,36 @@ class GuruController extends Controller
     {   
         $this->middleware(['auth']);
     }
+    public function indexc()
+    {   
+        $siswa = Siswa::where('no_daftar', '=', Auth::user()->kode_identitas)->first();
+        $pengguna = User::where('kode_identitas', '=', Auth::user()->kode_identitas)->first();
+        $pengajaran_siswa = Pengajaran_Siswa::where('kode_siswa', '=', $siswa->id)->get();
+        $pengajaran = Pengajaran::all(); 
+        $pengajaran_level = Pengajaran_Level::all();
+        $jumlah_presensi =  Jumlah_Presensi::where('id_siswa', '=', $siswa->id)->get();
+        return view('/siswa/siswa_dasboard')
+                ->with('siswa', $siswa)
+                ->with('pengguna', $pengguna)
+                ->with('pengajaran_siswa', $pengajaran_siswa)
+                ->with('pengajaran', $pengajaran)
+                ->with('pengajaran_level', $pengajaran_level)
+                ->with('jumlah_presensi', $jumlah_presensi); 
+    }
+
     public function index()
     {   
-        return view('/guru/guru_dasboard');
+        $guru = Guru::where('no_identitas', '=', Auth::user()->kode_identitas)->first();
+        $guru_kelas = Guru_Kelas::where('kode_guru', '=', Auth::user()->kode_identitas)->get();
+        $pengajaran = Pengajaran::all();
+        $jumlah_presensi =  Jumlah_Presensi::all();
+        $presensi =  Presensi::all();
+        return view('/guru/guru_dasboard')
+                ->with('guru', $guru)
+                ->with('guru_kelas', $guru_kelas)
+                ->with('pengajaran', $pengajaran)
+                ->with('jumlah_presensi', $jumlah_presensi)
+                ->with('presensi', $presensi); 
     }
     ////////////// PRESENSI
         public function index_presensi()

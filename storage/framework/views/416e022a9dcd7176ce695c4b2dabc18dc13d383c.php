@@ -125,7 +125,7 @@
                     </div>
                     <div class="col-12">
                         <div class="p-3 text-center">
-                            <a href="javascript:void(0);" class="btn-link font-weight-bold"><?php if($guru->jenis_kelamin == 'P'): ?> Perempuan <?php else: ?> Laki-Laku <?php endif; ?> </a> <span class="text-primary d-inline-block mx-3">&#9679;</span>
+                            <a href="javascript:void(0);" class="btn-link font-weight-bold"><?php if($guru->jenis_kelamin == 'P'): ?> Perempuan <?php else: ?> Laki-Laki <?php endif; ?> </a> <span class="text-primary d-inline-block mx-3">&#9679;</span>
                             <a href="javascript:void(0);" class="btn-link font-weight-bold"><?php echo e($guru->agama); ?></a> <span class="text-primary d-inline-block mx-3">&#9679;</span>
                             <a href="javascript:void(0);" class="btn-link font-weight-bold">Status <?php echo e($guru->status_aktif); ?></a>
                         </div>

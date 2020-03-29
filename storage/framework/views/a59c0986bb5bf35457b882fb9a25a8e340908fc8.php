@@ -35,6 +35,7 @@
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Admin</li>
         <li class="breadcrumb-item">Pengajaran</li>
         <li class="breadcrumb-item">Daftar Pengajaran</li>
         <li class="breadcrumb-item active">Detail Data Pengajaran</li>

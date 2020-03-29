@@ -29,7 +29,7 @@
 @section('Content')
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <ol class="breadcrumb page-breadcrumb ">
-        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Siswa</li>
         <li class="breadcrumb-item">Presensi</li>
         <li class="breadcrumb-item">Daftar Sesi</li>
         <li class="breadcrumb-item">Rekap Presensi</li>
@@ -45,7 +45,7 @@
     <div id="panel-1" class="panel">
     <div class="panel-hdr">
         <h2>
-            Detail Presensi Tanggal @php echo date('d - F - Y', strtotime($presensi[0]->waktu)); @endphp
+            Presensi Tanggal @php echo date('d - F - Y', strtotime($presensi[0]->waktu)); @endphp
         </h2>
         <div class="panel-toolbar">
             <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>

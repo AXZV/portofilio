@@ -98,6 +98,7 @@
     <?php endif; ?>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
 <ol class="breadcrumb page-breadcrumb ">
+<li class="breadcrumb-item">Admin</li>
         <li class="breadcrumb-item">Guru-Kelas</li>
         <li class="breadcrumb-item active">Daftar Guru-Kelas</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
@@ -313,7 +314,7 @@
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
+                    <button type="submit" class="btn btn-primary btn-sm" >Simpan</button>
                     <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
                 </div>
                 
@@ -337,11 +338,6 @@
             var id = id;
             var url = "/admin/edit_guru_kelas/"+id;
             $("#editForm").attr('action', url);
-        }
-
-        function formSubmit2()
-        {
-            $("#editForm").submit();
         }
 
     </script>

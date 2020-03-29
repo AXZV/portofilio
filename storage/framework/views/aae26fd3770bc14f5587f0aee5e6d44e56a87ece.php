@@ -15,11 +15,11 @@
                 scrollX: true,
                 scrollCollapse: true,
                 paging: true,
-                fixedColumns:
-                {
-                    leftColumns: 3,
-                    rightColumns:1
-                },
+                // fixedColumns:
+                // {
+                //     leftColumns: 3,
+                //     rightColumns:1
+                // },
                    
             });
         });
@@ -102,6 +102,7 @@
     <?php endif; ?>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
     <ol class="breadcrumb page-breadcrumb ">
+    <li class="breadcrumb-item">Admin</li>
         <li class="breadcrumb-item">Instansi</li>
         <li class="breadcrumb-item active">Daftar Instansi</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>

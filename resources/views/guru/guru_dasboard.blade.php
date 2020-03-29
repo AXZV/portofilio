@@ -81,25 +81,28 @@
                         </div>
                         @foreach($guru_kelas as $gk)
                             @foreach($pengajaran->where('kode_guru_kelas','=', $gk->kode) as $p)
-                                <div class="col-4 text-center">
-                                    <span class="profile-image rounded-circle d-block m-auto">
-                                        <div class='icon-stack display-3 flex-shrink-0'>
-                                            <i class="fas fa-chalkboard-teacher icon-stack-1x opacity-100 color-success-500"></i>
-                                        </div>
-                                    </span>
-                                    <span class="d-block text-truncate text-muted fs-xs mt-1">{{$p->guru_kelas->kelas->pelajaran->nama}}</span>
+                                <div class="col-4">
+                                    <a href="javascript:void(0);" class="text-center p-3 d-flex flex-column hover-highlight">
+                                        <span class="profile-image rounded-circle d-block m-auto">
+                                            <div class='icon-stack display-3 flex-shrink-0'>
+                                                <i class="fas fa-chalkboard-teacher icon-stack-1x opacity-100 color-success-500"></i>
+                                            </div>
+                                        </span>
+                                        <span class="d-block text-truncate text-muted fs-xs mt-1">{{$p->guru_kelas->kelas->pelajaran->nama}}</span>
+                                    </a>
                                 </div>
                             @endforeach
                         @endforeach
                     </div>
                 </div>
+
             </div>
             <div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
             <!-- Phone numb -->
                 <div class="card mb-2">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
                                     <div class='icon-stack display-3 flex-shrink-0'>
                                         <i class="fal fa-circle icon-stack-3x opacity-100 color-primary-400"></i>
@@ -114,7 +117,13 @@
                                     </div>
                                 </a>     
                             </div>
-                            <div class="col-6">
+                        </div>  
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
                                 <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
                                     <div class='icon-stack display-3 flex-shrink-0'>
                                         <i class="fal fa-circle icon-stack-3x opacity-100 color-warning-400"></i>
@@ -262,38 +271,8 @@
                     </div>
                 </div>
             <!-- rating -->
-                <div class="card mb-g">
-                    <div class="row row-grid no-gutters">
-                        <div class="col-12">
-                            <div class="p-3">
-                                <h2 class="mb-0 fs-xl">
-                                    <i class="fas fa-chart-line"></i>&nbsp;Level Siswa
-                                </h2>
-                            </div>
-                        </div>
-                        @foreach($guru_kelas as $gk)
-                            @foreach($pengajaran->where('kode_guru_kelas','=', $gk->kode) as $p)                     
-                                <div class="col-12 hover-highlight">
-                                    <a href="siswa/level_pengajaran/log_level_pengajaran/{{$p->kode}}" class="text-dark">
-                                        <div class="p-3">
-                                            <div class="fw-500 fs-xs">{{$gk->kelas->pelajaran->nama}}</div>
-                                            @forelse($pengajaran_level->where('kode_pengajaran', $p->kode) as $pl)
 
-                                                @for($i=0; $i<$pl->tingkat; $i++)
-                                                    <span class="fas fa-star text-warning"></span>
-                                                @endfor
 
-                                                @empty
-                                                    <span class="fal fa-star text-warning"></span>
-                                            @endforelse
-                                        </div>
-                                    </a>
-                                </div>                          
-                            @endforeach
-                        @endforeach
-
-                    </div>
-                </div>
             </div>
         </div>
     </main>

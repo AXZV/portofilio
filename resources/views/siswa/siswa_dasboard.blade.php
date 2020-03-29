@@ -99,7 +99,7 @@
                 <div class="card mb-2">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
                                     <div class='icon-stack display-3 flex-shrink-0'>
                                         <i class="fal fa-circle icon-stack-3x opacity-100 color-primary-400"></i>
@@ -114,7 +114,13 @@
                                     </div>
                                 </a>     
                             </div>
-                            <div class="col-6">
+                        </div>  
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
                                 <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
                                     <div class='icon-stack display-3 flex-shrink-0'>
                                         <i class="fal fa-circle icon-stack-3x opacity-100 color-warning-400"></i>

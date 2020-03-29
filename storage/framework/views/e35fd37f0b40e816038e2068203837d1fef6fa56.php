@@ -17,11 +17,11 @@
                 scrollX: true,
                 scrollCollapse: true,
                 paging: true,
-                fixedColumns:
-                {
-                    leftColumns: 3,
-                    rightColumns:1
-                },
+                // fixedColumns:
+                // {
+                //     leftColumns: 3,
+                //     rightColumns:1
+                // },
                 
             });
         });
@@ -104,6 +104,7 @@
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
     <ol class="breadcrumb page-breadcrumb ">
+    <li class="breadcrumb-item">Admin</li>
         <li class="breadcrumb-item">Siswa</li>
         <li class="breadcrumb-item active">Daftar Siswa</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
@@ -266,13 +267,13 @@
                             <?php endif; ?>
                         </div>
                         <div class="row mb-4">
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="nama_depan">Nama Depan</label>
                                     <input required value="<?php echo e(old('nama_depan')); ?>" type="text" name="nama_depan" class="form-control" id="nama_depan" placeholder="Nama Depan">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="nama_belakang">Nama Belakang</label>
                                     <input type="text" value="<?php echo e(old('nama_belakang')); ?>" name="nama_belakang" class="form-control" id="nama_belakang" placeholder="Nama Belakang">
@@ -281,26 +282,26 @@
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="tempat_lahir">Tempat Lahir</label>
                                     <input required value="<?php echo e(old('tempat_lahir')); ?>" type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label class="">Tanggal Lahir</label>
                                     <div class="input-group">
-                                        <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_lahir')); ?>" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Tanggal Lahir">
                                         <div class="input-group-append">
                                             <span class="input-group-text fs-xl">
                                                 <i class="fal fa-calendar-alt"></i>
                                             </span>
+                                            <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_lahir')); ?>" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Tanggal Lahir">
                                         </div>
                                      </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
@@ -310,9 +311,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
-                                    <label for="agama">Agama</label>
+                                    <label for="agama">Agama <span class="text-white">xxxxxxxxx</span> </label>
                                     <input required value="<?php echo e(old('agama')); ?>" type="text" name="agama" class="form-control" id="agama" placeholder="Agama">
                                 </div>
                             </div>
@@ -328,13 +329,13 @@
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="no_telp">Telepon</label>
                                     <input required value="<?php echo e(old('no_telp')); ?>" type="text" name="no_telp" class="form-control" id="no_telp" placeholder="Telepon">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input required value="<?php echo e(old('email')); ?>" type="text" name="email" class="form-control" id="email" placeholder="Email">
@@ -343,9 +344,9 @@
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
-                                    <label for="status_aktif">Status</label>
+                                    <label for="status_aktif">Status <span class="text-white">xxxxxxxxx</span> </label>
                                     <select name="status_aktif" id="status_aktif" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>
                                         <option value="Aktif" <?php echo e(old('status_aktif') == 'Aktif' ? 'selected' : ''); ?>>Aktif</option>
@@ -353,35 +354,35 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label class="">Tanggal Masuk</label>
                                     <div class="input-group">
-                                        <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_masuk')); ?>" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
                                         <div class="input-group-append">
                                             <span class="input-group-text fs-xl">
                                                 <i class="fal fa-calendar-alt"></i>
                                             </span>
+                                            <input required  type="text" autocomplete="off" value="<?php echo e(old('tanggal_masuk')); ?>" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
                                         </div>
                                      </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label class="">Tanggal Lulus</label>
                                     <div class="input-group">
-                                        <input type="text" autocomplete="off" value="<?php echo e(old('tanggal_lulus')); ?>" name="tanggal_lulus" class="form-control" id="tanggal_lulus" placeholder="Tanggal Lulus">
                                         <div class="input-group-append">
                                             <span class="input-group-text fs-xl">
                                                 <i class="fal fa-calendar-alt"></i>
                                             </span>
+                                            <input type="text" autocomplete="off" value="<?php echo e(old('tanggal_lulus')); ?>" name="tanggal_lulus" class="form-control" id="tanggal_lulus" placeholder="Tanggal Lulus">
                                         </div>
                                      </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-3">
                                 <div class="form-group">
-                                    <label for="kode_instansi">Instansi</label>
+                                    <label for="kode_instansi">Instansi <span class="text-white">xxxxxxxxx</span> </label>
                                     <select name="kode_instansi" id="kode_instansi" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>                                       
                                         <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ins): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -402,26 +403,26 @@
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="jumlah_bayar">Jumlah Bayar</label>
                                     <div class="input-group" >
-                                    <div class="input-group-prepend">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text">Rp.</span>
+                                            <input value="<?php echo e(old('jumlah_bayar')); ?>" type="number" name="jumlah_bayar" class="form-control" id="jumlah_bayar" placeholder="Jumlah Bayar">
                                         </div>
-                                    <input value="<?php echo e(old('jumlah_bayar')); ?>" type="number" name="jumlah_bayar" class="form-control" id="jumlah_bayar" placeholder="Jumlah Bayar">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label class="">Tanggal Bayar</label>
                                     <div class="input-group">
-                                        <input type="text" autocomplete="off" value="<?php echo e(old('tanggal_bayar')); ?>" name="tanggal_bayar" class="form-control" id="tanggal_bayar" placeholder="Tanggal Bayar">
                                         <div class="input-group-append">
                                             <span class="input-group-text fs-xl">
                                                 <i class="fal fa-calendar-alt"></i>
                                             </span>
+                                            <input type="text" autocomplete="off" value="<?php echo e(old('tanggal_bayar')); ?>" name="tanggal_bayar" class="form-control" id="tanggal_bayar" placeholder="Tanggal Bayar">
                                         </div>
                                      </div>
                                 </div>
@@ -429,7 +430,7 @@
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="username">Nama Pengguna</label>
                                     <input required value="<?php echo e(old('username')); ?>" type="text" name="username" class="form-control" id="username" placeholder="Username">
@@ -441,7 +442,7 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input required value="<?php echo e(old('password')); ?>" type="password" id="password" name="password" class="form-control" placeholder="Password">
@@ -626,13 +627,13 @@
                 <input type="hidden" name="id" id="form0x" class="form-control">
                 <div class="modal-body">
                 <div class="row mb-4">
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="nama_depan">Nama Depan</label>
                             <input required type="text" name="nama_depan" class="form-control" id="nama_depan1" placeholder="Nama Depan">
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="nama_belakang">Nama Belakang</label>
                             <input type="text" name="nama_belakang" class="form-control" id="nama_belakang1" placeholder="Nama Belakang">
@@ -640,26 +641,26 @@
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="tempat_lahir">Tempat Lahir</label>
                             <input required type="text" name="tempat_lahir" class="form-control" id="tempat_lahir1" placeholder="Tempat Lahir">
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
                             <label class="">Tanggal Lahir</label>
                             <div class="input-group">
-                                <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir1" placeholder="Tanggal Lahir">
                                 <div class="input-group-append">
                                     <span class="input-group-text fs-xl">
                                         <i class="fal fa-calendar-alt"></i>
                                     </span>
+                                    <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir1" placeholder="Tanggal Lahir">
                                 </div>
                                 </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="jenis_kelamin">Jenis Kelamin</label>
                             <select name="jenis_kelamin" id="jenis_kelamin1" class="form-control" required>
@@ -669,9 +670,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
-                            <label for="agama">Agama</label>
+                            <label for="agama">Agama <span class="text-white">xxxxxxxxx</span> </label>
                             <input required type="text" name="agama" class="form-control" id="agama1" placeholder="Agama">
                         </div>
                     </div>
@@ -687,13 +688,13 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="no_telp">Telepon</label>
                             <input required type="text" name="no_telp" class="form-control" id="no_telp1" placeholder="Telepon">
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input required type="text" name="email" class="form-control" id="email1" placeholder="Email">
@@ -702,9 +703,9 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
-                            <label for="status_aktif">Status</label>
+                            <label for="status_aktif">Status <span class="text-white">xxxxxxxxx</span> </label>
                             <select name="status_aktif" id="status_aktif1" class="form-control" required>
                                 <option value="" disabled selected>Pilih.....</option>
                                 <option value="Aktif">Aktif</option>
@@ -712,35 +713,35 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
                             <label class="">Tanggal Masuk</label>
                             <div class="input-group">
-                                <input required  type="text" autocomplete="off" name="tanggal_masuk" class="form-control" id="tanggal_masuk1" placeholder="Tanggal Masuk">
                                 <div class="input-group-append">
                                     <span class="input-group-text fs-xl">
                                         <i class="fal fa-calendar-alt"></i>
                                     </span>
+                                    <input required  type="text" autocomplete="off" name="tanggal_masuk" class="form-control" id="tanggal_masuk1" placeholder="Tanggal Masuk">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
                             <label class="">Tanggal Lulus</label>
                             <div class="input-group">
-                                <input type="text" autocomplete="off" name="tanggal_lulus" class="form-control" id="tanggal_lulus1" placeholder="Tanggal Lulus">
                                 <div class="input-group-append">
                                     <span class="input-group-text fs-xl">
                                         <i class="fal fa-calendar-alt"></i>
                                     </span>
+                                    <input type="text" autocomplete="off" name="tanggal_lulus" class="form-control" id="tanggal_lulus1" placeholder="Tanggal Lulus">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <div class="form-group">
-                            <label for="kode_instansi">Instansi</label>
+                            <label for="kode_instansi">Instansi <span class="text-white">xxxxxxxxx</span> </label>
                             <select name="kode_instansi" id="kode_instansi1" class="form-control" required>
                                 <option value="" disabled selected>Pilih.....</option>                                       
                                 <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ins): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -761,26 +762,26 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="jumlah_bayar">Jumlah Bayar</label>
                             <div class="input-group" >
-                            <div class="input-group-prepend">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text">Rp.</span>
+                                    <input type="number" name="jumlah_bayar" class="form-control" id="jumlah_bayar1" placeholder="Jumlah Bayar">
                                 </div>
-                            <input type="number" name="jumlah_bayar" class="form-control" id="jumlah_bayar1" placeholder="Jumlah Bayar">
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label class="">Tanggal Bayar</label>
                             <div class="input-group">
-                                <input type="text" autocomplete="off" name="tanggal_bayar" class="form-control" id="tanggal_bayar1" placeholder="Tanggal Bayar">
                                 <div class="input-group-append">
                                     <span class="input-group-text fs-xl">
                                         <i class="fal fa-calendar-alt"></i>
                                     </span>
+                                    <input type="text" autocomplete="off" name="tanggal_bayar" class="form-control" id="tanggal_bayar1" placeholder="Tanggal Bayar">
                                 </div>
                             </div>
                         </div>

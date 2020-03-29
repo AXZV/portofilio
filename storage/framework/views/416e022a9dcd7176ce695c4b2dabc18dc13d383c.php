@@ -260,13 +260,13 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="f0" class="form-control">
                     <div class="row mb-4">
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Nama Depan</label>
                                 <input required type="text" name="nama_depan" class="form-control" id="f2" placeholder="Nama Depan">
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Nama Belakang</label>
                                 <input type="text" name="nama_belakang" class="form-control" id="f3" placeholder="Nama Belakang">
@@ -275,26 +275,26 @@
                     </div>
 
                     <div class="row mb-4">
-                        <div class="col">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Tempat Lahir</label>
                                 <input required type="text" name="tempat_lahir" class="form-control" id="f4" placeholder="Tempat Lahir">
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label class="">Tanggal Lahir</label>
                                 <div class="input-group">
-                                    <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir2" placeholder="tanggal_lahir">
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-alt"></i>
                                         </span>
+                                        <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir2" placeholder="tanggal_lahir">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Jenis Kelamin</label>
                                 <select name="jenis_kelamin" id="f6" class="form-control" required>
@@ -304,22 +304,22 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Agama</label>
+                                <label for="formGroupExampleInput2">Agama <span class="text-white">xxxxxxxxx</span> </label>
                                 <input required type="text" name="agama" class="form-control" id="f7" placeholder="Agama">
                             </div>
                         </div>
                     </div>
                     <div class="row mb-4">
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Alamat</label>
                                 <input required type="text" name="alamat" class="form-control" id="f8" placeholder="Alamat">
                                 <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Alamat Domisili</label>
                                 <input required type="text" name="alamat_domisili" class="form-control" id="f9" placeholder="Alamat Domisili">
@@ -328,13 +328,13 @@
                     </div>
 
                     <div class="row mb-4">
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Telepon</label>
                                 <input required type="text" name="no_telp" class="form-control" id="f10" placeholder="Telepon">
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Email</label>
                                 <input required type="text" name="email" class="form-control" id="f11" placeholder="Email">

@@ -100,7 +100,7 @@
                 <div class="card mb-2">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
                                     <div class='icon-stack display-3 flex-shrink-0'>
                                         <i class="fal fa-circle icon-stack-3x opacity-100 color-primary-400"></i>
@@ -116,7 +116,13 @@
                                     </div>
                                 </a>     
                             </div>
-                            <div class="col-6">
+                        </div>  
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
                                 <a href="javascript:void(0);" class="d-flex flex-row align-items-center">
                                     <div class='icon-stack display-3 flex-shrink-0'>
                                         <i class="fal fa-circle icon-stack-3x opacity-100 color-warning-400"></i>
@@ -171,7 +177,6 @@
                             </div>
                         </div>
                         <?php $__currentLoopData = $pengajaran_siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
                             <?php $__currentLoopData = $pengajaran->where('id','=', $ps->kode_pengajaran); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col-12 hover-highlight">
                                 <a href="siswa/presensi/log_presensi/<?php echo e($p->kode); ?>" class="text-dark">
@@ -255,106 +260,6 @@
             </div>
         </div>
     </main>
-
-<!-- /////////////////////////////// Modal Edit Data akun /////////////////////////////// -->
-   <div class="modal fade bd-example-modal-lg" id="edituser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rubah Akun Pengguna</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form action="" id="edituserForm" method="POST">
-            <?php echo e(csrf_field()); ?>
-
-            <!--Body-->
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="form0x" class="form-control">
-
-                    <div class="form-group">
-                        <label for="nama1">Username</label>
-                        <input required type="text" value="<?php echo e(old('username')); ?>" name="username" class="form-control" id="username" placeholder="Username">
-                        <small id="usernameHelp" class="form-text text-muted">Berisi antara 3-12 karakter tanpa spasi</small>
-                        <?php if($errors->has('username')): ?>
-                            <div class="invalid-feedback d-block"> 
-                                Username sudah terdaftar atau tidak sesuai aturan
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="form-group">
-                        <label for="password1">Masukan Password Akun ini</label>
-                        <input type="password" name="password1" class="form-control" id="password1" placeholder="Password">
-                        <?php if(session()->has('passwordnotmatch1')): ?>
-                            <div class="invalid-feedback d-block"> 
-                                Kata sandi salah atau kosong
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="text-center">
-                    <small id="passwordHelp" class="form-text text-muted" style="font-size:12px;">"Jika tidak ingin merubah kata sandi silahkan abaikan form dibawah ini"</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">New Password</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                        <small id="passwordHelp" class="form-text text-muted">Minimal 8 karakter tanpa spasi</small>
-                        <?php if($errors->has('password')): ?>
-                            <div class="invalid-feedback d-block"> 
-                                Password tidak sesuai aturan
-                            </div>
-                        <?php endif; ?>
-                    </div> 
-                    <div class="form-group">
-                        <label for="password_confirmation ">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm Password">
-                        <small id='message'></small>
-                    </div>   
-                </div>
-                <!--Footer-->
-                <div class="modal-footer justify-content-center">
-                    <button type="submit" id="submitx" name="submitx" onclick="formSubmit2()" class="btn btn-primary btn-sm" >Simpan</button>
-                    <button type="button" class="btn btn-light btn-sm waves-effect" data-dismiss="modal">Batal</button>
-                </div>
-                
-            </form>
-
-        </div>
-    </div>
-    </div>
-    
-
-    <script type="text/javascript">
-        function edituser(id, username)
-        {
-            document.getElementById("form0x").value = id;
-            document.getElementById("username").value = username;
-            var id = id;
-            var url = "/guru/edit_user/"+id;
-            $("#edituserForm").attr('action', url);
-        }
-
-        function formSubmit2()
-        {
-            $("#edituserForm").submit();
-        }
-    </script>
-
-    <script>
-        $('document').ready(function(){
-            $('#password_confirmation').on('keyup', function () {
-            if ($('#password').val() == $('#password_confirmation').val()) {
-                $('#message').html('Password Cocok').css('color', 'green');
-                document.getElementById("submitx").disabled = false; 
-            } else 
-            {
-                $('#message').html('Password Tidak Cocok').css('color', 'red');
-                document.getElementById("submitx").disabled = true; 
-            }
-            });
-        });
-    </script>
 
 
 <?php $__env->stopSection(); ?>

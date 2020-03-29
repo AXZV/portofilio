@@ -29,7 +29,7 @@
 @section('Content')
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <ol class="breadcrumb page-breadcrumb ">
-        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Siswa</li>
         <li class="breadcrumb-item">Presensi</li>
         <li class="breadcrumb-item">Daftar Sesi</li>
         <li class="breadcrumb-item">Rekap Presensi</li>

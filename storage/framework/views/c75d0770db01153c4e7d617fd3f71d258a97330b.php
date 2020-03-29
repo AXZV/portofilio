@@ -64,7 +64,7 @@
             else if($role == 'Siswa')
             { 
                 $nama= $user->siswa->nama_depan;
-                $urlset = "{{ url('/admin/useraccountset') }}";
+                $urlset = "/siswa/pengaturan";
             }
         ?>
 

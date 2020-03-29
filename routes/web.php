@@ -94,5 +94,7 @@ Route::GET('/dasboard_siswa', 'Siswa\SiswaController@index')->middleware('Siswa'
     Route::GET('/siswa/level_pengajaran/detail_level_pengajaran/{kode_pengajaran}/{id_siswa}', 'Siswa\SiswaController@detail_level_pengajaran')->middleware('Siswa');
     //Sesi
     Route::GET('/siswa/sesi', 'Siswa\SiswaController@index_sesi')->middleware('Siswa');
-
+    //pengaturan
+    Route::GET('/siswa/pengaturan', 'Siswa\SiswaController@index_pengaturan')->middleware('Siswa');
+    Route::POST('/siswa/edit_pengaturan', 'Siswa\SiswaController@edit_pengaturan')->middleware('Siswa');
     

@@ -27,5 +27,9 @@ class Pengajaran extends Model
     {
         return $this->belongsToMany('App\Model\Siswa', 'pengajaran_siswa', 'kode_pengajaran', 'kode_siswa')->withTimestamps();
     }
+    public function jumlah_presensi()
+    {
+        return $this->belongsTo('App\Model\User', 'id', 'id_pengajaran');
+    }
 
 }

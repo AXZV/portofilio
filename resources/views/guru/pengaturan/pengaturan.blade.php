@@ -124,7 +124,7 @@
                     </div>
                     <div class="col-12">
                         <div class="p-3 text-center">
-                            <a href="javascript:void(0);" class="btn-link font-weight-bold">@if($guru->jenis_kelamin == 'P') Perempuan @else Laki-Laku @endif </a> <span class="text-primary d-inline-block mx-3">&#9679;</span>
+                            <a href="javascript:void(0);" class="btn-link font-weight-bold">@if($guru->jenis_kelamin == 'P') Perempuan @else Laki-Laki @endif </a> <span class="text-primary d-inline-block mx-3">&#9679;</span>
                             <a href="javascript:void(0);" class="btn-link font-weight-bold">{{$guru->agama}}</a> <span class="text-primary d-inline-block mx-3">&#9679;</span>
                             <a href="javascript:void(0);" class="btn-link font-weight-bold">Status {{$guru->status_aktif}}</a>
                         </div>

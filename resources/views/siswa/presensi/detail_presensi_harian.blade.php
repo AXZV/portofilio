@@ -1,9 +1,9 @@
-<?php $__env->startSection('CSS'); ?>
-    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('JS'); ?>
-    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
+@section('CSS')
+    <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
+@endsection
+@section('JS')
+    <script src="{{ asset('js/theme.js') }}"></script>
+    <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
     <script>
     $(document).ready(function()
     {   
@@ -22,12 +22,12 @@
         });
     });
     </script>
-<?php $__env->stopSection(); ?>
+@endsection
 
+@extends('layouts.master_3')
 
-
-<?php $__env->startSection('Content'); ?>
-    <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+@section('Content')
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <ol class="breadcrumb page-breadcrumb ">
         <li class="breadcrumb-item">Guru</li>
         <li class="breadcrumb-item">Presensi</li>
@@ -38,17 +38,17 @@
     </ol>
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fas fa-user-check'></i> Presensi <span class='font-weight-light font-italic'>#<?php echo e($presensi[0]->id); ?>-<?php echo e($presensi[0]->pengajaran->guru_kelas->kelas->nama); ?></span>
+            <i class='subheader-icon fas fa-user-check'></i> Presensi <span class='font-weight-light font-italic'>#{{$presensi[0]->id}}-{{$presensi[0]->pengajaran->guru_kelas->kelas->nama}}</span>
         </h1>
     </div>
 
     <div id="panel-1" class="panel">
     <div class="panel-hdr">
         <h2>
-            Detail Presensi Tanggal <?php echo date('d - F - Y', strtotime($presensi[0]->waktu)); ?>
+            Detail Presensi Tanggal @php echo date('d - F - Y', strtotime($presensi[0]->waktu)); @endphp
         </h2>
         <div class="panel-toolbar">
-            <a class="btn btn-primary" href="<?php echo e(URL::previous()); ?>">Kembali</a>
+            <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
         </div>
     </div>
     <div class="panel-container show">
@@ -65,41 +65,39 @@
                 </thead>
                 <tbody>
                     <?php $r=1 ?>
-                    <?php $__currentLoopData = $presensi[0]->pengajaran->siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    @foreach($presensi[0]->pengajaran->siswa as $ps)
                     <tr style=" width:1px; white-space:nowrap;">
                         <td class="text-center"> <?php echo $r++ ?></td>
-                        <td> <?php echo e($ps->nama_depan); ?></td>
+                        <td> {{$ps->nama_depan}}</td>
                         <td style="text-align:center"> 
-                            <?php if( $ps->status_aktif == 'Aktif'): ?>
+                            @if( $ps->status_aktif == 'Aktif')
                                 <span class="badge badge-success">Aktif</span>
-                            <?php else: ?>
+                            @else
                                 <span class="badge badge-danger">Tidak Aktif</span>
-                            <?php endif; ?>
+                            @endif
                         </td>
                         <td style="text-align:center">
-                            <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psx): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($psx->kehadiran_harian($ps->id)->first()->pivot->status == 'Masuk'): ?>
+                            @foreach($presensi as $psx)
+                                @if($psx->kehadiran_harian($ps->id)->first()->pivot->status == 'Masuk')
                                     <span class="badge badge-success">Masuk</span>
-                                <?php elseif($psx->kehadiran_harian($ps->id)->first()->pivot->status == 'Ijin'): ?>
+                                @elseif($psx->kehadiran_harian($ps->id)->first()->pivot->status == 'Ijin')
                                     <span class="badge badge-warning">Ijin</span>
-                                <?php else: ?>
+                                @else
                                     <span class="badge badge-danger">Tidak Masuk</span>
-                                <?php endif; ?>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
+                                @endif
+                            @endforeach  
                         </td>
                         <td>
-                            <?php $__currentLoopData = $presensi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $psx): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php echo e($psx->kehadiran_harian($ps->id)->first()->pivot->catatan); ?>
-
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
+                            @foreach($presensi as $psx)
+                                {{$psx->kehadiran_harian($ps->id)->first()->pivot->catatan}}
+                            @endforeach  
                         </td>
                     </tr>  
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    @endforeach
 
 
                      
-                    <?php echo e(logger('Test')); ?>
-
+                    {{ logger('Test') }}
                 </tbody>
             </table>
             <!-- conten end -->
@@ -109,5 +107,4 @@
 <!-- ///////////////////////////////////////////////////////////////////////// -->  
     <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
 <!-- ///////////////////////////////////////////////////////////////////////// -->
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/presensi/detail_presensi_harian.blade.php ENDPATH**/ ?>
+@endsection

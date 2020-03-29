@@ -17,6 +17,7 @@ use App\Model\Pengajaran_Level_Siswa;
 use App\Model\Guru;
 use App\Model\User;
 use App\Model\Users;
+use App\Model\Jumlah_Presensi;
 
 
 class GuruController extends Controller
@@ -45,9 +46,8 @@ class GuruController extends Controller
         public function detail_presensi($kode_pengajaran)
         {       
             $pengajaran = Pengajaran::where('kode', '=', $kode_pengajaran)->first(); 
-            $presensi = Presensi::where('kode_pengajaran', '=', $kode_pengajaran)->get();
-            $presensisiswa = Presensi_Siswa::all();
-            return view('guru/presensi/detail_presensi')->with('presensi', $presensi)->with('presensisiswa', $presensisiswa)->with('pengajaran', $pengajaran);     
+            $jumlah_presensi = Jumlah_Presensi::all();
+            return view('guru/presensi/detail_presensi')->with('jumlah_presensi', $jumlah_presensi)->with('pengajaran', $pengajaran);     
         }
         public function detail_presensi_harian($id_presensi)
         {       
@@ -80,7 +80,66 @@ class GuruController extends Controller
             for($i=0 ; $i<count($request->get('kode_siswa')) ; $i++){
                 $data->Siswa()->attach($kode_siswa[$i], ['status' => $presensi[$i], 'catatan' => $catatan[$i]]);
             }
-             return redirect('/guru/presensi/log_presensi/'.$request->get('kode_pengajaran'))->with('successpresensi', true);
+            $this->jumlah_presensi($request);
+
+            return redirect('/guru/presensi/log_presensi/'.$request->get('kode_pengajaran'))->with('successpresensi', true);
+        }
+
+        public function jumlah_presensi($request)
+        {
+            foreach($request->get('presensi') as $valx){
+                $status[]   = $valx;
+            }
+            foreach($request->get('kode_siswa') as $valy){
+                $id_siswa[] = $valy;
+            }
+
+            for($i=0 ; $i<count($request->get('kode_siswa')) ; $i++){
+
+                $count = Jumlah_Presensi::where('id_pengajaran', '=' , $request->get('kode_pengajaran'))->where('id_siswa', '=' , $id_siswa[$i])->count();
+                if($count > 0 ) {
+                    $jp = Jumlah_Presensi::where('id_pengajaran', '=' , $request->get('kode_pengajaran'))->where('id_siswa', '=' , $id_siswa[$i])->first();
+                        $data = Jumlah_Presensi::where('id_pengajaran', '=' , $request->get('kode_pengajaran'))->where('id_siswa', '=' , $id_siswa[$i])->first();
+                        if($status[$i] == 'Masuk')
+                        {
+                            $data->masuk=$data->masuk+1;
+                        }
+                        elseif($status[$i] == 'Tidak Masuk')
+                        {
+                            $data->tidak_masuk=$data->tidak_masuk+1;
+                        }
+                        elseif($status[$i] == 'Ijin')
+                        {
+                            $data->ijin=$data->ijin+1;
+                        }
+                        $data->save();
+                }
+                else
+                {
+                        $data = new Jumlah_Presensi;
+                        $data->id_pengajaran=$request->get('kode_pengajaran');
+                        $data->id_siswa=$id_siswa[$i];
+                        if($status[$i] == 'Masuk')
+                        {
+                            $data->masuk=1;
+                            $data->tidak_masuk=0;
+                            $data->ijin=0;
+                        }
+                        elseif($status[$i] == 'Tidak Masuk')
+                        {
+                            $data->masuk=0;
+                            $data->tidak_masuk=1;
+                            $data->ijin=0;
+                        }
+                        elseif($status[$i] == 'Ijin')
+                        {
+                            $data->masuk=0;
+                            $data->tidak_masuk=0;
+                            $data->ijin=1;
+                        }
+                        $data->save();
+                }
+            }    
         }
     ////////////// LEVEL PENGAJARAN
         public function index_level_pengajaran()

@@ -25,7 +25,7 @@ Route::GET('/dasboard_admin', 'Admin\AdminController@index')->middleware('Admin'
     Route::POST('/admin/tambah_siswa', 'Admin\AdminController@tambah_siswa')->middleware('Admin');
     Route::POST('/admin/hapus_siswa/{id}', 'Admin\AdminController@hapus_siswa')->middleware('Admin');
     Route::POST('/admin/edit_siswa/{id}', 'Admin\AdminController@edit_siswa')->middleware('Admin');
-    //siswa
+    //pelajaran
     Route::GET('/admin/pelajaran', 'Admin\AdminController@index_pelajaran')->middleware('Admin');
     Route::POST('/admin/tambah_pelajaran', 'Admin\AdminController@tambah_pelajaran')->middleware('Admin');
     Route::POST('/admin/hapus_pelajaran/{id}', 'Admin\AdminController@hapus_pelajaran')->middleware('Admin');
@@ -81,4 +81,18 @@ Route::GET('/dasboard_guru', 'Guru\GuruController@index')->middleware('Guru');
     Route::POST('/guru/edit_data_guru/{id}', 'Guru\GuruController@edit_guru')->middleware('Guru');
 
 //SISWA
-Route::GET('/dasboard_siswa', 'Siswa\SiswaController@index')->middleware('Siswa');   
+Route::GET('/dasboard_siswa', 'Siswa\SiswaController@index')->middleware('Siswa');
+
+    //presensi
+    Route::GET('/siswa/presensi', 'Siswa\SiswaController@index_presensi')->middleware('Siswa');
+    Route::GET('/siswa/presensi/log_presensi/{id}', 'Siswa\SiswaController@index_log_presensi')->middleware('Siswa');
+    Route::GET('/siswa/presensi/detail_presensi/{id}', 'Siswa\SiswaController@detail_presensi')->middleware('Siswa');
+    Route::GET('/siswa/presensi/detail_presensi_harian/{id}', 'Siswa\SiswaController@detail_presensi_harian')->middleware('Siswa');
+    //level_pengajaran
+    Route::GET('/siswa/level_pengajaran', 'Siswa\SiswaController@index_level_pengajaran')->middleware('Siswa');
+    Route::GET('/siswa/presensi/log_level_pengajaran/{id}', 'Siswa\SiswaController@index_log_level_pengajaran')->middleware('Siswa');
+    Route::GET('/siswa/level_pengajaran/detail_level_pengajaran/{kode_pengajaran}/{id_siswa}', 'Siswa\SiswaController@detail_level_pengajaran')->middleware('Siswa');
+    //Sesi
+    Route::GET('/siswa/sesi', 'Siswa\SiswaController@index_sesi')->middleware('Siswa');
+
+    

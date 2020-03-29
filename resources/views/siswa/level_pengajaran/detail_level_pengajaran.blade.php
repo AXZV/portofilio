@@ -1,9 +1,9 @@
-<?php $__env->startSection('CSS'); ?>
-    <link rel="stylesheet" media="screen, print" href="<?php echo e(asset('css/datagrid/datatables/datatables.bundle.css')); ?>">
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('JS'); ?>
-    <script src="<?php echo e(asset('js/datagrid/datatables/datatables.bundle.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
+@section('CSS')
+    <link rel="stylesheet" media="screen, print" href="{{ asset('css/datagrid/datatables/datatables.bundle.css') }}">
+@endsection
+@section('JS')
+    <script src="{{ asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
     <script>
     $(document).ready(function()
     {   
@@ -23,16 +23,16 @@
     });
     </script>
     
-<?php $__env->stopSection(); ?>
+@endsection
 
+@extends('layouts.master_3')
 
-
-<?php $__env->startSection('Content'); ?>
-    <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+@section('Content')
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
     <ol class="breadcrumb page-breadcrumb ">
-        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Siswa</li>
         <li class="breadcrumb-item">Level Pengajaran</li>
         <li class="breadcrumb-item">Daftar Sesi</li>
         <li class="breadcrumb-item active">Detail Level Pengajaran Sesi</li>
@@ -40,7 +40,7 @@
     </ol>
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fas fa-flask'></i> Sesi <span class='font-weight-light font-italic'>#<?php echo e($pengajaran->guru_kelas->kelas->nama); ?></span>
+            <i class='subheader-icon fas fa-flask'></i> Sesi <span class='font-weight-light font-italic'>#{{$pengajaran->guru_kelas->kelas->nama}}</span>
         </h1>
     </div>
 
@@ -50,7 +50,7 @@
             Tingkatan Pengajaran Siswa
         </h2>
         <div class="panel-toolbar">
-            <a class="btn btn-primary" href="<?php echo e(URL::previous()); ?>">Kembali</a>
+            <a class="btn btn-primary" href="{{ URL::previous() }}">Kembali</a>
         </div>
     </div>
     <div class="panel-container show">
@@ -65,18 +65,18 @@
                 </thead>
                 <tbody>
                     <?php $r=1 ?>
-                    <?php $__currentLoopData = $pengajaran_level_siswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    @foreach($pengajaran_level_siswa as $ps)
                     <tr style=" width:1px; white-space:nowrap;">
                         <td class="text-center"> <?php echo $r++ ?></td>
                         <td> 
-                            <?php for($i=0; $i<$ps->tingkat; $i++): ?>
+                            @for($i=0; $i<$ps->tingkat; $i++)
                                 <span class="fa fa-star text-warning"></span>
-                            <?php endfor; ?>
+                            @endfor
                         </td>
-                        <td> <?php echo e($ps->catatan); ?> </td>
+                        <td> {{$ps->catatan}} </td>
                     </tr>
 
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    @endforeach
 
                 </tbody>
             </table>
@@ -98,8 +98,7 @@
             </div>
 
             <form action="" id="levelForm" method="POST">
-            <?php echo e(csrf_field()); ?>
-
+            {{ csrf_field() }}
             <!--Body-->
                 <div class="modal-body text-center">
                     <i class="fal fas fa-chart-line fa-6x mb-3"></i>
@@ -147,5 +146,4 @@
 
     </script>
 
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/level_pengajaran/detail_level_pengajaran.blade.php ENDPATH**/ ?>
+@endsection

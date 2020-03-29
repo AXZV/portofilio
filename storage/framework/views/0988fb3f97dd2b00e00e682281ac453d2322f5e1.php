@@ -50,6 +50,7 @@
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
     <ol class="breadcrumb page-breadcrumb ">
+        <li class="breadcrumb-item">Guru</li>
         <li class="breadcrumb-item">Level Pengajaran</li>
         <li class="breadcrumb-item">Daftar Sesi</li>
         <li class="breadcrumb-item active">Level Pengajaran Sesi</li>

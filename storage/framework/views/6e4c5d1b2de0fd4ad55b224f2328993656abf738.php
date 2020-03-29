@@ -32,7 +32,7 @@
 
 <!-- ///////////////////////////////////////////////////////////////////////// -->
     <ol class="breadcrumb page-breadcrumb ">
-        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Siswa</li>
         <li class="breadcrumb-item">Level Pengajaran</li>
         <li class="breadcrumb-item">Daftar Sesi</li>
         <li class="breadcrumb-item active">Detail Level Pengajaran Sesi</li>
@@ -148,4 +148,4 @@
     </script>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/guru/level_pengajaran/detail_level_pengajaran.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master_3', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Laravel_05\laravel Fix auth crud_2\resources\views/siswa/level_pengajaran/detail_level_pengajaran.blade.php ENDPATH**/ ?>

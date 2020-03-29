@@ -29,4 +29,8 @@ class Siswa extends Model
     {
         return $this->belongsTo('App\Model\User', 'no_daftar', 'kode_identitas');
     }
+    public function jumlah_presensi()
+    {
+        return $this->belongsTo('App\Model\User', 'id', 'id_siswa');
+    }
 }

@@ -38,7 +38,7 @@
                 <?php elseif(Auth::user()->role == 'Guru'): ?>
                     <?php echo $__env->make('component.sidenav_guru', ['active' => $active ?? ''], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <?php elseif(Auth::user()->role == 'Siswa'): ?>
-
+                    <?php echo $__env->make('component.sidenav_siswa', ['active' => $active ?? ''], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <?php endif; ?>
 
                 <div class="page-content-wrapper">

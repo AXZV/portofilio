@@ -38,7 +38,7 @@
                 @elseif(Auth::user()->role == 'Guru')
                     @include('component.sidenav_guru', ['active' => $active ?? ''])
                 @elseif(Auth::user()->role == 'Siswa')
-
+                    @include('component.sidenav_siswa', ['active' => $active ?? ''])
                 @endif
 
                 <div class="page-content-wrapper">

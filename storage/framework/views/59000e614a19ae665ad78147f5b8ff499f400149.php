@@ -41,7 +41,7 @@
                                         <!-- Label -->
                                         <h5 class="text-danger text-italic pb-2 pt-1 font-italic"><i class="fas fa-chalkboard-teacher"></i> #Sesi <?php echo $e++ ?></h5>
                                         <!-- Title -->
-                                        <h4 class="font-weight-bold card-title"><?php echo e($gk->kelas->nama); ?></h4>
+                                        <h4 class="font-weight-bold card-title"><?php echo e($gk->kelas->pelajaran->nama); ?></h4>
                                         <!-- Text -->
                                         <div class="form-group">
                                             <div class="input-group">
@@ -51,17 +51,6 @@
                                                     </span>
                                                 </div>
                                                 <input disabled type="text" value="<?php echo e($p->siswa->count()); ?> Siswa" name="1" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text fs-xl">
-                                                        <i class="fas fa-book"></i>
-                                                    </span>
-                                                </div>
-                                                <input disabled type="text" value="<?php echo e($gk->kelas->pelajaran->nama); ?>" name="1" class="form-control">
                                             </div>
                                         </div>
                                         <!-- Button -->

@@ -251,28 +251,27 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row mb-4">
-                            <div class="col-3">
+                        <div class="row">
+                            <div class="col-sm-3 mb-4">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput24">Tempat Lahir</label>
                                     <input required value="{{ old('tempat_lahir') }}" type="text" name="tempat_lahir" class="form-control" id="formGroupExampleInput24" placeholder="Tempat Lahir">
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="form-group">
                                     <label class="" for="datepicker-3">Tanggal Lahir</label>
                                     <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="{{ old('tanggal_lahir') }}" name="tanggal_lahir" class="form-control" id="datepicker-3" placeholder="Tanggal Lahir">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fal fa-calendar-alt"></i>
                                             </span>
-                                            <input required  type="text" autocomplete="off" value="{{ old('tanggal_lahir') }}" name="tanggal_lahir" class="form-control" id="datepicker-3" placeholder="Tanggal Lahir">
                                         </div>
                                      </div>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput26">Jenis Kelamin</label>
                                     <select name="jenis_kelamin" id="inputState" class="form-control" required>
@@ -282,22 +281,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput27">Agama <small class="text-white">xxxxxxx</small> </label>
+                                    <label for="formGroupExampleInput27">Agama  </label>
                                     <input value="{{ old('agama') }}" required type="text" name="agama" class="form-control" id="formGroupExampleInput27" placeholder="Agama">
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-4">
-                            <div class="col">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput28">Alamat</label>
                                     <input value="{{ old('alamat') }}" required type="text" name="alamat" class="form-control" id="formGroupExampleInput28" placeholder="Alamat">
                                     <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6 mb-4">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput29">Alamat Domisili</label>
                                     <input required value="{{ old('alamat_domisili') }}" type="text" name="alamat_domisili" class="form-control" id="formGroupExampleInput29" placeholder="Alamat Domisili">
@@ -320,10 +319,10 @@
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="col-3">
+                        <div class="row">
+                            <div class="col-md-3 mb-4">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput216">Status <small class="text-white">xxxxxxx</small> </label>
+                                    <label for="formGroupExampleInput216">Status  </label>
                                     <select name="status_aktif" id="status_aktif1" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>
                                         <option value="Aktif" {{ old('status_aktif') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
@@ -331,35 +330,35 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="form-group">
                                     <label class="">Tanggal Masuk</label>
                                     <div class="input-group">
+                                        <input required  type="text" autocomplete="off" value="{{ old('tanggal_masuk') }}" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fal fa-calendar-alt"></i>
                                             </span>
-                                            <input required  type="text" autocomplete="off" value="{{ old('tanggal_masuk') }}" name="tanggal_masuk" class="form-control" id="tanggal_masuk" placeholder="Tanggal Masuk">
                                         </div>
                                      </div>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="form-group">
                                     <label class="">Tanggal Keluar</label>
                                     <div class="input-group">
+                                        <input type="text" autocomplete="off" value="{{ old('tanggal_keluar') }}" name="tanggal_keluar" class="form-control" id="tanggal_keluar" placeholder="Tanggal Keluar">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fal fa-calendar-alt"></i>
                                             </span>
-                                            <input type="text" autocomplete="off" value="{{ old('tanggal_keluar') }}" name="tanggal_keluar" class="form-control" id="tanggal_keluar" placeholder="Tanggal Keluar">
                                         </div>
                                      </div>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput218">Instansi <small class="text-white">xxxxxxx</small> </label>
+                                    <label for="formGroupExampleInput218">Instansi  </label>
                                     <select name="kode_instansi" id="kode_instansi" class="form-control" required>
                                         <option value="" disabled selected>Pilih.....</option>                                       
                                         @foreach($instansi as $ins)
@@ -558,27 +557,27 @@
                         </div>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col-3">
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Tempat Lahir</label>
                                 <input required type="text" name="tempat_lahir" class="form-control" id="f4" placeholder="Tempat Lahir">
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 mb-4">
                             <div class="form-group">
                                 <label class="">Tanggal Lahir</label>
                                 <div class="input-group">
+                                <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir2" placeholder="tanggal_lahir">
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-alt"></i>
                                         </span>
-                                        <input required  type="text" autocomplete="off" name="tanggal_lahir" class="form-control" id="tanggal_lahir2" placeholder="tanggal_lahir">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 mb-4">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Jenis Kelamin</label>
                                 <select name="jenis_kelamin" id="f6" class="form-control" required>
@@ -588,22 +587,22 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 mb-4">
                             <div class="form-group">
-                                <label for="f7"> Agama <span class="text-white">xxxxxxxxxx</span> </label>
+                                <label for="f7"> Agama </label>
                                 <input required type="text" name="agama" class="form-control" id="f7" placeholder="Agama">
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-6">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Alamat</label>
                                 <input required type="text" name="alamat" class="form-control" id="f8" placeholder="Alamat">
                                 <small id="alamatHelp" class="form-text text-muted">Alamat Sesuai KTP</small>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6 mb-4">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Alamat Domisili</label>
                                 <input required type="text" name="alamat_domisili" class="form-control" id="f9" placeholder="Alamat Domisili">
@@ -626,10 +625,10 @@
                         </div>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col-3">
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Status <small class="text-white">xxxxxxx</small> </label>
+                                <label for="formGroupExampleInput2">Status  </label>
                                 <select name="status_aktif" id="f14" class="form-control" required>
                                     <option value="" disabled>Pilih.....</option>
                                     <option value="Aktif">Aktif</option>
@@ -637,35 +636,35 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 mb-4">
                         <div class="form-group">
                             <label class="">Tanggal Masuk</label>
                             <div class="input-group">
+                            <input required  type="text" autocomplete="off" name="tanggal_masuk" class="form-control" id="tanggal_masuk2" placeholder="Tanggal Masuk">
                                 <div class="input-group-append">
                                     <span class="input-group-text fs-xl">
                                         <i class="fal fa-calendar-alt"></i>
                                     </span>
-                                    <input required  type="text" autocomplete="off" name="tanggal_masuk" class="form-control" id="tanggal_masuk2" placeholder="Tanggal Masuk">
                                 </div>
                              </div>
                         </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 mb-4">
                             <div class="form-group">
                                 <label class="">Tanggal Keluar</label>
                                 <div class="input-group">
+                                <input required  type="text" autocomplete="off" name="tanggal_keluar" class="form-control" id="tanggal_keluar2" placeholder="Tanggal Keluar">
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-alt"></i>
                                         </span>
-                                        <input required  type="text" autocomplete="off" name="tanggal_keluar" class="form-control" id="tanggal_keluar2" placeholder="Tanggal Keluar">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 mb-4">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Instansi <small class="text-white">xxxxxxx</small> </label>
+                                <label for="formGroupExampleInput2">Instansi  </label>
                                 <select name="kode_instansi" id="f15" class="form-control" required>                                    
                                     @foreach($instansi as $ins)
                                     <option value="{{$ins->kode}}">{{$ins->kode}} - {{$ins->nama}}</option>

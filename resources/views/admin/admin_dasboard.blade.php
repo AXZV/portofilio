@@ -1,6 +1,44 @@
 @extends('layouts.master_3')
 
 @section('Content')
+<style>
+    .cardx {
+        border-radius: 8px;
+        border:none;
+        color: white;
+        padding: 10px;
+        position: relative;
+    }
+
+    .zmdi {
+		color: white;
+		font-size: 38px;
+		opacity: 0.3;
+		position: absolute;
+		right: 13px;
+		top: 13px;
+	}
+
+	.stat {
+		border-top: 1px solid rgba(255, 255, 255, 0.3);
+		font-size: 11px;
+		margin-top: 25px;
+		padding: 10px 10px 0;
+		text-transform: uppercase;
+	}
+
+	.title {
+		display: inline-block;
+		font-size: 12px;
+		padding: 10px 10px 0;
+		text-transform: uppercase;
+	}
+
+	.value {
+		font-size: 28px;
+		padding: 0 10px;
+	}
+</style>
 
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('js/theme.js') }}"></script>
@@ -20,200 +58,380 @@
                 <i class='subheader-icon fal fa-chart-area'></i> Admin <span class='fw-300'>Dashboard</span>
             </h1>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
 
-                <div id="panel-1" class="panel" data-panel-close="false" data-panel-fullscreen="false" data-panel-collapsed="false" data-panel-color="false" data-panel-refresh="false" data-panel-reset="false">
-                    <div class="panel-hdr">
-                        <h2>
-                            Data Siswa
-                        </h2>
-                        <div class="panel-toolbar">
-                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                            <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                        </div>
+        <div class="card-list">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+                    <div class="card cardx bg-info">
+                        <div class="title">Siswa Aktif</div>
+                        <i class="zmdi fas fa-user-graduate"></i>
+                        <div class="value">{{$siswa->count()}}</div>
+                        <div class="stat"></div>
                     </div>
-                    <div class="panel-container show">
-                        <div class="panel-content border-faded border-left-0 border-right-0 border-top-0">
-                            <!-- ///pembayaran -->
-                            <div class="row no-gutters">
-                                
-                                <div class="col-lg-7 col-xl-8">
-                                    <div class="position-relative">
-                                        <div id="updating-chart" style="height:242px"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-5 col-xl-4 pl-lg-3">
-                                        <div class="row" style="justify-content:center;">  
-                                            <h4 class="text-center fw-300 text-muted">
-                                                Pembayaran
-                                            </h4>
-                                        </div>
-                                    <div>
-                                        @php
-                                            $total_siswa = count($siswa->where('status_aktif', '=', 'Aktif'));
-                                            $siswa_belum_bayar = count($siswa->where('status_bayar', '=', 'Belum Bayar')->where('status_aktif', '=', 'Aktif'));
-                                            $siswa_sudah_bayar = count($siswa->where('status_bayar', '=', 'Bayar')->where('status_aktif', '=', 'Aktif'));
-                                        @endphp
-                                        <div class="row h-100" id="barStacked">
-                                            <canvas style="width:80%; height:100%"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel-content p-0">
-                                <div class="container">
-                                    <div class="row">
-                                        @php
-                                            $total_siswa2  = count($siswa);
-                                            $siswa_aktif2  = count($siswa->where('status_aktif', '=', 'Aktif'));
-                                            $siswa_tidak_aktif2 = count($siswa->where('status_aktif', '=', 'Tidak Aktif'));
-                                            $p_siswa_aktif = ($siswa_aktif2/$total_siswa2)*100;
-                                            $p_siswa_tidak_aktif = ($siswa_tidak_aktif2/$total_siswa2)*100;
-                                        @endphp
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="d-flex">
-                                                        Aktif
-                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_aktif2 ?></span>
-                                                    </div>
-                                                    <div class="progress progress mb-3">
-                                                        <div class="progress-bar bg-success-500 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_aktif ?>%" aria-valuenow="<?php echo $p_siswa_aktif ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    <div class="d-flex mt-2">
-                                                        Tidak Aktif
-                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_tidak_aktif2 ?></span>
-                                                    </div>
-                                                    <div class="progress progress mb-3">
-                                                        <div class="progress-bar bg-fusion-400 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_tidak_aktif ?>%" aria-valuenow="<?php echo $p_siswa_tidak_aktif ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>  
-                                            </div>
-                                        </div>
-
-                                        @php
-                                            $siswa_laki  = count($siswa->where('jenis_kelamin', '=', 'L')->where('status_aktif', '=', 'Aktif'));
-                                            $siswa_perempuan = count($siswa->where('jenis_kelamin', '=', 'P')->where('status_aktif', '=', 'Aktif'));
-                                            $p_siswa_laki = ($siswa_laki/$total_siswa)*100;
-                                            $p_siswa_perempuan = ($siswa_perempuan/$total_siswa)*100;
-                                        @endphp
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="d-flex">
-                                                        Laki-Laki
-                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_laki ?></span>
-                                                    </div>
-                                                    <div class="progress progress mb-3">
-                                                        <div class="progress-bar bg-warning-500 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_laki ?>%;" aria-valuenow="<?php echo $p_siswa_laki ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    <div class="d-flex mt-2">
-                                                        Perempuan
-                                                        <span class="d-inline-block ml-auto"><?php echo $siswa_perempuan ?></span>
-                                                    </div>
-                                                    <div class="progress progress mb-3">
-                                                        <div class="progress-bar bg-fusion-400 progress-bar-striped progress-bar-animated" role="progressbar" style="width:<?php echo $p_siswa_perempuan ?>%;" aria-valuenow="<?php echo $p_siswa_perempuan?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>  
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+                    <div class="card cardx bg-dark">
+                        <div class="title">Guru Aktif</div>
+                        <i class="zmdi fas fa-id-badge"></i>
+                        <div class="value">{{$guru->count()}}</div>
+                        <div class="stat"></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+                    <div class="card cardx bg-warning">
+                        <div class="title">Kelas Aktif</div>
+                        <i class="zmdi fas fa-chalkboard-teacher"></i>
+                        <div class="value">{{$pengajaran->count()}}</div>
+                        <div class="stat"></div>
                     </div>
                 </div>
             </div>
-
-            <!-- col -->
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6 mb-4">
+            <!-- Rekap Kehadiran Siswa -->
+                <div class="card mb-g">
+                    <div class="row row-grid no-gutters">
+                        <div class="col-12">
+                            <div class="p-3">
+                                <h3 class="mb-0 fs-xl">
+                                    <i class="fas fa-user-check"></i>&nbsp;Persentase Kehadiran Siswa
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            @php
+                                $jumlahmasuk = 0;
+                                $jumlahtidakmasuk = 0;
+                                $jumlahijin = 0; 
+                            @endphp
+                            @foreach($jumlah_presensi as $jp)
+                                @php
+                                    $jumlahmasuk += $jp->masuk;
+                                    $jumlahtidakmasuk += $jp->tidak_masuk;
+                                    $jumlahijin += $jp->ijin;
+                                @endphp        
+                            @endforeach
+                            @php
+                                $jumlahtotal = $jumlahmasuk + $jumlahtidakmasuk + $jumlahijin;
+                                if($jumlahmasuk == 0)
+                                {     
+                                    $persen_jumlahmasuk = 0;
+                                }
+                                if($jumlahmasuk != 0)
+                                {     
+                                    $persen_jumlahmasuk = round($jumlahmasuk/$jumlahtotal*100);
+                                }
+
+                                if($jumlahtidakmasuk == 0)
+                                {     
+                                    $persen_jumlahtidakmasuk = 0;
+                                }
+                                if($jumlahtidakmasuk != 0)
+                                {     
+                                    $persen_jumlahtidakmasuk = round($jumlahtidakmasuk/$jumlahtotal*100);
+                                }
+
+                                if($jumlahijin == 0)
+                                {     
+                                    $persen_jumlahijin = 0;  
+                                }
+                                if($jumlahijin != 0)
+                                {     
+                                    $persen_jumlahijin = round($jumlahijin/$jumlahtotal*100);  
+                                }
+
+                            @endphp
+                            <div class="row no-gutters row-grid">                       
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="text-center py-1">
+                                        <h6 class="mb-0 fw-700">
+                                            <small class="mb-0 text-success font-weight-bold">MASUK</small>
+                                            <div class="chart_masuk m-2 position-relative d-inline-flex align-items-center justify-content-center" data-percent="{{$persen_jumlahmasuk}}">
+                                                <div class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
+                                                    <span class="text-success font-weight-bold">{{$persen_jumlahmasuk}} %</span>  
+                                                </div>
+                                            </div>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="text-center py-1">
+                                        <h6 class="mb-0 fw-700">
+                                            <small class="mb-0 text-danger font-weight-bold">TIDAK MASUK</small>
+                                            <div class="chart_tmasuk m-2 position-relative d-inline-flex align-items-center justify-content-center" data-percent="{{$persen_jumlahtidakmasuk}}">
+                                                <div class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
+                                                    <span class="text-danger font-weight-bold">{{$persen_jumlahtidakmasuk}} %</span>  
+                                                </div>
+                                            </div>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="text-center py-1">
+                                        <h6 class="mb-0 fw-700">
+                                            <small class="mb-0 text-warning font-weight-bold">IJIN</small>
+                                            <div class="chart_ijin m-2 position-relative d-inline-flex align-items-center justify-content-center" data-percent="{{$persen_jumlahijin}}">
+                                                <div class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
+                                                    <span class="text-warning font-weight-bold">{{$persen_jumlahijin}} %</span>  
+                                                </div>
+                                            </div>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Kelas -->
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr">
+                        <h2 class="mb-0 fs-xl text-dark">
+                            <i class="fas fa-chalkboard-teacher"></i>&nbsp;Kelas Berjalan
+                        </h2>
+                        <div class="panel-toolbar">
+                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        </div>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                                <div class="row no-gutters">
+                                @foreach($pengajaran as $p)                       
+                                    <div class="col-sm-6 col-md-6">
+                                        <!-- Card Narrower -->
+                                        <div class="card card-cascade hover-highlight m-1 text-center">
+                                            <h5 class="text-dark pb-2 pt-1 text-capitalize font-weight-bold mt-2">{{$p->guru_kelas->kelas->nama}}</h5>
+                                            <div class="row no-gutters row-grid text-dark">
+                                                <div class="col-md-6">
+                                                    <div class="text-center py-3">
+                                                        <h6 class="mb-0 fw-700 text-dark">
+                                                            Guru
+                                                            <small class="text-muted mb-0 text-capitalize small">{{$p->guru_kelas->guru->nama_depan}} {{$p->guru_kelas->guru->nama_belakang}}</small>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="text-center py-3">
+                                                        <h6 class="mb-0 fw-700 text-dark">
+                                                            Siswa
+                                                            <small class="text-muted mb-0 small">{{$p->siswa->count()}} Orang</small>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters row-grid text-dark">
+                                                <div class="col-md-12">
+                                                    <small class="text-muted mb-0 text-capitalize small"> <span class="fas fa-map-signs text-info"></span> {{$p->guru_kelas->guru->instansi->nama}}</small>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters row-grid text-dark">
+                                                <div class="col-md-4">
+                                                    <small class="text-success mb-0 text-capitalize small "> Masuk</small>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <small class="text-danger mb-0 text-capitalize small"> Tidak Masuk</small>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <small class="text-warning mb-0 text-capitalize small"> Ijin</small>
+                                                </div>
+                                            </div>
+
+                                            @php
+                                                $jumlahmasuk2 = 0;
+                                                $jumlahtidakmasuk2 = 0;
+                                                $jumlahijin2 = 0;
+                                                $pertemuan = 0;
+                                            @endphp
+                                            @foreach($jumlah_presensi->where('id_pengajaran','=',$p->kode) as $jp)
+                                                @php
+                                                    $jumlahmasuk2 += $jp->masuk;
+                                                    $jumlahtidakmasuk2 += $jp->tidak_masuk;
+                                                    $jumlahijin2 += $jp->ijin;
+                                                    $pertemuan += 1;
+                                                @endphp 
+                                                
+                                            @endforeach
+                                            @php
+                                                $jumlahtotal2 = $jumlahmasuk2 + $jumlahtidakmasuk2 + $jumlahijin2;
+
+                                                if($jumlahmasuk2 == 0)
+                                                {     
+                                                    $persen_jumlahmasuk2 = 0;
+                                                }
+                                                if($jumlahmasuk2 != 0)
+                                                {     
+                                                    $persen_jumlahmasuk2 = round($jumlahmasuk2/$jumlahtotal2*100);
+                                                }
+
+                                                if($jumlahtidakmasuk2 == 0)
+                                                {     
+                                                    $persen_jumlahtidakmasuk2 = 0;
+                                                }
+                                                if($jumlahtidakmasuk2 != 0)
+                                                {     
+                                                    $persen_jumlahtidakmasuk2 = round($jumlahtidakmasuk2/$jumlahtotal2*100);
+                                                }
+
+                                                if($jumlahijin2 == 0)
+                                                {     
+                                                    $persen_jumlahijin2 = 0;  
+                                                }
+                                                if($jumlahijin2 != 0)
+                                                {     
+                                                    $persen_jumlahijin2 = round($jumlahijin2/$jumlahtotal2*100);  
+                                                }
+
+                                            @endphp
+                                            <div class="row no-gutters row-grid text-dark">
+                                                <div class="col-md-4">
+                                                    <small class="text-success mb-0">{{$persen_jumlahmasuk2 }} %</small>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <small class="text-danger mb-0">{{$persen_jumlahtidakmasuk2 }} %</small>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <small class="text-warning mb-0">{{$persen_jumlahijin2 }} %</small>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <small class="text-muted mb-0">{{$pertemuan}} x Pertemuan</small>
+                                                </div>
+                                                
+                                            </div>                                    
+                                        </div>
+                                        <!-- Card Narrower -->
+                                    </div>
+                                @endforeach
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6 mb-4">
+            <!-- Jenis Kelamin Siswa -->
+                <div class="card mb-g">
+                    <div class="row row-grid no-gutters">
+                        <div class="col-12">
+                            <div class="p-3">
+                                <h3 class="mb-0 fs-xl">
+                                    <i class="fas fa-user-graduate"></i>&nbsp;Siswa
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            @php
+                                $total_siswa = count($siswa->where('status_aktif', '=', 'Aktif'));
+                                $siswa_laki  = count($siswa->where('jenis_kelamin', '=', 'L')->where('status_aktif', '=', 'Aktif'));
+                                $siswa_perempuan = count($siswa->where('jenis_kelamin', '=', 'P')->where('status_aktif', '=', 'Aktif'));
+                                $p_siswa_laki = ($siswa_laki/$total_siswa)*100;
+                                $p_siswa_perempuan = ($siswa_perempuan/$total_siswa)*100;
+                            @endphp
+                            <div class="row no-gutters row-grid"> 
+                                <div class="col-sm-12 col-md-12 ">
+                                    <div class="m-4">
+                                        <div class="d-flex">
+                                            Laki-Laki
+                                            <span class="d-inline-block ml-auto"><?php echo $siswa_laki ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-danger-500 " role="progressbar" style="width:<?php echo $p_siswa_laki ?>%;" aria-valuenow="<?php echo $p_siswa_laki ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            Perempuan
+                                            <span class="d-inline-block ml-auto"><?php echo $siswa_perempuan ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-fusion-400 " role="progressbar" style="width:<?php echo $p_siswa_perempuan ?>%;" aria-valuenow="<?php echo $p_siswa_perempuan?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Jenis Kelamin Guru -->
+                 <div class="card mb-g">
+                    <div class="row row-grid no-gutters">
+                        <div class="col-12">
+                            <div class="p-3">
+                                <h4 class="mb-0 fs-xl">
+                                    <i class="fas fa-id-badge"></i>&nbsp;Guru
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            @php
+                                $total_guru = count($guru->where('status_aktif', '=', 'Aktif'));
+                                $guru_laki  = count($guru->where('jenis_kelamin', '=', 'L')->where('status_aktif', '=', 'Aktif'));
+                                $guru_perempuan = count($guru->where('jenis_kelamin', '=', 'P')->where('status_aktif', '=', 'Aktif'));
+                                $p_guru_laki = ($guru_laki/$total_guru)*100;
+                                $p_guru_perempuan = ($guru_perempuan/$total_guru)*100;
+                            @endphp
+                            <div class="row no-gutters row-grid"> 
+                                <div class="col-sm-12 col-md-12 ">
+                                    <div class="m-4">
+                                        <div class="d-flex">
+                                            Laki-Laki
+                                            <span class="d-inline-block ml-auto"><?php echo $guru_laki ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-warning-500 " role="progressbar" style="width:<?php echo $p_guru_laki ?>%;" aria-valuenow="<?php echo $p_guru_laki ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            Perempuan
+                                            <span class="d-inline-block ml-auto"><?php echo $guru_perempuan ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-fusion-400 " role="progressbar" style="width:<?php echo $p_guru_perempuan ?>%;" aria-valuenow="<?php echo $p_guru_perempuan?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
     </main>
 
-    <script>
-         function barChart()
-            {
-                var total_siswa= "Total : "+<?php echo json_encode($total_siswa); ?>+" Siswa Aktif";
-                var belum_lunas = <?php echo json_encode($siswa_belum_bayar); ?>;
-                var lunas = <?php echo json_encode($siswa_sudah_bayar); ?>;                   
-                console.log(total_siswa);
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/statistics/easypiechart/easypiechart.bundle.js') }}"></script>
 
-                var barStackedData = {
-                    labels: [total_siswa],
-                    datasets: [
-                    {
-                        label: "Lunas",
-                        backgroundColor: '#1dc9b7',
-                        data: [lunas]
-                    },
-                    {
-                        label: "Belum Lunas",
-                        backgroundColor: '#505050;',
-                        data: [belum_lunas]
-                    }]
-
-                };
-                var config = {
-                    type: 'bar',
-                    data: barStackedData,
-                    options:
-                    {
-                        legend:
-                        {
-                            display: true,
-                            labels:
-                            {
-                                display: false
-                            }
-                        },
-                        scales:
-                        {
-                            yAxes: [
-                            {
-                                stacked: true,
-                                gridLines:
-                                {
-                                    display: true,
-                                    color: "#f2f2f2"
-                                },
-                                ticks:
-                                {
-                                    beginAtZero: true,
-                                    fontSize: 11
-                                }
-                            }],
-                            xAxes: [
-                            {
-                                stacked: true,
-                                gridLines:
-                                {
-                                    display: true,
-                                    color: "#f2f2f2"
-                                },
-                                ticks:
-                                {
-                                    beginAtZero: true,
-                                    fontSize: 11
-                                }
-                            }]
-                        }
-                    }
-                }
-                new Chart($("#barStacked > canvas").get(0).getContext("2d"), config);
-            }
-
-    </script>
-
-    <script>
-            $(document).ready(function()
-            {
-                barChart();
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+            $('.chart_masuk').easyPieChart({
+                trackColor:'#505050',
+                barColor:'#1dc9b7',
+                scaleColor:'#505050',
+                scaleLength:4,
+                lineWidth:8,
             });
+
+            $('.chart_tmasuk').easyPieChart({
+                trackColor:'#505050',
+                barColor:'#fd3995',
+                scaleColor:'#505050',
+                scaleLength:4,
+                lineWidth:8,
+            });
+
+            $('.chart_ijin').easyPieChart({
+                trackColor:'#505050',
+                barColor:'#ffc241',
+                scaleColor:'#505050',
+                scaleLength:4,
+                lineWidth:8,
+            });
+        });
     </script>
+
+
+
 
 @endsection

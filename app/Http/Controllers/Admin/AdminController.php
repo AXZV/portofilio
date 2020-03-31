@@ -16,6 +16,7 @@ use App\Model\Kelas;
 use App\Model\Produk;
 use App\Model\Guru_Kelas;
 use App\Model\Pengajaran;
+use App\Model\Jumlah_Presensi;
 
 class AdminController extends Controller
 {
@@ -25,8 +26,16 @@ class AdminController extends Controller
     }
     public function index()
     {
-        $siswa = Siswa::all();      
-        return view('/admin/admin_dasboard', ['siswa' => $siswa]);
+        $siswa = Siswa::where('status_aktif','Aktif')->get();
+        $guru  = Guru::where('status_aktif','Aktif')->get();
+        $pengajaran = Pengajaran::where('status_selesai','Belum Selesai')->get();
+        $jumlah_presensi = Jumlah_Presensi::all();
+
+        return view('/admin/admin_dasboard')
+                ->with('siswa', $siswa)
+                ->with('pengajaran', $pengajaran)
+                ->with('jumlah_presensi', $jumlah_presensi)
+                ->with('guru', $guru);
     }
     ////////////// User
         protected function tambah_user($username, $password, $kode_identitas, $role)

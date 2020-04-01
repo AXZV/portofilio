@@ -392,6 +392,76 @@
                         </div>
                     </div>
                 </div>
+            <!-- Kelas -->
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr">
+                        <h2 class="mb-0 fs-xl text-dark">
+                            <i class="fas fa-building"></i>&nbsp;Kantor
+                        </h2>
+                        <div class="panel-toolbar">
+                            <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                            <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        </div>
+                    </div>
+                    <div class="panel-container show">
+                        <div class="panel-content">
+                                <div class="row no-gutters">
+                                <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                       
+                                    <div class="col-sm-6 col-md-6">
+
+                                        <?php 
+                                            $jumlahguru = 0;
+                                            $jumlahsiswa = 0; 
+                                        ?>
+
+                                        <?php $__currentLoopData = $guru->where('kode_instansi', '=', $i->kode); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $g): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php 
+                                                $jumlahguru += 1; 
+                                            ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php $__currentLoopData = $siswa->where('kode_instansi', '=', $i->kode); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php 
+                                                $jumlahsiswa += 1; 
+                                            ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                        <!-- Card Narrower -->
+                                        <div class="card card-cascade hover-highlight m-1 text-center">
+                                            <h5 class="text-dark pb-2 pt-1 text-capitalize font-weight-bold mt-2"><?php echo e($i->nama); ?></h5>
+                                            <div class="row no-gutters row-grid text-dark">
+                                                <div class="col-md-6">
+                                                    <div class="text-center py-3">
+                                                        <h6 class="mb-0 fw-700 text-dark">
+                                                            Guru
+                                                            <small class="text-muted mb-0 text-capitalize small"><?php echo e($jumlahguru); ?> Guru</small>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="text-center py-3">
+                                                        <h6 class="mb-0 fw-700 text-dark">
+                                                            Siswa
+                                                            <small class="text-muted mb-0 small"><?php echo e($jumlahsiswa); ?> Siswa</small>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-2">
+                                                    <h6 class="mb-0 fw-700 text-dark">
+                                                        <small class="text-muted mb-0 text-capitalize small"> <span class="fas fa-map-signs text-info"></span> &nbsp; <?php echo e($i->status_pusat); ?></small>
+                                                    </h6>
+                                                </div>
+                                            </div>                                  
+                                        </div>
+                                        <!-- Card Narrower -->
+                                    </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>

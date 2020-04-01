@@ -30,11 +30,13 @@ class AdminController extends Controller
         $guru  = Guru::where('status_aktif','Aktif')->get();
         $pengajaran = Pengajaran::where('status_selesai','Belum Selesai')->get();
         $jumlah_presensi = Jumlah_Presensi::all();
+        $instansi = Instansi::all();
 
         return view('/admin/admin_dasboard')
                 ->with('siswa', $siswa)
                 ->with('pengajaran', $pengajaran)
                 ->with('jumlah_presensi', $jumlah_presensi)
+                ->with('instansi', $instansi)
                 ->with('guru', $guru);
     }
     ////////////// User

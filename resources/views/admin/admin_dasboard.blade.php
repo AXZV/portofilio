@@ -64,8 +64,8 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xl-4 mb-4">
                     <div class="card cardx bg-info">
                         <div class="title">Siswa Aktif</div>
-                        <i class="zmdi fas fa-user-graduate"></i>
-                        <div class="value">{{$siswa->count()}}</div>
+                        <i class="zmdi fas fa-user-graduate"></i>                     
+                        <div class="value">@php echo count($siswa->where('status_aktif', 'Aktif')) @endphp</div>
                         <div class="stat"></div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="card cardx bg-dark">
                         <div class="title">Guru Aktif</div>
                         <i class="zmdi fas fa-id-badge"></i>
-                        <div class="value">{{$guru->count()}}</div>
+                        <div class="value">@php echo count($guru->where('status_aktif', 'Aktif')) @endphp</div>
                         <div class="stat"></div>
                     </div>
                 </div>
@@ -324,14 +324,20 @@
                         </div>
                         <div class="col-12">
                             @php
-                                $total_siswa = count($siswa->where('status_aktif', '=', 'Aktif'));
+                                $total_siswa = count($siswa);
+                                $siswa_aktif = count($siswa->where('status_aktif', '=', 'Aktif'));
+                                $siswa_tidak_aktif = count($siswa->where('status_aktif', '=', 'Tidak Aktif'));
                                 $siswa_laki  = count($siswa->where('jenis_kelamin', '=', 'L')->where('status_aktif', '=', 'Aktif'));
                                 $siswa_perempuan = count($siswa->where('jenis_kelamin', '=', 'P')->where('status_aktif', '=', 'Aktif'));
-                                $p_siswa_laki = ($siswa_laki/$total_siswa)*100;
-                                $p_siswa_perempuan = ($siswa_perempuan/$total_siswa)*100;
+
+                                $p_siswa_laki = ($siswa_laki/$siswa_aktif)*100;
+                                $p_siswa_perempuan = ($siswa_perempuan/$siswa_aktif)*100;
+
+                                $p_siswa_aktif = ($siswa_aktif/$total_siswa)*100;
+                                $p_siswa_tidak_aktif = ($siswa_tidak_aktif/$total_siswa)*100;
                             @endphp
                             <div class="row no-gutters row-grid"> 
-                                <div class="col-sm-12 col-md-12 ">
+                                <div class="col-sm-6 col-md-6 ">
                                     <div class="m-4">
                                         <div class="d-flex">
                                             Laki-Laki
@@ -346,6 +352,24 @@
                                         </div>
                                         <div class="progress progress-sm mb-3">
                                             <div class="progress-bar bg-fusion-400 " role="progressbar" style="width:<?php echo $p_siswa_perempuan ?>%;" aria-valuenow="<?php echo $p_siswa_perempuan?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 ">
+                                    <div class="m-4">
+                                        <div class="d-flex">
+                                            Aktif
+                                            <span class="d-inline-block ml-auto"><?php echo $siswa_aktif ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-fusion-400 " role="progressbar" style="width:<?php echo $p_siswa_aktif ?>%;" aria-valuenow="<?php echo $p_siswa_aktif ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            Tidak Aktif
+                                            <span class="d-inline-block ml-auto"><?php echo $siswa_tidak_aktif ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-danger-500 " role="progressbar" style="width:<?php echo $p_siswa_tidak_aktif ?>%;" aria-valuenow="<?php echo $p_siswa_tidak_aktif?>" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -365,14 +389,18 @@
                         </div>
                         <div class="col-12">
                             @php
-                                $total_guru = count($guru->where('status_aktif', '=', 'Aktif'));
+                                $total_guru = count($guru);
+                                $guru_aktif = count($guru->where('status_aktif', '=', 'Aktif'));
+                                $guru_tidak_aktif = count($guru->where('status_aktif', '=', 'Tidak Aktif'));                        
                                 $guru_laki  = count($guru->where('jenis_kelamin', '=', 'L')->where('status_aktif', '=', 'Aktif'));
                                 $guru_perempuan = count($guru->where('jenis_kelamin', '=', 'P')->where('status_aktif', '=', 'Aktif'));
-                                $p_guru_laki = ($guru_laki/$total_guru)*100;
-                                $p_guru_perempuan = ($guru_perempuan/$total_guru)*100;
+                                $p_guru_laki = ($guru_laki/$guru_aktif)*100;
+                                $p_guru_perempuan = ($guru_perempuan/$guru_aktif)*100;
+                                $p_guru_aktif = ($guru_aktif/$total_guru)*100;
+                                $p_guru_tidak_aktif = ($guru_tidak_aktif/$total_guru)*100;
                             @endphp
                             <div class="row no-gutters row-grid"> 
-                                <div class="col-sm-12 col-md-12 ">
+                                <div class="col-sm-6 col-md-6 ">
                                     <div class="m-4">
                                         <div class="d-flex">
                                             Laki-Laki
@@ -387,6 +415,24 @@
                                         </div>
                                         <div class="progress progress-sm mb-3">
                                             <div class="progress-bar bg-fusion-400 " role="progressbar" style="width:<?php echo $p_guru_perempuan ?>%;" aria-valuenow="<?php echo $p_guru_perempuan?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 ">
+                                    <div class="m-4">
+                                        <div class="d-flex">
+                                            Aktif
+                                            <span class="d-inline-block ml-auto"><?php echo $guru_aktif ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-fusion-400 " role="progressbar" style="width:<?php echo $p_guru_aktif ?>%;" aria-valuenow="<?php echo $p_guru_aktif ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            Tidak Aktif
+                                            <span class="d-inline-block ml-auto"><?php echo $guru_tidak_aktif ?></span>
+                                        </div>
+                                        <div class="progress progress-sm mb-3">
+                                            <div class="progress-bar bg-warning-500 " role="progressbar" style="width:<?php echo $p_guru_tidak_aktif ?>%;" aria-valuenow="<?php echo $p_guru_tidak_aktif?>" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -416,12 +462,12 @@
                                             $jumlahsiswa = 0; 
                                         @endphp
 
-                                        @foreach($guru->where('kode_instansi', '=', $i->kode) as $g)
+                                        @foreach($guru->where('kode_instansi', '=', $i->kode)->where('status_aktif', '=', 'Aktif') as $g)
                                             @php 
                                                 $jumlahguru += 1; 
                                             @endphp
                                         @endforeach
-                                        @foreach($siswa->where('kode_instansi', '=', $i->kode) as $s)
+                                        @foreach($siswa->where('kode_instansi', '=', $i->kode)->where('status_aktif', '=', 'Aktif') as $s)
                                             @php 
                                                 $jumlahsiswa += 1; 
                                             @endphp

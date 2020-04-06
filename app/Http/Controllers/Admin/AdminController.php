@@ -26,8 +26,8 @@ class AdminController extends Controller
     }
     public function index()
     {
-        $siswa = Siswa::where('status_aktif','Aktif')->get();
-        $guru  = Guru::where('status_aktif','Aktif')->get();
+        $siswa = Siswa::all();
+        $guru  = Guru::all();
         $pengajaran = Pengajaran::where('status_selesai','Belum Selesai')->get();
         $jumlah_presensi = Jumlah_Presensi::all();
         $instansi = Instansi::all();

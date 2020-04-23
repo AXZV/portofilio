@@ -37,7 +37,8 @@
 		padding: 0 10px;
 	}
 </style>
-
+    
+    <link href="<?php echo e(asset('dist/jqvmap.css')); ?>" media="screen" rel="stylesheet" type="text/css"/>
     <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
     <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
     <script src="js/statistics/chartjs/chartjs.bundle.js"></script>
@@ -438,7 +439,7 @@
                         </div>
                     </div>
                 </div>
-            <!-- Kelas -->
+            <!-- Kantor -->
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2 class="mb-0 fs-xl text-dark">
@@ -451,6 +452,11 @@
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div id="vmap" style="height: 250px; width:100%"></div>
+                                    </div>
+                                </div>
                                 <div class="row no-gutters">
                                 <?php $__currentLoopData = $instansi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                       
                                     <div class="col-sm-6 col-md-6">
@@ -512,6 +518,8 @@
             </div>
         </div>
 
+
+
     </main>
 
     <script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
@@ -543,6 +551,33 @@
                 lineWidth:8,
             });
         });
+    </script>
+
+<script src="<?php echo e(asset('js/jquery-3.2.1.min.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('dist/jquery.vmap.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('dist/maps/jquery.vmap.indonesia.js')); ?>" charset="utf-8"></script>
+    <script>
+            (function($) {
+                jQuery('#vmap').vectorMap({
+                    map: 'indonesia_id',
+                    backgroundColor: 'none',
+                    color: '#a8a8a8',
+                    borderColor: '#ffffff',
+                    borderWidth:5,
+                    selectedRegions: ['ID'],
+                    selectedColor:'#fd3995',
+                    enableZoom: true,
+                    showTooltip: true,
+                    selectedColor: null,
+                    onRegionClick: function(event, code, region){
+                      event.preventDefault();
+                    }
+                  });
+            })(jQuery);
+
+            // a8a8a8
+            // fd3995
+
     </script>
 
 
